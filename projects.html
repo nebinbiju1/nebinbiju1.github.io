@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects — Nebin Biju</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: #141413;
+            font-family: 'Fira Code', monospace;
+            min-height: 100vh;
+            padding: 90px 32px 80px;
+        }
+
+        .topbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: 52px;
+            background-color: #1a1a18;
+            border-bottom: 1px solid #2a2a28;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            z-index: 100;
+        }
+
+        .topbar a {
+            font-family: 'Fira Code', monospace;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            color: #666662;
+            padding: 6px 16px;
+            border-radius: 8px;
+            transition: color 0.2s;
+        }
+
+        .topbar a:hover { color: #ffffff; }
+        .topbar a.active { color: #f1629c; }
+
+
+        .cards {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            max-width: 580px;
+            margin: 0 auto;
+        }
+
+        .card {
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid #2a2a28;
+            background: #0e0e0d;
+            cursor: pointer;
+            position: relative;
+            height: 380px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .card:nth-child(1) { background: url('images/atlassian_2.png') center/cover no-repeat; }
+        .card:nth-child(2) { background: url('images/copilot_search.png') center/cover no-repeat; }
+        .card:nth-child(3) { background: url('images/code_art.png') center/cover no-repeat; }
+        .card:nth-child(4) { background: url('images/Chachaji.png') center/cover no-repeat; }
+        .card:nth-child(5) { background: url('images/NTU_1.png') center/cover no-repeat; }
+
+        .card::before,
+        .card::after { display: none; }
+
+        .card-panel {
+            position: absolute;
+            bottom: -2px; left: -1px; right: -1px;
+            background: #141413;
+            border-radius: 0 0 18px 18px;
+            transform: translateY(calc(100% - 64px));
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: 2;
+            padding-bottom: 2px;
+        }
+
+        .card:hover .card-panel { transform: translateY(0); }
+
+        .card-title-bar {
+            height: 64px;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .card-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.3;
+        }
+
+        .card-detail { padding: 0 20px 20px; }
+
+        .card-desc {
+            font-size: 12px;
+            font-weight: 400;
+            color: #888884;
+            line-height: 1.75;
+            margin-bottom: 14px;
+        }
+
+        .card-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+
+        .tag {
+            font-size: 11px;
+            font-weight: 700;
+            color: #f1629c;
+            background: rgba(241,98,156,0.12);
+            border: 1px solid rgba(241,98,156,0.3);
+            border-radius: 6px;
+            padding: 4px 10px;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.visible { display: flex; }
+
+        .modal {
+            background: #1a1a18;
+            border: 1px solid #2a2a28;
+            border-radius: 18px;
+            padding: 32px 28px;
+            width: 420px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .modal-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .modal-sub {
+            font-size: 12px;
+            font-weight: 600;
+            color: #555552;
+            margin-top: -8px;
+        }
+
+        .modal input {
+            font-family: 'Fira Code', monospace;
+            font-size: 13px;
+            font-weight: 600;
+            background: #111211;
+            border: 1px solid #2a2a28;
+            border-radius: 10px;
+            color: #ffffff;
+            padding: 10px 14px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .modal input:focus { border-color: #f1629c; }
+
+        .modal input.error { border-color: #e05050; animation: shake 0.3s ease; }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-6px); }
+            75% { transform: translateX(6px); }
+        }
+
+        .modal-error {
+            font-size: 11px;
+            font-weight: 700;
+            color: #e05050;
+            min-height: 14px;
+            margin-top: -8px;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 8px;
+            justify-content: flex-end;
+        }
+
+        .modal-actions button {
+            font-family: 'Fira Code', monospace;
+            font-size: 13px;
+            font-weight: 700;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 18px;
+            cursor: pointer;
+        }
+
+        .btn-cancel {
+            background: transparent;
+            color: #555552;
+        }
+
+        .btn-cancel:hover { color: #ffffff; }
+
+        .btn-enter {
+            background: #f1629c;
+            color: #ffffff;
+        }
+
+        .btn-enter:hover { background: #e0508a; }
+
+        .modal-char-wrap {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <nav class="topbar">
+        <a href="index.html">home</a>
+        <a href="projects.html" class="active">projects</a>
+        <a href="about.html">about</a>
+    </nav>
+
+<div class="cards">
+
+        <a class="card" data-category="corporate" href="project.html?id=0">
+            <div class="card-panel">
+                <div class="card-title-bar">
+                    <div class="card-title">remediation in data migration</div>
+                </div>
+                <div class="card-detail">
+                    <p class="card-desc">enhancing Atlassian migration tooling reliability and reducing migration time by elegantly handling errors and ensuring enterprise readiness.</p>
+                    <div class="card-tags">
+                        <span class="tag">end-to-end</span>
+                        <span class="tag">2024–25</span>
+                        <span class="tag">atlassian</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        <a class="card" data-category="corporate" href="project.html?id=1">
+            <div class="card-panel">
+                <div class="card-title-bar">
+                    <div class="card-title">copilot search</div>
+                </div>
+                <div class="card-detail">
+                    <p class="card-desc">designing the search experience for Microsoft Copilot, helping users navigate AI-generated content and enterprise knowledge with clarity.</p>
+                    <div class="card-tags">
+                        <span class="tag">product design</span>
+                        <span class="tag">2025</span>
+                        <span class="tag">microsoft</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        <a class="card" data-category="experiments" href="project.html?id=4">
+            <div class="card-panel">
+                <div class="card-title-bar">
+                    <div class="card-title">vibe coded experiments</div>
+                </div>
+                <div class="card-detail">
+                    <p class="card-desc">a collection of small, weird, and delightful things built for the joy of building. no brief, no deadline, just vibes and a blank canvas.</p>
+                    <div class="card-tags">
+                        <span class="tag">experiments</span>
+                        <span class="tag">creative coding</span>
+                        <span class="tag">ongoing</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        <a class="card" data-category="experiments" href="project.html?id=2">
+            <div class="card-panel">
+                <div class="card-title-bar">
+                    <div class="card-title">adventures of chachaji</div>
+                </div>
+                <div class="card-detail">
+                    <p class="card-desc">a passion project exploring storytelling through interactive experiences following the journey of Chachaji across unexpected adventures.</p>
+                    <div class="card-tags">
+                        <span class="tag">university project</span>
+                        <span class="tag">interaction design</span>
+                        <span class="tag">2019</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        <a class="card" data-category="university" href="project.html?id=3" style="display:none">
+            <div class="card-panel">
+                <div class="card-title-bar">
+                    <div class="card-title">NTU museum app</div>
+                </div>
+                <div class="card-detail">
+                    <p class="card-desc">redesigning the museum visit experience for NTU, blending wayfinding, digital exhibits, and accessibility into a cohesive mobile interface.</p>
+                    <div class="card-tags">
+                        <span class="tag">mobile</span>
+                        <span class="tag">ux research</span>
+                        <span class="tag">uni</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+    </div>
+
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal">
+            <div class="modal-char-wrap">
+                <canvas id="modal-char-canvas" width="80" height="100" style="image-rendering:pixelated;"></canvas>
+            </div>
+            <div class="modal-title">this project requires a password to view.</div>
+            <input type="password" id="modal-input" placeholder="enter password" />
+            <div class="modal-error" id="modal-error"></div>
+            <div class="modal-actions">
+                <button class="btn-cancel" id="modal-cancel">cancel</button>
+                <button class="btn-enter" id="modal-enter">enter</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const pills = document.querySelectorAll('.filter-pill');
+        const cards = document.querySelectorAll('.card');
+
+        pills.forEach(pill => {
+            pill.addEventListener('click', () => {
+                pills.forEach(p => p.classList.remove('active'));
+                pill.classList.add('active');
+                const filter = pill.dataset.filter;
+                cards.forEach(card => {
+                    const match = filter === 'all' || card.dataset.category === filter;
+                    card.style.display = match ? 'block' : 'none';
+                });
+            });
+        });
+
+        // Password protection
+        const passwords = {
+            'project.html?id=0': 'nebin',
+            'project.html?id=1': 'nebin123'
+        };
+
+        const overlay = document.getElementById('modal-overlay');
+        const input = document.getElementById('modal-input');
+        const errorEl = document.getElementById('modal-error');
+        let pendingHref = null;
+
+        document.querySelectorAll('.card').forEach(card => {
+            const href = card.getAttribute('href');
+            if (!passwords[href]) return;
+            card.addEventListener('click', e => {
+                e.preventDefault();
+                pendingHref = href;
+                input.value = '';
+                errorEl.textContent = '';
+                overlay.classList.add('visible');
+                setTimeout(() => input.focus(), 50);
+            });
+        });
+
+        document.getElementById('modal-cancel').addEventListener('click', () => {
+            overlay.classList.remove('visible');
+        });
+
+        overlay.addEventListener('click', e => {
+            if (e.target === overlay) overlay.classList.remove('visible');
+        });
+
+        function tryEnter() {
+            if (input.value === passwords[pendingHref]) {
+                overlay.classList.remove('visible');
+                window.location.href = pendingHref;
+            } else {
+                errorEl.textContent = 'incorrect password';
+                input.classList.add('error');
+                input.value = '';
+                setTimeout(() => input.classList.remove('error'), 400);
+            }
+        }
+
+        document.getElementById('modal-enter').addEventListener('click', tryEnter);
+        input.addEventListener('keydown', e => { if (e.key === 'Enter') tryEnter(); });
+    </script>
+
+    <script>
+    (function() {
+        const cc = document.getElementById('modal-char-canvas');
+        const cx = cc.getContext('2d');
+        const P = 4, OX = 3, OY0 = 3;
+
+        const K = {
+            H:  '#3d2b1f', S:  '#c8956c', Sd: '#b07050', E:  '#141413',
+            J:  '#f1629c', JL: '#ff8ab8', JD: '#b03060', L:  '#555558', Z:  '#f1629c',
+        };
+
+        // Head look sequence: straight → right → straight → left
+        const lookSeq = [0, 1, 0, -1];
+        let T = 0;
+
+        function draw() {
+            cx.clearRect(0, 0, 80, 100);
+            T++;
+
+            // No body bob — stand still
+            const by = 0;
+
+            // Head look offset cycles every 80 frames per pose
+            const hx = lookSeq[Math.floor(T / 80) % 4];
+
+            function p(x, y, w, h, c) {
+                cx.fillStyle = c;
+                cx.fillRect((OX + x) * P, (OY0 + by + y) * P, w * P, h * P);
+            }
+
+            // Body & legs (static)
+            p(0, 17, 4, 2, K.Z);
+            p(5, 17, 4, 2, K.Z);
+            p(1, 12, 3, 5, K.L);
+            p(6, 12, 3, 5, K.L);
+            p(1,  7, 8, 5, K.J);
+            p(0,  8, 1, 3, K.J);
+            p(9,  8, 1, 3, K.J);
+            p(1,  7, 2, 2, K.JD);
+            p(7,  7, 2, 2, K.JD);
+            p(4,  8, 2, 4, K.JL);
+            p(1, 11, 8, 1, K.JD);
+            p(-2, 8, 2, 4, K.J);
+            p(-2,12, 2, 1, K.S);
+            p(10, 8, 2, 4, K.J);
+            p(10,12, 2, 1, K.S);
+
+            // Neck
+            p(3, 7, 4, 1, K.S);
+
+            // Face
+            p(2, 1, 6, 5, K.S);
+            p(1, 2, 8, 3, K.S);
+
+            // Nose (shifts with look direction)
+            p(4 + hx, 4, 2, 1, K.Sd);
+
+            // Smile (shifts with look direction)
+            p(3 + hx, 5, 1, 1, K.E);
+            p(6 + hx, 5, 1, 1, K.E);
+            p(4 + hx, 6, 2, 1, K.E);
+
+            // Hair
+            p(1,  0, 8, 1, K.H);
+            p(0,  1,10, 1, K.H);
+            p(0,  2, 2, 1, K.H);
+            p(8,  2, 2, 1, K.H);
+            p(0,  3, 1, 1, K.H);
+            p(9,  3, 1, 1, K.H);
+
+            // Black shades (drawn over eyes)
+            // Frame bar
+            p(2, 3, 7, 2, '#111111');
+            // Lens shine (top-left of each lens)
+            p(2 + hx, 3, 1, 1, '#333333');
+            p(5 + hx, 3, 1, 1, '#333333');
+            // Bridge between lenses
+            p(4, 3, 1, 1, '#0a0a0a');
+
+            requestAnimationFrame(draw);
+        }
+
+        draw();
+    })();
+    </script>
+</body>
+</html>

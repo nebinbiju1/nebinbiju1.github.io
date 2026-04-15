@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nebin Biju — About</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #141413;
+            font-family: 'Fira Code', monospace;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 100px 24px 100px;
+        }
+
+        .topbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 52px;
+            background-color: #1a1a18;
+            border-bottom: 1px solid #2a2a28;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            z-index: 100;
+        }
+
+        .topbar a {
+            font-family: 'Fira Code', monospace;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            color: #666662;
+            padding: 6px 16px;
+            border-radius: 8px;
+            transition: color 0.2s;
+        }
+
+        .topbar a:hover {
+            color: #ffffff;
+        }
+
+        .topbar a.active {
+            color: #f1629c;
+        }
+
+        .chat {
+            width: 100%;
+            max-width: 560px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            text-align: left;
+        }
+
+        .bubble {
+            padding: 14px 20px;
+            border-radius: 22px;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 1.5;
+            max-width: 80%;
+            word-break: break-word;
+        }
+
+        .bubble.right {
+            background-color: #1e1118;
+            color: #f1629c;
+            border: 1px solid #7a3055;
+            align-self: flex-end;
+            border-bottom-right-radius: 6px;
+        }
+
+        .bubble.left {
+            background-color: #111211;
+            color: #666662;
+            border: 1px solid #2e2e2c;
+            align-self: flex-start;
+            border-bottom-left-radius: 6px;
+        }
+
+        .bubble .highlight {
+            color: #f1629c;
+        }
+
+        .bubble a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .bubble a:hover .highlight,
+        .bubble a:hover {
+            text-decoration: underline;
+        }
+
+        .bubble.project {
+            background-color: #111211;
+            color: #f1629c;
+            border: 1px solid #2e2e2c;
+            align-self: flex-start;
+            border-bottom-left-radius: 6px;
+        }
+
+        .bubble.image {
+            background-color: #111211;
+            border: 1px solid #2e2e2c;
+            align-self: flex-start;
+            border-bottom-left-radius: 6px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-width: 60%;
+        }
+
+        .bubble.image img {
+            width: 100%;
+            border-radius: 14px;
+            display: block;
+        }
+
+        .bubble.image .caption {
+            font-size: 16px;
+            color: #666662;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <nav class="topbar">
+        <a href="index.html">home</a>
+        <a href="projects.html">projects</a>
+        <a href="about.html" class="active">about</a>
+    </nav>
+
+    <div class="chat">
+        <div class="bubble left">Hello!</div>
+        <div class="bubble left">I am Nebin Biju, and I love bringing smiles to interactions. Currently,  I'm a Product Designer at <a href="https://microsoft.com" target="_blank"><span class="highlight">Microsoft</span></a> designing AI experiences for the Copilot App.</div>
+        <div class="bubble left">Previously, I worked with <a href="https://www.atlassian.com/" target="_blank"><span class="highlight">Atlassian</span></a> helping enterprise users migrate data.</div>
+        <div class="bubble left">More details in my <a href="https://drive.google.com/file/d/1wNCA_hwy8p7VDoel-va2AQfvZZW7HfSf/view?usp=drive_link" target="_blank"><span class="highlight">resume</span></a>.</div>
+        <div class="bubble image">
+            <img src="images/about/me.png" alt="Nebin Biju">
+            <span class="caption">Oh! btw this is how I look</span>
+        </div>
+
+        <div class="bubble right">What’s your educational background?</div>
+        <div class="bubble left">I hold a B.Des (interaction design) degeree from <a href="https://www.iitb.ac.in/" target="_blank"><span class="highlight">IIT Bombay</span></a>, graduating with the Institute Silver Medal for being the batch topper 🎖️.</div>
+        <div class="bubble left">I did a semester at <a href="https://www.ntu.edu.sg/" target="_blank"><span class="highlight">NTU Singapore</span></a> majoring in interactive media.</div>
+        <div class="bubble right">How would you describe your approach to design?</div>
+        <div class="bubble left">Good design is invisible.</div>
+        <div class="bubble left">To me, interfaces are intelligent systems, workflows are conversations and products are living, learning collaborators.</div>
+        <div class="bubble left">I’m especially drawn to AI, systems thinking, and biomimicry.</div>
+
+        <div class="bubble right">That’s a cool way to look at it. What do you enjoy outside of work?</div>
+        <div class="bubble left">I play, I write, I code.</div>
+        <div class="bubble image">
+            <img src="images/about/Speak_1.png" alt="public speaking">
+            <span class="caption">I public speak.</span>
+        </div>
+        <div class="bubble image">
+            <img src="images/about/trek_2.jpeg" alt="trekking">
+            <span class="caption">I trek. Summited the Everest and Annapurna base camps.</span>
+        </div>
+        <div class="bubble image">
+            <img src="images/about/volunteer.png" alt="volunteering">
+            <span class="caption">I volunteer.</span>
+        </div>
+        <div class="bubble image">
+            <img src="images/about/paint.jpeg" alt="painting">
+            <span class="caption">I paint.</span>
+        </div>
+        <div class="bubble image">
+            <img src="images/about/journal.jpeg" alt="journaling">
+            <span class="caption">I journal.</span>
+        </div>
+
+        <div class="bubble right">If someone wants to reach out, where can they find you?</div>
+        <div class="bubble left">Always happy to connect! Please write to <a href="mailto:nebinbiju@gmail.com"><span class="highlight">nebinbiju@gmail.com</span></a></div>
+        <div class="bubble left">Also find me in <a href="https://www.linkedin.com/in/nebin-biju-08502b159/" target="_blank"><span class="highlight">LinkedIn</span></a>, <a href="https://github.com/nebinbiju1" target="_blank"><span class="highlight">Github</span></a>, <a href="https://medium.com/@nebinbiju" target="_blank"><span class="highlight">Medium</span></a> and <a href="https://www.instagram.com/nebinbiju/" target="_blank"><span class="highlight">Instagram</span></a>.</div>
+    </div>
+</body>
+</html>

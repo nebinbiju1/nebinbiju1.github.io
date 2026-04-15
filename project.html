@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project — Nebin Biju</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #141413;
+            font-family: 'Fira Code', monospace;
+            min-height: 100vh;
+            color: #666662;
+        }
+
+        .topbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 52px;
+            background-color: #1a1a18;
+            border-bottom: 1px solid #2a2a28;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            z-index: 100;
+        }
+
+        .topbar a {
+            font-family: 'Fira Code', monospace;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            color: #666662;
+            padding: 6px 16px;
+            border-radius: 8px;
+            transition: color 0.2s;
+        }
+
+        .topbar a:hover { color: #ffffff; }
+        .topbar a.active { color: #f1629c; }
+
+        .page {
+            max-width: 620px;
+            margin: 0 auto;
+            padding: 80px 24px 120px;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            font-weight: 700;
+            color: #666662;
+            text-decoration: none;
+            margin-bottom: 48px;
+            transition: color 0.2s;
+        }
+
+        .back-btn:hover { color: #ffffff; }
+
+        .back-btn svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .project-header {
+            margin-bottom: 28px;
+        }
+
+        .project-title {
+            font-size: 42px;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        .project-desc {
+            font-size: 14px;
+            font-weight: 600;
+            color: #666662;
+            line-height: 1.75;
+            margin-bottom: 20px;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            font-size: 12px;
+            font-weight: 700;
+            color: #f1629c;
+            background: rgba(241, 98, 156, 0.12);
+            border: 1px solid rgba(241, 98, 156, 0.3);
+            border-radius: 6px;
+            padding: 4px 10px;
+        }
+
+        .divider {
+            height: 1px;
+            background: #2a2a28;
+            margin: 36px 0;
+        }
+
+        .content-block {
+            margin-bottom: 36px;
+        }
+
+        .content-block h2 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 12px;
+        }
+
+        .content-block h3 {
+            font-size: 13px;
+            font-weight: 700;
+            color: #888884;
+            margin-top: 20px;
+            margin-bottom: 8px;
+        }
+
+        .content-block p {
+            font-size: 13px;
+            font-weight: 600;
+            line-height: 1.85;
+            color: #555552;
+        }
+
+        .content-block p + p { margin-top: 10px; }
+
+        .content-block ul,
+        .content-block ol {
+            margin: 10px 0 10px 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .content-block li {
+            font-size: 13px;
+            font-weight: 600;
+            color: #555552;
+            line-height: 1.75;
+        }
+
+        .content-block strong {
+            color: #888884;
+            font-weight: 700;
+        }
+
+        .content-block blockquote {
+            border-left: 2px solid rgba(241,98,156,0.35);
+            padding-left: 14px;
+            margin: 16px 0;
+            font-style: italic;
+            font-size: 13px;
+            font-weight: 600;
+            color: #555552;
+            line-height: 1.75;
+        }
+
+        .proj-meta {
+            font-size: 12px;
+            font-weight: 600;
+            color: #444440;
+            line-height: 1.75;
+        }
+
+        .proj-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 14px 0;
+        }
+
+        .proj-table th {
+            text-align: left;
+            color: #f1629c;
+            border-bottom: 1px solid #2a2a28;
+            padding: 8px 10px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        .proj-table td {
+            color: #555552;
+            border-bottom: 1px solid #1e1e1c;
+            padding: 10px;
+            vertical-align: top;
+            line-height: 1.6;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .proj-table tr:last-child td { border-bottom: none; }
+
+        .proj-link {
+            color: #f1629c;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .proj-link:hover { text-decoration: underline; }
+
+        .dummy-image {
+            width: 100%;
+            height: 240px;
+            border-radius: 14px;
+            border: 1px solid #2a2a28;
+            margin-bottom: 36px;
+        }
+
+        .video-list {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .video-item {}
+
+        .video-item-meta {
+            margin-bottom: 12px;
+        }
+
+        .video-item-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 6px;
+        }
+
+        .video-item-link {
+            font-size: 12px;
+            font-weight: 700;
+            color: #555552;
+            text-decoration: none;
+        }
+
+        .video-item-link:hover { text-decoration: underline; }
+
+        .video-thumb {
+            position: relative;
+            width: 100%;
+            border-radius: 14px;
+            overflow: hidden;
+            background: #0e0e0d;
+            border: 1px solid #2a2a28;
+            cursor: pointer;
+        }
+
+        .video-thumb video {
+            width: 100%;
+            display: block;
+        }
+
+        .video-play-btn {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.35);
+            transition: background 0.2s;
+        }
+
+        .video-thumb:hover .video-play-btn { background: rgba(0,0,0,0.5); }
+
+        .video-play-btn.hidden { display: none; }
+
+        .video-play-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: rgba(241,98,156,0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.15s;
+        }
+
+        .video-thumb:hover .video-play-icon { transform: scale(1.08); }
+
+        .video-play-icon svg {
+            width: 20px;
+            height: 20px;
+            fill: #ffffff;
+            margin-left: 3px;
+        }
+
+        .project-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 56px;
+            padding-top: 32px;
+            border-top: 1px solid #2a2a28;
+        }
+
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Fira Code', monospace;
+            font-size: 13px;
+            font-weight: 700;
+            color: #666662;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .nav-btn:hover { color: #ffffff; }
+
+        .nav-btn svg {
+            width: 14px;
+            height: 14px;
+            flex-shrink: 0;
+        }
+
+        .nav-btn.disabled {
+            opacity: 0.2;
+            pointer-events: none;
+        }
+
+        .nav-btn.next {
+            margin-left: auto;
+        }
+    </style>
+</head>
+<body>
+    <nav class="topbar">
+        <a href="index.html">home</a>
+        <a href="projects.html" class="active">projects</a>
+        <a href="about.html">about</a>
+    </nav>
+
+    <div class="page">
+        <a class="back-btn" href="projects.html">
+            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 2L4 7L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            back to projects
+        </a>
+
+        <div class="project-header">
+            <div class="project-title" id="proj-title"></div>
+            <p class="project-desc" id="proj-desc"></p>
+            <div class="project-tags" id="proj-tags"></div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div id="proj-dummy" style="background:#1a1a18; border-radius:14px; border:1px solid #2a2a28; height:220px; margin-bottom:36px;"></div>
+
+        <div id="proj-content"></div>
+
+        <div class="project-nav">
+            <a class="nav-btn" href="projects.html">
+                <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 2L4 7L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                back to projects
+            </a>
+        </div>
+    </div>
+
+
+    <script>
+        const projects = [
+            {
+                title: 'remediation in data migration',
+                desc: 'enhancing Atlassian migration tooling reliability and reducing migration time by elegantly handling errors and ensuring enterprise readiness.',
+                tags: ['end-to-end', '2024–25', 'atlassian'],
+                color: 'linear-gradient(145deg, #5b2d9e, #8b3fcf)'
+            },
+            {
+                title: 'copilot search',
+                desc: 'designing the search experience for Microsoft Copilot, helping users navigate AI-generated content and enterprise knowledge with clarity.',
+                tags: ['product design', '2025', 'microsoft'],
+                color: 'linear-gradient(145deg, #1a3a6b, #2563eb)'
+            },
+            {
+                title: 'adventures of chachaji',
+                desc: 'a passion project exploring storytelling through interactive experiences following the journey of Chachaji across unexpected adventures.',
+                tags: ['university project', 'interaction design', '2019'],
+                color: 'linear-gradient(145deg, #7c2d12, #ea580c)'
+            },
+            {
+                title: 'NTU museum app',
+                desc: 'redesigning the museum visit experience for NTU, blending wayfinding, digital exhibits, and accessibility into a cohesive mobile interface.',
+                tags: ['mobile', 'ux research', 'uni'],
+                color: 'linear-gradient(145deg, #134e4a, #0d9488)'
+            },
+            {
+                title: 'vibe coded experiments',
+                desc: 'a collection of small, weird, and delightful things built for the joy of building, no brief, no deadline, just vibes and a blank canvas.',
+                tags: ['experiments', 'creative coding', 'ongoing'],
+                color: 'linear-gradient(145deg, #1a1a18, #2a2a28)'
+            }
+        ];
+
+        const params = new URLSearchParams(window.location.search);
+        const id = parseInt(params.get('id')) || 0;
+        const proj = projects[id];
+
+        // Fill content
+        document.title = proj.title + ' — Nebin Biju';
+        document.getElementById('proj-title').textContent = proj.title;
+        document.getElementById('proj-desc').textContent = proj.desc;
+        const dummyEl = document.getElementById('proj-dummy');
+        if (id === 0 || id === 3 || id === 4) {
+            dummyEl.style.display = 'none';
+        } else if (id === 2) {
+            dummyEl.style.background = '#1a1a18';
+            dummyEl.style.display = 'flex';
+            dummyEl.style.flexDirection = 'column';
+            dummyEl.style.alignItems = 'center';
+            dummyEl.style.justifyContent = 'center';
+            dummyEl.style.padding = '48px 24px';
+            dummyEl.style.gap = '16px';
+            dummyEl.innerHTML = '<canvas id="wip-char" width="80" height="100" style="image-rendering:pixelated;display:block;"></canvas>'
+                + '<p style="font-size:13px;font-weight:600;color:#555552;line-height:1.85;text-align:center;">a condensed version of this project is a work in progress.<br>for now, do take a look at the detailed version in the link below.</p>'
+                + '<a href="https://drive.google.com/file/d/1jfEXqQp83PV8q7BLoIqO-SLCmQTgzgOx/view?usp=drive_link" target="_blank" style="font-family:\'Fira Code\',monospace;font-size:13px;font-weight:700;color:#f1629c;text-decoration:none;">link to detailed report</a>';
+
+            (function() {
+                const cc = document.getElementById('wip-char');
+                const cx = cc.getContext('2d');
+                const P = 4, OX = 3, OY0 = 3;
+                const K = {
+                    H: '#3d2b1f', S: '#c8956c', Sd: '#b07050', E: '#141413',
+                    J: '#f1629c', JL: '#ff8ab8', JD: '#b03060', L: '#555558', Z: '#f1629c',
+                };
+                let T = 0;
+                function draw() {
+                    cx.clearRect(0, 0, 80, 100);
+                    T++;
+                    const ph = T * 0.045;
+                    const lay = Math.round(Math.sin(ph * 4) * 1.5);
+                    const ray = Math.round(Math.cos(ph * 4) * 1.5);
+                    function p(x, y, w, h, c) {
+                        cx.fillStyle = c;
+                        cx.fillRect((OX + x) * P, (OY0 + y) * P, w * P, h * P);
+                    }
+                    // shoes
+                    p(0, 17, 4, 2, K.Z); p(5, 17, 4, 2, K.Z);
+                    // legs
+                    p(1, 12, 3, 5, K.L); p(6, 12, 3, 5, K.L);
+                    // body
+                    p(1, 7, 8, 5, K.J); p(0, 8, 1, 3, K.J); p(9, 8, 1, 3, K.J);
+                    p(1, 7, 2, 2, K.JD); p(7, 7, 2, 2, K.JD);
+                    p(4, 8, 2, 4, K.JL); p(1, 11, 8, 1, K.JD);
+                    // ruler (drawn before arm so hand overlaps handle)
+                    const RC = '#e8d070', RCD = '#aa9030';
+                    p(-2, 3+lay, 1, 5, RC);
+                    p(-2, 4+lay, 1, 1, RCD);
+                    p(-2, 6+lay, 1, 1, RCD);
+                    // left arm
+                    p(-2, 8 + lay, 2, 4, K.J); p(-2, 12 + lay, 2, 1, K.S);
+                    // laptop
+                    const lpy = OY0 + 11;
+                    cx.fillStyle = '#4a4a48'; cx.fillRect((OX+0)*P, (lpy-3)*P, P*10, P*3);
+                    cx.fillStyle = '#2a2a28'; cx.fillRect((OX+1)*P, (lpy-3)*P, P*8,  P*2);
+                    cx.fillStyle = '#f1629c'; cx.fillRect((OX+2)*P, (lpy-3)*P, P*6,  P);
+                    cx.fillStyle = 'rgba(241,98,156,0.3)'; cx.fillRect((OX+2)*P, (lpy-2)*P, P*6, P);
+                    cx.fillStyle = '#555552'; cx.fillRect((OX+0)*P, (lpy-1)*P, P*10, P);
+                    cx.fillStyle = '#4a4a48'; cx.fillRect((OX-1)*P, lpy*P,     P*12, P*2);
+                    cx.fillStyle = '#666662';
+                    for (let k = 0; k < 5; k++) cx.fillRect((OX + k*2)*P, (lpy+1)*P, P, P);
+                    // right arm
+                    p(10, 8 + ray, 2, 4, K.J); p(10, 12 + ray, 2, 1, K.S);
+                    // neck + face
+                    p(3, 7, 4, 1, K.S);
+                    p(2, 1, 6, 5, K.S); p(1, 2, 8, 3, K.S);
+                    p(3, 3, 1, 1, K.E); p(6, 3, 1, 1, K.E);
+                    p(4, 4, 2, 1, K.Sd);
+                    p(3, 5, 1, 1, K.E); p(6, 5, 1, 1, K.E); p(4, 6, 2, 1, K.E);
+                    // hair
+                    p(1, 0, 8, 1, K.H); p(0, 1, 10, 1, K.H);
+                    p(0, 2, 2, 1, K.H); p(8, 2, 2, 1, K.H);
+                    p(0, 3, 1, 1, K.H); p(9, 3, 1, 1, K.H);
+                    // builder hat (on top of hair)
+                    const HC = '#f5c518', HCS = '#c9a010';
+                    p(2, -1, 6, 1, HC);
+                    p(1,  0, 8, 1, HC);
+                    p(-1, 1, 3, 1, HC); p(8, 1, 3, 1, HC);
+                    p(3, -1, 1, 1, HCS);
+                    requestAnimationFrame(draw);
+                }
+                draw();
+            })();
+        } else {
+            dummyEl.style.background = proj.color;
+        }
+
+        const tagsEl = document.getElementById('proj-tags');
+        proj.tags.forEach(t => {
+            const span = document.createElement('span');
+            span.className = 'tag';
+            span.textContent = t;
+            tagsEl.appendChild(span);
+        });
+
+        const atlassianImages = Array.from({length: 90}, (_, i) => {
+            const n = String(i + 1).padStart(2, '0');
+            return `<img src="images/PNG/${n}.png" style="width:100%;display:block;border-radius:12px;margin-bottom:16px;" alt="slide ${i+1}">`;
+        }).join('');
+
+        const defaultContent = ``;
+
+        const projectContent = {
+            0: atlassianImages,
+            3: `<img src="https://framerusercontent.com/images/EVq4ZctUdzbCsdfcdAUWFC4QsY.jpg?width=2480&height=40020" style="width:100%;display:block;border-radius:12px;" alt="NTU museum app">`,
+            4: `
+                <div class="video-list" id="video-list">
+                    <div class="video-item">
+                        <div class="video-item-meta">
+                            <div class="video-item-title">dino finder</div>
+                            <div class="video-item-desc" style="font-size:12px;font-weight:600;color:#555552;line-height:1.75;margin:4px 0 8px;">Explore a Minecraft-inspired voxel world, track hidden dinosaurs with a compass, and discover fun facts about them along the way.</div>
+                            <a href="#" class="video-item-link">link to code</a>
+                        </div>
+                        <div class="video-thumb">
+                            <video src="Videos/dino_finder.mp4" preload="metadata"></video>
+                            <div class="video-play-btn">
+                                <div class="video-play-icon">
+                                    <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <div class="video-item-meta">
+                            <div class="video-item-title">vangogh</div>
+                            <div class="video-item-desc" style="font-size:12px;font-weight:600;color:#555552;line-height:1.75;margin:4px 0 8px;">A browser-based finger painting app that uses your webcam to track hand movements in real time.</div>
+                            <a href="https://github.com/nebinbiju1/vangogh" class="video-item-link">link to code</a>
+                        </div>
+                        <div class="video-thumb">
+                            <video src="Videos/Vangogh.mp4" preload="metadata"></video>
+                            <div class="video-play-btn">
+                                <div class="video-play-icon">
+                                    <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <div class="video-item-meta">
+                            <div class="video-item-title">homepage animation for this website</div>
+                            <a href="#" class="video-item-link">link to code</a>
+                        </div>
+                        <div class="video-thumb">
+                            <video src="videos/vibe_2.mov" preload="metadata"></video>
+                            <div class="video-play-btn">
+                                <div class="video-play-icon">
+                                    <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `,
+            2: ``
+        };
+
+        document.getElementById('proj-content').innerHTML = projectContent[id] || defaultContent;
+
+        // Video play/pause for project 4
+        if (id === 4) {
+            const thumbs = document.querySelectorAll('.video-thumb');
+
+            function pauseAll(except) {
+                thumbs.forEach(t => {
+                    if (t === except) return;
+                    const v = t.querySelector('video');
+                    const b = t.querySelector('.video-play-btn');
+                    if (!v.paused) {
+                        v.pause();
+                        b.classList.remove('hidden');
+                    }
+                });
+            }
+
+            thumbs.forEach(thumb => {
+                const video = thumb.querySelector('video');
+                const btn = thumb.querySelector('.video-play-btn');
+                thumb.addEventListener('click', () => {
+                    if (video.paused) {
+                        pauseAll(thumb);
+                        video.play();
+                        btn.classList.add('hidden');
+                    } else {
+                        video.pause();
+                        btn.classList.remove('hidden');
+                    }
+                });
+                video.addEventListener('ended', () => btn.classList.remove('hidden'));
+            });
+        }
+
+    </script>
+</body>
+</html>

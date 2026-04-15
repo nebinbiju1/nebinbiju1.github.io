@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nebin Biju</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #141413;
+            font-family: 'Fira Code', monospace;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 50vh 24px 100px;
+            text-align: center;
+        }
+
+        .topbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 52px;
+            background-color: #1a1a18;
+            border-bottom: 1px solid #2a2a28;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            z-index: 100;
+        }
+
+        .topbar a {
+            font-family: 'Fira Code', monospace;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            color: #666662;
+            padding: 6px 16px;
+            border-radius: 8px;
+            transition: color 0.2s;
+        }
+
+        .topbar a:hover {
+            color: #ffffff;
+        }
+
+        .topbar a.active {
+            color: #f1629c;
+        }
+
+
+        .modal button:hover {
+            background: #e0508a;
+        }
+
+        h1 {
+            font-size: 64px;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.1;
+        }
+
+        .hero {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .subtitle {
+            font-size: 32px;
+            font-weight: 700;
+            color: #f1629c;
+            margin-top: 4px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .subtitle-icon {
+            font-size: 28px;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        .subtitle-text {
+            display: flex;
+            align-items: center;
+        }
+
+        .subtitle-word {
+            display: inline-block;
+            white-space: nowrap;
+        }
+
+
+        .subtitle-cursor {
+            display: inline-block;
+            width: 0.55em;
+            height: 0.9em;
+            background-color: #f1629c;
+            margin-left: 1px;
+            vertical-align: middle;
+            animation: blink 0.7s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+
+        .hero-byline {
+            font-size: 14px;
+            font-weight: 600;
+            color: #666662;
+            margin-top: 28px;
+            line-height: 1.8;
+            text-align: left;
+            align-self: flex-start;
+        }
+
+        .byline-link {
+            color: #666662;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .byline-link:hover {
+            color: #f1629c;
+        }
+
+        #char-canvas {
+            display: block;
+            margin: 0 auto 16px;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+        }
+
+        .chat {
+            margin-top: 160px;
+            width: 100%;
+            max-width: 560px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            text-align: left;
+        }
+
+        .bubble {
+            padding: 14px 20px;
+            border-radius: 22px;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 1.5;
+            max-width: 80%;
+            word-break: break-word;
+        }
+
+        .bubble.right {
+            background-color: #1e1118;
+            color: #f1629c;
+            border: 1px solid #7a3055;
+            align-self: flex-end;
+            border-bottom-right-radius: 6px;
+        }
+
+        .bubble.left {
+            background-color: #111211;
+            color: #666662;
+            border: 1px solid #2e2e2c;
+            align-self: flex-start;
+            border-bottom-left-radius: 6px;
+        }
+
+        .bubble .highlight {
+            color: #f1629c;
+        }
+
+        .bubble.project {
+            background-color: #111211;
+            color: #f1629c;
+            border: 1px solid #2e2e2c;
+            align-self: flex-start;
+            border-bottom-left-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="topbar">
+        <a href="index.html" class="active">home</a>
+        <a href="projects.html">projects</a>
+        <a href="about.html">about</a>
+    </nav>
+
+    <div class="hero">
+        <canvas id="char-canvas" width="120" height="150"></canvas>
+<div class="hero-text">
+        <h1>nebin biju</h1>
+        <div class="subtitle">
+            <span class="subtitle-icon">✳</span>
+            <span class="subtitle-text">
+                <span class="subtitle-word"></span><span class="subtitle-cursor"></span><span class="subtitle-ellipsis" style="opacity:0">...</span>
+            </span>
+        </div>
+        <p class="hero-byline">// bringing smiles to interactions :)<br><a href="projects.html" class="byline-link">projects</a></p>
+        </div>
+    </div>
+
+    <div class="chat" style="display:none">
+        <div class="bubble left">Hello!</div>
+        <div class="bubble left">I am Nebin Biju, I'm a Product Designer at <span class="highlight">Microsoft</span> designing AI experiences for the Copilot App.</div>
+        <div class="bubble left">Previously, I worked with <span class="highlight">Atlassian</span> helping enterprise users migrate data.</div>
+
+        <div class="bubble right">What are some of your key projects?</div>
+        <div class="bubble left">These are some of my impactful ones from my previous workplaces</div>
+
+        <div class="bubble right">Great, and anything else? Maybe your passion projects or the ones from your uni days?</div>
+        <div class="bubble left">Yess!, I like to <span class="highlight">vibe code</span> and make experiences. You can find them here.</div>
+        <div class="bubble left">And I have couple of favorites from my uni days as well</div>
+
+        <div class="bubble right">What's your take on Design?</div>
+        <div class="bubble left">[TBD] Good design is purposeful, functional, aesthetically pleasing, user-centered, and sustainable, enhancing both usability and overall experience.</div>
+
+        <div class="bubble right">What do you do outside of work?</div>
+        <div class="bubble left">I trek, I write, I play sports,<br>I travel, I public speak,<br>I volunteer, I journal, etc.</div>
+
+        <div class="bubble right">It was nice knowing you :)</div>
+        <div class="bubble left">Likewise :), Please find me in <span class="highlight">LinkedIn, Instagram</span> and <span class="highlight">Medium.</span></div>
+    </div>
+
+    <script>
+        const words = ['coding', 'biomimicking', 'designing', 'adventuring', 'cooking', 'journaling'];
+        const icons = ['✳', '+', '◆', '*', '✦', '+', '✳', '◇'];
+        let wordIndex = 0;
+        let iconIndex = 0;
+        const wordEl = document.querySelector('.subtitle-word');
+        const iconEl = document.querySelector('.subtitle-icon');
+        const cursorEl = document.querySelector('.subtitle-cursor');
+        const ellipsisEl = document.querySelector('.subtitle-ellipsis');
+
+        setInterval(() => {
+            iconIndex = (iconIndex + 1) % icons.length;
+            iconEl.textContent = icons[iconIndex];
+        }, 120);
+
+        const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+        async function typeWord(word) {
+            if (window.setCharState) window.setCharState(word);
+            cursorEl.style.display = 'inline-block';
+            ellipsisEl.style.opacity = '0';
+            for (let i = 0; i <= word.length; i++) {
+                wordEl.textContent = word.slice(0, i);
+                await sleep(90);
+            }
+            cursorEl.style.display = 'none';
+            ellipsisEl.style.opacity = '1';
+            await sleep(1800);
+        }
+
+        async function deleteWord() {
+            if (window.setCharState) window.setCharState('idle');
+            cursorEl.style.display = 'inline-block';
+            ellipsisEl.style.opacity = '0';
+            const current = wordEl.textContent;
+            for (let i = current.length; i >= 0; i--) {
+                wordEl.textContent = current.slice(0, i);
+                await sleep(55);
+            }
+        }
+
+        async function cycle() {
+            await typeWord(words[wordIndex]);
+            while (true) {
+                await deleteWord();
+                await sleep(150);
+                wordIndex = (wordIndex + 1) % words.length;
+                await typeWord(words[wordIndex]);
+            }
+        }
+
+        cycle();
+    </script>
+
+    <script>
+    (function() {
+        const cc = document.getElementById('char-canvas');
+        const cx = cc.getContext('2d');
+        const P = 6, OX = 5, OY0 = 5;
+
+        const K = {
+            H:  '#3d2b1f',  // hair
+            S:  '#c8956c',  // skin
+            Sd: '#b07050',  // skin dark
+            E:  '#141413',  // eye
+            J:  '#f1629c',  // jacket pink
+            JL: '#ff8ab8',  // zipper
+            JD: '#b03060',  // collar/hem
+            L:  '#555558',  // trousers grey
+            Z:  '#f1629c',  // shoes pink
+            BP: '#4a7ab5',  // backpack
+            BPD:'#2d5a8a',  // backpack dark
+            BPL:'#6a9ad5',  // backpack light
+        };
+
+        let charState = 'idle', T = 0;
+        window.setCharState = s => { charState = s; };
+
+        function draw() {
+            cx.clearRect(0, 0, 120, 150);
+            T++;
+
+            const sin = Math.sin, cos = Math.cos, abs = Math.abs, rnd = Math.round;
+            const ph = T * 0.045;
+
+            let by = 0;
+            let lax = 0, lay = 0, rax = 0, ray = 0;
+            let lly = 0, rly = 0;
+            const isAdventuring = charState === 'adventuring';
+
+            switch (charState) {
+                case 'idle':
+                    by = rnd(sin(ph) * 1.5);
+                    break;
+                case 'coding':
+                    lay = rnd(sin(ph * 4) * 1.5);
+                    ray = rnd(cos(ph * 4) * 1.5);
+                    break;
+                case 'designing':
+                    by = rnd(sin(ph * 0.5) * 0.6);
+                    lax = -1; lay = rnd(-2.5 + sin(ph * 1.2) * 0.8);
+                    break;
+                case 'adventuring':
+                    by  = rnd(-abs(sin(ph * 1.2)) * 5);
+                    lly = rnd( sin(ph * 1.2) * 2);
+                    rly = rnd(-sin(ph * 1.2) * 2);
+                    lay = rnd(-sin(ph * 1.2) * 2);
+                    ray = rnd( sin(ph * 1.2) * 2);
+                    break;
+                case 'journaling':
+                    by  = rnd(sin(ph * 0.4) * 0.5);
+                    lax = rnd(sin(ph * 2.5) * 2);
+                    lay = 1;
+                    break;
+                case 'cooking':
+                    by  = rnd(sin(ph * 0.4) * 0.5);
+                    lax = rnd(cos(ph * 1.8) * 2);
+                    lay = rnd(-1 + sin(ph * 1.8) * 1.5);
+                    break;
+                case 'biomimicking':
+                    by  = rnd(sin(ph * 0.6) * 1.5);
+                    lay = rnd(sin(ph * 1.0) * 1);
+                    ray = rnd(cos(ph * 1.0) * 1);
+                    break;
+            }
+
+            function p(x, y, w, h, c) {
+                cx.fillStyle = c;
+                cx.fillRect((OX + x) * P, (OY0 + by + y) * P, w * P, h * P);
+            }
+
+            // SHOES
+            p(0, 17 + lly, 4, 2, K.Z);
+            p(5, 17 + rly, 4, 2, K.Z);
+
+            // LEGS
+            p(1, 12 + lly, 3, 5, K.L);
+            p(6, 12 + rly, 3, 5, K.L);
+
+            // BACKPACK (adventuring — drawn behind body, large)
+            if (isAdventuring) {
+                p(6,  6, 5, 8, K.BP);   // main pack body
+                p(6,  6, 5, 1, K.BPD);  // top flap
+                p(6, 13, 5, 1, K.BPD);  // bottom
+                p(7,  8, 3, 4, K.BPL);  // front pocket
+                p(7,  8, 3, 1, K.BPD);  // pocket top
+                p(8,  9, 1, 2, K.BPD);  // pocket detail
+                // straps across torso
+                p(2,  8, 1, 4, K.BPD);
+                p(4,  8, 1, 4, K.BPD);
+            }
+
+            // BODY
+            p(1,  7, 8, 5, K.J);
+            p(0,  8, 1, 3, K.J);
+            p(9,  8, 1, 3, K.J);
+            p(1,  7, 2, 2, K.JD);
+            p(7,  7, 2, 2, K.JD);
+            p(4,  8, 2, 4, K.JL);
+            p(1, 11, 8, 1, K.JD);
+
+            // LEFT ARM
+            p(-2 + lax,  8 + lay, 2, 4, K.J);
+            p(-2 + lax, 12 + lay, 2, 1, K.S);
+
+            // PENCIL — designing & writing/journaling (held in left hand)
+            if (charState === 'designing' || charState === 'journaling') {
+                const px = OX + (-2 + lax) - 1;
+                const py = OY0 + by + lay + 6;
+                cx.fillStyle = '#f5e642';
+                cx.fillRect(px * P, py * P, P, P * 4);
+                cx.fillStyle = '#e05030';
+                cx.fillRect(px * P, (py - 1) * P, P, P);
+                cx.fillStyle = K.Sd;
+                cx.fillRect(px * P, (py + 4) * P, P, P);
+            }
+
+            // LAPTOP — coding (drawn in front after arms so it overlaps hands)
+            if (charState === 'coding') {
+                const lpy = OY0 + by + 11;
+                // screen (tilted back, above keyboard)
+                cx.fillStyle = '#4a4a48';
+                cx.fillRect((OX + 0) * P, (lpy - 3) * P, P * 10, P * 3);
+                cx.fillStyle = '#2a2a28';
+                cx.fillRect((OX + 1) * P, (lpy - 3) * P, P * 8, P * 2);
+                // screen glow
+                cx.fillStyle = '#f1629c';
+                cx.fillRect((OX + 2) * P, (lpy - 3) * P, P * 6, P);
+                cx.fillStyle = 'rgba(241,98,156,0.3)';
+                cx.fillRect((OX + 2) * P, (lpy - 2) * P, P * 6, P);
+                // hinge
+                cx.fillStyle = '#555552';
+                cx.fillRect((OX + 0) * P, (lpy - 1) * P, P * 10, P);
+                // keyboard base
+                cx.fillStyle = '#4a4a48';
+                cx.fillRect((OX - 1) * P, lpy * P, P * 12, P * 2);
+                // keys
+                cx.fillStyle = '#666662';
+                for (let k = 0; k < 5; k++) {
+                    cx.fillRect((OX + k * 2) * P, (lpy + 1) * P, P, P);
+                }
+            }
+
+            // SPOON — cooking (held in left hand, circles)
+            if (charState === 'cooking') {
+                const sx = OX + (-2 + lax) - 1;
+                const sy = OY0 + by + lay + 8;
+                cx.fillStyle = '#ddddaa';
+                cx.fillRect(sx * P, sy * P, P, P * 3);       // handle
+                cx.fillStyle = '#bbbb88';
+                cx.fillRect((sx - 1) * P, (sy + 3) * P, P * 3, P * 2); // bowl
+            }
+
+            // RIGHT ARM
+            p(10 + rax,  8 + ray, 2, 4, K.J);
+            p(10 + rax, 12 + ray, 2, 1, K.S);
+
+            // BOWL — cooking (held in right hand, stationary)
+            if (charState === 'cooking') {
+                const bx = OX + 9 + rax;
+                const bby = OY0 + by + 11 + ray;
+                cx.fillStyle = '#4a9a6a';
+                cx.fillRect(bx * P, bby * P, P * 4, P * 3);
+                cx.fillStyle = '#2a7a4a';
+                cx.fillRect(bx * P, bby * P, P * 4, P);
+                cx.fillStyle = '#6aba8a';
+                cx.fillRect((bx + 1) * P, (bby + 1) * P, P * 2, P);
+            }
+
+            // NECK
+            p(3, 7, 4, 1, K.S);
+
+            // FACE
+            p(2, 1, 6, 5, K.S);
+            p(1, 2, 8, 3, K.S);
+
+            // Eyes
+            p(3, 3, 1, 1, K.E);
+            p(6, 3, 1, 1, K.E);
+
+            // Nose
+            p(4, 4, 2, 1, K.Sd);
+
+            // Smile
+            p(3, 5, 1, 1, K.E);
+            p(6, 5, 1, 1, K.E);
+            p(4, 6, 2, 1, K.E);
+
+            // HAIR
+            p(1, 0, 8, 1, K.H);
+            p(0, 1,10, 1, K.H);
+            p(0, 2, 2, 1, K.H);
+            p(8, 2, 2, 1, K.H);
+            p(0, 3, 1, 1, K.H);
+            p(9, 3, 1, 1, K.H);
+
+            // LION MASK + TAIL — biomimicking
+            if (charState === 'biomimicking') {
+                const MN = '#c8860a'; // mane orange
+                const MD = '#8a5500'; // mane dark
+                const ML = '#e8a830'; // mane light
+                const MF = '#e8c070'; // face tan
+
+                // TAIL (behind everything — but we draw it here on top for visibility)
+                // Draw tail curving to the right side
+                const tailSwing = rnd(sin(ph * 1.2) * 1);
+                p(10 + tailSwing, 10, 1, 3, MN);
+                p(11 + tailSwing, 12, 1, 2, MN);
+                p(11 + tailSwing, 14, 2, 1, MN);
+                p(12 + tailSwing, 14, 1, 2, MD);  // tuft
+
+                // MANE — ring of spiky pixels around head
+                // outer ring
+                p(-1,  0, 1, 1, ML);   // top-left spike
+                p(10,  0, 1, 1, ML);   // top-right spike
+                p(-2,  1, 2, 5, MN);   // left mane
+                p(10,  1, 2, 5, MN);   // right mane
+                p( 0, -2, 2, 2, ML);   // top-left spikes
+                p( 4, -3, 2, 2, ML);   // top center
+                p( 8, -2, 2, 2, ML);   // top-right spikes
+                p(-1,  6, 2, 1, MD);   // bottom left mane
+                p( 9,  6, 2, 1, MD);   // bottom right mane
+                p( 1,  7, 8, 1, MD);   // mane bottom chin
+
+                // LION FACE MASK over normal face
+                p(2, 1, 6, 6, MF);     // face base
+                p(1, 2, 8, 4, MF);     // wider cheeks
+
+                // lion eyes (bigger, rounder)
+                p(2, 3, 2, 2, '#8a6000');
+                p(6, 3, 2, 2, '#8a6000');
+                p(3, 3, 1, 1, K.E);    // pupils
+                p(7, 3, 1, 1, K.E);
+
+                // lion nose (wide pink triangle)
+                p(4, 5, 2, 1, '#d06080');
+                p(3, 5, 1, 1, '#d06080');
+                p(5, 5, 1, 1, '#d06080');
+
+                // whiskers
+                cx.fillStyle = '#ccccaa';
+                cx.fillRect((OX - 1) * P, (OY0 + by + 5) * P, P * 3, Math.max(1, P / 4));
+                cx.fillRect((OX + 8) * P, (OY0 + by + 5) * P, P * 3, Math.max(1, P / 4));
+                cx.fillRect((OX - 1) * P, (OY0 + by + 6) * P, P * 3, Math.max(1, P / 4));
+                cx.fillRect((OX + 8) * P, (OY0 + by + 6) * P, P * 3, Math.max(1, P / 4));
+
+                // lion ears (on top of mane)
+                p(1, -1, 2, 2, MN);
+                p(7, -1, 2, 2, MN);
+                p(2, -1, 1, 1, ML);
+                p(8, -1, 1, 1, ML);
+            }
+
+            requestAnimationFrame(draw);
+        }
+
+        draw();
+    })();
+    </script>
+</body>
+</html>
