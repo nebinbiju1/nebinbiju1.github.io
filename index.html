@@ -63,10 +63,11 @@
         }
 
         h1 {
-            font-size: 64px;
+            font-size: clamp(28px, 12vw, 64px);
             font-weight: 700;
             color: #ffffff;
             line-height: 1.1;
+            white-space: nowrap;
         }
 
         .hero {
@@ -82,13 +83,14 @@
         }
 
         .subtitle {
-            font-size: 32px;
+            font-size: clamp(14px, 6vw, 32px);
             font-weight: 700;
             color: #f1629c;
             margin-top: 4px;
             display: flex;
             align-items: center;
             gap: 12px;
+            white-space: nowrap;
         }
 
         .subtitle-icon {
@@ -125,7 +127,7 @@
 
 
         .hero-byline {
-            font-size: 14px;
+            font-size: clamp(11px, 3vw, 14px);
             font-weight: 600;
             color: #666662;
             margin-top: 28px;
