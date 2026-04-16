@@ -575,17 +575,21 @@
 
         // Video exclusive playback for project 4
         if (id === 4) {
-            const iframes = document.querySelectorAll('.video-thumb iframe');
+            const iframes = Array.from(document.querySelectorAll('.video-thumb iframe'));
+            iframes.forEach(f => { f.dataset.src = f.src; });
+            let active = null;
 
             window.addEventListener('blur', () => {
-                const focused = document.activeElement;
-                if (!focused || focused.tagName !== 'IFRAME') return;
-                iframes.forEach(iframe => {
-                    if (iframe === focused) return;
-                    const src = iframe.src;
-                    iframe.src = '';
-                    iframe.src = src;
-                });
+                setTimeout(() => {
+                    const el = document.activeElement;
+                    if (!el || el.tagName !== 'IFRAME' || !iframes.includes(el) || el === active) return;
+                    if (active) {
+                        const prev = active;
+                        prev.src = '';
+                        setTimeout(() => { prev.src = prev.dataset.src; }, 80);
+                    }
+                    active = el;
+                }, 0);
             });
         }
 
