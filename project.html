@@ -429,7 +429,7 @@
         document.getElementById('proj-title').textContent = proj.title;
         document.getElementById('proj-desc').textContent = proj.desc;
         const dummyEl = document.getElementById('proj-dummy');
-        if (id === 0 || id === 3 || id === 4) {
+        if (id === 0 || id === 3 || id === 4 || id === 5) {
             dummyEl.style.display = 'none';
         } else if (id === 2) {
             dummyEl.style.background = '#1a1a18';
@@ -530,10 +530,16 @@
             return `<img src="https://github.com/nebinbiju1/nebinbiju1.github.io/releases/download/slides-v1/${n}.png" style="width:100%;display:block;border-radius:12px;margin-bottom:16px;" alt="slide ${i+1}">`;
         }).join('');
 
+        const dataSelectionImages = Array.from({length: 50}, (_, i) => {
+            const n = String(i + 1).padStart(2, '0');
+            return `<img src="https://github.com/nebinbiju1/nebinbiju1.github.io/releases/download/data-selection-v1/${n}.png" style="width:100%;display:block;border-radius:12px;margin-bottom:16px;" alt="slide ${i+1}">`;
+        }).join('');
+
         const defaultContent = ``;
 
         const projectContent = {
             0: atlassianImages,
+            5: dataSelectionImages,
             3: `<img src="https://framerusercontent.com/images/EVq4ZctUdzbCsdfcdAUWFC4QsY.jpg?width=2480&height=40020" style="width:100%;display:block;border-radius:12px;" alt="NTU museum app">`,
             4: `
                 <div class="video-list" id="video-list">
