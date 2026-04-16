@@ -579,18 +579,16 @@
             iframes.forEach(f => { f.dataset.src = f.src; });
             let active = null;
 
-            window.addEventListener('blur', () => {
-                setTimeout(() => {
-                    const el = document.activeElement;
-                    if (!el || el.tagName !== 'IFRAME' || !iframes.includes(el) || el === active) return;
-                    if (active) {
-                        const prev = active;
-                        prev.src = '';
-                        setTimeout(() => { prev.src = prev.dataset.src; }, 80);
-                    }
-                    active = el;
-                }, 0);
-            });
+            setInterval(() => {
+                const el = document.activeElement;
+                if (!el || el.tagName !== 'IFRAME' || !iframes.includes(el) || el === active) return;
+                if (active) {
+                    const prev = active;
+                    prev.src = '';
+                    setTimeout(() => { prev.src = prev.dataset.src; }, 100);
+                }
+                active = el;
+            }, 250);
         }
 
     </script>
