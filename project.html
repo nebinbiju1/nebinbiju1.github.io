@@ -535,8 +535,7 @@
                             <a href="#" class="video-item-link">open code</a>
                         </div>
                         <div class="video-thumb">
-                            <div class="video-play-btn"><div class="video-play-icon"><svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="5,3 17,10 5,17"/></svg></div></div>
-                            <iframe src="https://drive.google.com/file/d/1IfU-QkFnMe-Z7M6Gp6uIbToF4EXf2oqu/preview" style="width:100%;aspect-ratio:16/9;display:block;border:none;pointer-events:none;" allow="autoplay" allowfullscreen></iframe>
+                            <iframe src="https://drive.google.com/file/d/1IfU-QkFnMe-Z7M6Gp6uIbToF4EXf2oqu/preview" style="width:100%;aspect-ratio:16/9;display:block;border:none;" allow="autoplay" allowfullscreen></iframe>
                         </div>
                     </div>
                     <div class="video-item">
@@ -546,8 +545,7 @@
                             <a href="https://github.com/nebinbiju1/vangogh" class="video-item-link">open code</a>
                         </div>
                         <div class="video-thumb">
-                            <div class="video-play-btn"><div class="video-play-icon"><svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="5,3 17,10 5,17"/></svg></div></div>
-                            <iframe src="https://drive.google.com/file/d/1ihfxUGoUtfgOkSaLAEG_frIabzZMuPA1/preview" style="width:100%;aspect-ratio:16/9;display:block;border:none;pointer-events:none;" allow="autoplay" allowfullscreen></iframe>
+                            <iframe src="https://drive.google.com/file/d/1ihfxUGoUtfgOkSaLAEG_frIabzZMuPA1/preview" style="width:100%;aspect-ratio:16/9;display:block;border:none;" allow="autoplay" allowfullscreen></iframe>
                         </div>
                     </div>
                     <div class="video-item">
@@ -557,8 +555,7 @@
                             <a href="https://github.com/nebinbiju1/waveart" class="video-item-link">open code</a>
                         </div>
                         <div class="video-thumb">
-                            <div class="video-play-btn"><div class="video-play-icon"><svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="5,3 17,10 5,17"/></svg></div></div>
-                            <iframe src="https://drive.google.com/file/d/14qSelOFJG_93Sa1y1xogKhCEU68dJBIw/preview" style="width:100%;aspect-ratio:16/9;display:block;border:none;pointer-events:none;" allow="autoplay" allowfullscreen></iframe>
+                            <iframe src="https://drive.google.com/file/d/14qSelOFJG_93Sa1y1xogKhCEU68dJBIw/preview" style="width:100%;aspect-ratio:16/9;display:block;border:none;" allow="autoplay" allowfullscreen></iframe>
                         </div>
                     </div>
                     <div class="video-item">
@@ -566,8 +563,7 @@
                             <div class="video-item-title">homepage animation for this website</div>
                         </div>
                         <div class="video-thumb">
-                            <div class="video-play-btn"><div class="video-play-icon"><svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="5,3 17,10 5,17"/></svg></div></div>
-                            <iframe src="https://drive.google.com/file/d/1KyAQXARat5ydA0_75CLy6SjrXay7juah/preview" style="width:100%;aspect-ratio:16/9;display:block;border:none;pointer-events:none;" allow="autoplay" allowfullscreen></iframe>
+                            <iframe src="https://drive.google.com/file/d/1KyAQXARat5ydA0_75CLy6SjrXay7juah/preview" style="width:100%;aspect-ratio:16/9;display:block;border:none;" allow="autoplay" allowfullscreen></iframe>
                         </div>
                     </div>
                 </div>
@@ -577,31 +573,18 @@
 
         document.getElementById('proj-content').innerHTML = projectContent[id] || defaultContent;
 
-        // Video play/pause for project 4
+        // Video exclusive playback for project 4
         if (id === 4) {
-            const thumbs = document.querySelectorAll('.video-thumb');
+            const iframes = document.querySelectorAll('.video-thumb iframe');
 
-            thumbs.forEach(thumb => {
-                const btn = thumb.querySelector('.video-play-btn');
-                const iframe = thumb.querySelector('iframe');
-
-                btn.addEventListener('click', () => {
-                    // Stop all other iframes by resetting their src
-                    thumbs.forEach(other => {
-                        if (other === thumb) return;
-                        const otherBtn = other.querySelector('.video-play-btn');
-                        const otherIframe = other.querySelector('iframe');
-                        if (!otherBtn.classList.contains('hidden')) return;
-                        const src = otherIframe.src;
-                        otherIframe.src = '';
-                        otherIframe.src = src;
-                        otherIframe.style.pointerEvents = 'none';
-                        otherBtn.classList.remove('hidden');
-                    });
-
-                    // Play this one
-                    btn.classList.add('hidden');
-                    iframe.style.pointerEvents = 'auto';
+            window.addEventListener('blur', () => {
+                const focused = document.activeElement;
+                if (!focused || focused.tagName !== 'IFRAME') return;
+                iframes.forEach(iframe => {
+                    if (iframe === focused) return;
+                    const src = iframe.src;
+                    iframe.src = '';
+                    iframe.src = src;
                 });
             });
         }
