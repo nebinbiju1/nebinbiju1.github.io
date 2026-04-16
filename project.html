@@ -535,6 +535,7 @@
                             <a href="#" class="video-item-link">open code</a>
                         </div>
                         <div class="video-thumb">
+                            <img src="images/dino_cover.png" class="video-cover" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;cursor:pointer;z-index:1;" alt="dino finder thumbnail">
                             <iframe src="https://drive.google.com/file/d/1IfU-QkFnMe-Z7M6Gp6uIbToF4EXf2oqu/preview" style="width:100%;aspect-ratio:16/9;display:block;border:none;" allow="autoplay" allowfullscreen></iframe>
                         </div>
                     </div>
@@ -578,6 +579,21 @@
             const iframes = Array.from(document.querySelectorAll('.video-thumb iframe'));
             iframes.forEach(f => { f.dataset.src = f.src; });
             let active = null;
+
+            // Cover thumbnail click
+            const cover = document.querySelector('.video-cover');
+            if (cover) {
+                cover.addEventListener('click', () => {
+                    iframes.forEach(f => {
+                        if (f !== cover.closest('.video-thumb').querySelector('iframe')) {
+                            const src = f.dataset.src;
+                            f.src = '';
+                            setTimeout(() => { f.src = src; }, 100);
+                        }
+                    });
+                    cover.style.display = 'none';
+                });
+            }
 
             setInterval(() => {
                 const el = document.activeElement;
