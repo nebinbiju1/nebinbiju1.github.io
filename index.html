@@ -134,6 +134,18 @@
             line-height: 1.8;
             text-align: left;
             align-self: flex-start;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 600px) {
+            .hero-byline {
+                font-size: clamp(10px, 3.5vw, 16px);
+                align-self: center;
+                text-align: center;
+            }
+            .hero-text {
+                align-items: center;
+            }
         }
 
         .byline-link {
