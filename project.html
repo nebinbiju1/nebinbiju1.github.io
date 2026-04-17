@@ -620,13 +620,24 @@
 
         // Click-to-load YouTube facade for project 4
         if (id === 4) {
-            document.querySelectorAll('.video-thumb[data-videoid]').forEach(thumb => {
-                thumb.addEventListener('click', () => {
-                    const vid = thumb.dataset.videoid;
-                    if (!vid) return;
-                    thumb.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${vid}?rel=0&modestbranding=1&iv_load_policy=3&autoplay=1" style="width:100%;aspect-ratio:16/9;display:block;border:none;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
-                    delete thumb.dataset.videoid;
-                });
+            let activeThumb = null;
+            let activeVid = null;
+
+            function restoreThumb(thumb, vid) {
+                thumb.innerHTML = `<img src="https://img.youtube.com/vi/${vid}/maxresdefault.jpg" onerror="this.src='https://img.youtube.com/vi/${vid}/hqdefault.jpg'" style="width:100%;aspect-ratio:16/9;display:block;object-fit:cover;"><div class="video-play-btn"><div class="video-play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>`;
+                thumb.dataset.videoid = vid;
+            }
+
+            document.getElementById('video-list').addEventListener('click', e => {
+                const thumb = e.target.closest('.video-thumb');
+                if (!thumb) return;
+                const vid = thumb.dataset.videoid;
+                if (!vid) return;
+                if (activeThumb && activeThumb !== thumb) restoreThumb(activeThumb, activeVid);
+                thumb.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${vid}?rel=0&modestbranding=1&iv_load_policy=3&autoplay=1" style="width:100%;aspect-ratio:16/9;display:block;border:none;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+                delete thumb.dataset.videoid;
+                activeThumb = thumb;
+                activeVid = vid;
             });
         }
 
