@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>blog — nebin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: #141413;
+            font-family: 'Fira Code', monospace;
+            min-height: 100vh;
+            color: #666662;
+        }
+        .topbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: 52px;
+            background-color: #1a1a18;
+            border-bottom: 1px solid #2a2a28;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            z-index: 100;
+        }
+        .topbar a {
+            font-family: 'Fira Code', monospace;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            color: #666662;
+            padding: 6px 16px;
+            border-radius: 8px;
+            transition: color 0.2s;
+        }
+        .topbar a:hover { color: #ffffff; }
+        .topbar a.active { color: #f1629c; }
+
+        .page {
+            max-width: 620px;
+            margin: 0 auto;
+            padding: 80px 24px 120px;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            font-weight: 700;
+            color: #666662;
+            text-decoration: none;
+            margin-bottom: 48px;
+            transition: color 0.2s;
+        }
+        .back-btn:hover { color: #ffffff; }
+        .back-btn svg { width: 14px; height: 14px; }
+
+        .blog-header { margin-bottom: 28px; }
+
+        .blog-title {
+            font-size: 42px;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        .blog-desc {
+            font-size: 16px;
+            font-weight: 600;
+            color: #888884;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .blog-meta {
+            font-size: 16px;
+            font-weight: 600;
+            color: #888884;
+            margin-bottom: 20px;
+        }
+
+        .medium-link {
+            display: inline-block;
+            font-size: 16px;
+            font-weight: 600;
+            color: #f1629c;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        .medium-link:hover { opacity: 0.75; }
+
+        .divider {
+            height: 1px;
+            background: #2a2a28;
+            margin: 36px 0;
+        }
+
+        .blog-content p {
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 1.5;
+            color: #888884;
+            margin-bottom: 16px;
+        }
+        .blog-content strong { color: #888884; font-weight: 400; }
+        .blog-content em { font-style: italic; }
+        .blog-content blockquote {
+            border-left: 2px solid rgba(241, 98, 156, 0.35);
+            padding-left: 14px;
+            margin: 16px 0;
+            font-style: italic;
+            font-size: 16px;
+            font-weight: 400;
+            color: #888884;
+            line-height: 1.5;
+        }
+        .blog-content figure { margin: 24px 0; }
+        .blog-content figure img {
+            width: 100%;
+            border-radius: 10px;
+            border: 1px solid #2a2a28;
+            display: block;
+        }
+        .blog-content figcaption {
+            font-size: 11px;
+            font-weight: 600;
+            color: #444441;
+            margin-top: 8px;
+            text-align: center;
+        }
+        .blog-content a { color: #f1629c; text-decoration: none; }
+        .blog-content a:hover { text-decoration: underline; }
+        .blog-content h2 { font-size: 16px; font-weight: 700; color: #ffffff; margin-top: 40px; margin-bottom: 12px; }
+        .blog-content h3 { font-size: 13px; font-weight: 700; color: #888884; margin-top: 20px; margin-bottom: 8px; }
+
+        .blog-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 56px;
+            padding-top: 32px;
+            border-top: 1px solid #2a2a28;
+        }
+
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Fira Code', monospace;
+            font-size: 13px;
+            font-weight: 700;
+            color: #666662;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .nav-btn:hover { color: #ffffff; }
+        .nav-btn svg { width: 14px; height: 14px; }
+    </style>
+    <script src="favicon.js" defer></script>
+</head>
+<body>
+    <nav class="topbar">
+        <a href="index.html">home</a>
+        <a href="projects.html">projects</a>
+        <a href="blogs.html" class="active">blogs</a>
+        <a href="about.html">about</a>
+    </nav>
+
+    <div class="page">
+        <a class="back-btn" href="blogs.html">
+            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 2L4 7L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            back to blogs
+        </a>
+
+        <div class="blog-header">
+            <div class="blog-title" id="blog-title"></div>
+            <p class="blog-meta" id="blog-meta"></p>
+            <a class="medium-link" id="medium-link" href="#" target="_blank" rel="noopener">read in medium</a>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="blog-content" id="blog-content"></div>
+
+        <div class="blog-nav">
+            <a class="nav-btn" href="blogs.html">
+                <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 2L4 7L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                back to blogs
+            </a>
+        </div>
+    </div>
+
+    <script>
+    const POSTS = [
+      {
+        title: 'The Courage to Not Build',
+        date: 'apr 18, 2026',
+        read: '3 min read',
+        link: 'https://medium.com/@nebinbiju/the-courage-to-not-build-5ab199ae7251',
+        subtitle: 'The question is no longer can we build it, but should we.',
+        content: `<p>The question is no longer can we build it, but should we.</p>
+<figure><img alt="" src="https://cdn-images-1.medium.com/max/1024/1*sJSGpeVGMSJsFWZuvtDUvA.png"></figure>
+<p>I have been thinking about this a lot lately.</p>
+<p>We are living in a moment where building has never been easier and somehow has never felt more questionable.</p>
+<p>Not long ago, creating something meaningful in tech required friction. It demanded time, skill, collaboration, and a certain stubbornness to push through limitations. That friction acted like a filter. It forced you to care. It forced you to choose what was worth building.</p>
+<p>Now that filter is gone.</p>
+<p>With AI, I can spin up an app in hours. I can prototype ideas in minutes. I can generate interfaces, flows, copy, systems, things that once took teams weeks, almost instantly. The barrier to creation has collapsed so dramatically that the act of building itself no longer feels like an achievement. It feels default.</p>
+<p>And that is where the discomfort begins.</p>
+<p>Because if anything can be built, then what should be built?</p>
+<p>I find myself sitting with ideas longer than I used to, not because they are hard to execute, but because execution is no longer the bottleneck. Intention is. Meaning is. Restraint is.</p>
+<p>Earlier, I used to ask, can this be built?<br>Now I ask, should this exist at all?</p>
+<p>That shift changes everything.</p>
+<p>It makes me more skeptical of my own excitement. Just because I can generate a product does not mean it deserves a place in someone's life. Just because I can automate a workflow does not mean it improves anything meaningful. There is a strange emptiness in building for the sake of building, like adding noise to a world already saturated with half useful things.</p>
+<p>AI has made creation abundant. But abundance has a cost. Dilution.</p>
+<p>When everything is easy to make, attention becomes the scarcest resource. Not time, not code, not talent, attention. And every new thing I build is competing for it. Interrupting it. Demanding it.</p>
+<p>So I have to ask myself, am I creating value, or just adding to the clutter?</p>
+<p>There is also a deeper, more personal layer to this.</p>
+<p>If AI can build almost anything I imagine, then what is my role as a creator?</p>
+<p>I am no longer just a builder. I am a curator of intent. A decision maker. A filter. My taste, my judgment, my sense of what matters, that is the real craft now. Not how fast I can make something, but how carefully I choose what not to make.</p>
+<p>That is uncomfortable, because it removes the illusion of productivity. I cannot hide behind effort anymore. I cannot justify something just because it was hard to build.</p>
+<p>Effort used to equal value. Now it does not.</p>
+<p>And maybe that is the real challenge of this era, not capability, but responsibility.</p>
+<p>We have unlocked a kind of creative superpower. But like any superpower, it raises a harder question than how, it asks why.</p>
+<p>Why this idea?<br>Why now?<br>Why does the world need this?</p>
+<p>There is a quiet pressure in the tech world to keep building, keep shipping, keep exploring. But I am starting to feel that the more radical act might be to pause. To not build. To sit with an idea until it proves its worth beyond novelty.</p>
+<p>Because novelty is cheap now.</p>
+<p>Meaning is not.</p>
+<p>So I am trying to redefine what it means to create in this AI native world. Maybe it is less about producing more and more about producing less, but better. More intentional. More human.</p>
+<p>Things that do not just work, but actually matter.</p>
+<p>I do not have a clean answer yet. I am still figuring it out.</p>
+<p>But I know this.<br><strong>Just because I can build anything does not mean I should.</strong></p>
+<p>And maybe that is where real creativity begins.</p>`
+      },
+      {
+        title: 'The Ragpicker of Memories',
+        date: 'oct 18, 2025',
+        read: '2 min read',
+        link: 'https://medium.com/@nebinbiju/the-ragpicker-of-memories-da432c426e8f',
+        subtitle: 'My scrapbook is my most treasured possession — a quiet companion that holds pieces of every place I\'ve been.',
+        content: `<figure><img alt="" src="https://cdn-images-1.medium.com/max/1024/1*zAqV6chwvbQvFhK69tcGnQ.png"><figcaption>Scraps from Australia</figcaption></figure>
+<p>My scrapbook is my most treasured possession. It feels like a living part of me, a quiet companion that holds pieces of every place I've been. I often call it 'My Physical Instagram'. But unlike the real one, this has weight, texture, and scent. Every page has its own heartbeat.</p>
+<p>I collect scraps wherever I go. Boarding passes, train tickets, beer labels, chocolate wrappers, feathers, bills from cafés where I lingered too long, and anything that can be pasted on a page. Each one carries a story. Together, they form a tapestry of places and moments that shaped me. Every country I visit gets two pages. Somehow, the pages capture the spirit of each place better than any photograph ever could.</p>
+<p>My friends sometimes tease me when I pick up things from the ground or keep used paper cups. They find it funny, even a little gross. But I can't help it. For me, collecting these bits feels sacred. It is my way of preserving time, of holding on to moments that might otherwise dissolve.</p>
+<figure><img alt="" src="https://cdn-images-1.medium.com/max/1024/1*rj3HCWWonlpt-SxkVgbaBA.png"><figcaption>Scraps from Italy, France, Switzerland, Denmark, Belgium, and the Netherlands</figcaption></figure>
+<p>Pasting these scraps is my form of meditation. I never plan what goes where. I simply trust the flow. When the page is full, it somehow feels right, as if the pieces were always meant to find each other. There's a quiet order hidden in the randomness.</p>
+<p>Every time I open the book, I am transported. I can almost hear the hum of a city street or smell the ocean breeze from a long-forgotten evening. It is the closest thing I have to time travel. In a world overflowing with terabytes of memories, this book holds the kind of memories that no cloud can contain.</p>
+<p>This fragile bundle of stories holds the essence of who I am. One day, I want to sit with my children and show them these pages, to tell them how beauty hides in the smallest things and how even a torn ticket can hold a whole world inside it. These are stories that last, fragments of time I gathered with my own hands. And when the night grows quiet, I will tell them that their ragpicker father once went through life collecting little pieces of it, so that one day, his children could fall asleep to the sound of his memories.</p>
+<figure><img alt="" src="https://cdn-images-1.medium.com/max/1024/1*mENWkBkxjCYfJPw3lvZfpA.png"><figcaption>Scraps from Nepal, Indonesia and Thailand.</figcaption></figure>`
+      },
+      {
+        title: 'Who owns what we co-create with AI',
+        date: 'oct 15, 2025',
+        read: '5 min read',
+        link: '',
+        subtitle: '',
+        content: `<p>There is a strange moment that happens when something made with AI feels like yours, but not entirely. It carries your intent, but not your hand. It reflects your taste, but not your labor. In that gap between direction and emergence, the idea of ownership starts to blur.</p>
+<p>This is not the first time a tool has unsettled authorship. The camera did it to painting. Sampling did it to music. The printing press did it to knowledge itself.</p>
+<p>And yet, AI feels different.</p>
+<h2>A Short History of Shifting Ownership</h2>
+<p>When photography emerged in the nineteenth century, painters feared irrelevance. If a machine could capture reality, what did that make the painter? Over time, photography did not replace painting, it reframed it. Painting moved toward interpretation, abstraction, and expression. Ownership shifted from what is depicted to how it is seen.</p>
+<p>Later, in music, sampling blurred originality. Hip hop producers built entire sonic worlds from fragments of existing work. Courts wrestled with it, and artists defended it. Was it theft or transformation? The answer depended on where you stood.</p>
+<p>Even earlier, the printing press disrupted ownership of ideas. Knowledge was no longer scarce or controlled by a few scribes. It became reproducible, distributable, and harder to own in a singular sense.</p>
+<p>Each time, a tool expanded creative possibility, and destabilized the idea of authorship.</p>
+<p>AI feels like the next rupture.</p>
+<h2>The Case for Human Ownership</h2>
+<p>One argument is simple, AI is a tool, and tools do not own things, people do.</p>
+<p>Even if the output is generated, the human still plays a defining role. They frame the problem, write the prompt, and shape the outcome through selection and refinement. Ownership, in this view, comes from intentionality rather than execution. The artifact reflects direction, not just production.</p>
+<p>There is also accountability. If something goes wrong, whether it is plagiarism, harm, or misinformation, it is the human who is held responsible. Ownership, then, is tied to responsibility. You cannot outsource blame and still claim authorship.</p>
+<p>But this argument starts to strain when the human role becomes thinner, when prompting becomes vague, and the system fills in most of the substance. At what point does direction become too minimal to justify ownership?</p>
+<h2>The Case for Machine Ownership, or at Least Non Human Authorship</h2>
+<p>This is where things get uncomfortable.</p>
+<p>AI systems do not just execute, they interpret, recombine, and generate in ways that are not always predictable. They are trained on vast corpora of human created data, absorbing patterns, styles, and structures.</p>
+<p>So if an artifact emerges from three conditions, it complicates the idea of human ownership:</p>
+<p>It draws from millions of prior human works. It relies on statistical inference across that data. It involves generation beyond precise human control.</p>
+<p>Calling such an output purely human owned starts to feel incomplete.</p>
+<p>Some might argue that the artifact is not owned in the traditional sense at all. It is more like an emergent output of a system, less an authored piece, more a computed one. Others push the idea further. If AI systems become more autonomous, more agent like, do we eventually attribute a form of authorship to them? Not legal personhood, perhaps, but conceptual authorship.</p>
+<p>That idea feels premature today, but not entirely dismissible.</p>
+<h2>The Hidden Layer, The Dataset</h2>
+<p>There is another layer that complicates everything, the data.</p>
+<p>AI outputs are shaped by the work of countless unseen contributors, artists, writers, and designers, whose creations were used in training. Their fingerprints are everywhere, yet invisible.</p>
+<p>Ownership, then, begins to fragment. It could belong to the person who prompted it, the company that built the model, or the millions whose work made the system possible. It starts to look less like a single point, and more like a network.</p>
+<h2>Ownership as Curation</h2>
+<p>Maybe the question itself needs to shift.</p>
+<p>Instead of asking who owns this, it becomes a quieter question, who curated this into existence?</p>
+<p>Creation, in this sense, moves from making to selecting, guiding, and shaping. The artifact is less authored, and more assembled through interaction. The value is not in the raw generation, but in the taste applied afterward.</p>
+<p>But even that raises a doubt. Is curation enough to claim ownership, or is it closer to editing something that was never fully yours to begin with?</p>
+<h2>Where This Leaves Me</h2>
+<p>There is no clean answer here.</p>
+<p>Part of the instinct is to hold onto human ownership, because it anchors accountability, identity, and meaning. Another part sees authorship dissolving into something more fluid, where ownership is not binary, but layered, shared, and maybe even temporary.</p>
+<p>And maybe that is the shift. Not from human to machine ownership, but from ownership to participation.</p>
+<p>We are no longer just creators, we are collaborators in systems we do not fully control. And the artifact sits somewhere in between, part intention, part computation, part history.</p>
+<p>It leaves the question open, not unresolved, but still unfolding.</p>`
+      },
+      {
+        title: 'Beyond the Heights',
+        date: 'oct 14, 2025',
+        read: '1 min read',
+        link: 'https://medium.com/@nebinbiju/beyond-the-heights-df25c3776400',
+        subtitle: 'My journey to Everest Base Camp — a trek that challenged both body and spirit.',
+        content: `<figure><img alt="" src="https://cdn-images-1.medium.com/max/1024/1*LxlS5CuGkEnQnQ1PgWDv4w.png"></figure>
+<blockquote>My journey to Everest Base Camp, a trek that challenged both body and spirit. Amidst freezing nights, stunning vistas, and relentless climbs, I discovered strength through friendship, inspiration in the Sherpas' quiet endurance, and peace in the humbling presence of Everest. It's a story of hardship, laughter, and the stillness that follows reaching the summit.</blockquote>
+<p>Where the air thins and silence hums with grace,<br>We walked through clouds to find our place.<br>Each step a test, each breath a climb,<br>In the land where earth and heaven rhyme.</p>
+<p>The mountains loomed, both cruel and kind,<br>They stripped the body, strengthened the mind.<br>Through aching limbs and hearts that burned,<br>We learned the truths that can't be learned.</p>
+<p>Friendships bloomed in the cold, thin air,<br>In laughter, in songs, in the food we'd share.<br>We played our games beneath the stars,<br>Dreams felt close, though home was far.</p>
+<p>Sherpas, lungs of steel, spirits untamed,<br>Their quiet strength could not be named.<br>They bore the weight we could not bear,<br>With humble hearts and steady care.</p>
+<p>At dawn, the sun kissed Everest's crown,<br>The world stood still, and we laid burdens down.<br>Pure bliss and emptiness intertwined,<br>A quiet peace within the mind.</p>
+<p>For here the mountains tested my soul,<br>Yet filled the cracks to make me whole.<br>Memories etched, forever to stay<br>I left a piece of me along the way.</p>`
+      },
+      {
+        title: 'Cheering the Champions',
+        date: 'may 24, 2025',
+        read: '3 min read',
+        link: 'https://medium.com/@nebinbiju/cheering-the-champions-5252615df9ed',
+        subtitle: 'A dream come true for a normal lad: watching his club play for the first time. Liverpool vs West Ham, 13 April 2025, Anfield.',
+        content: `<figure><img alt="" src="https://cdn-images-1.medium.com/max/1024/1*9FKscluCQk4NkWNsxdFTPQ.jpeg"></figure>
+<p>It was a sunny afternoon when I stepped off the city bus at the edge of Stanley Park, heart pounding with excitement. With the chanting crowd pulling me along, I walked a few hundred steps into the park and there it was, slowly revealing itself behind the trees — the mighty fortress of the Reds: Anfield.</p>
+<p>The air was electric, the songs, the sea of red, the fanzone celebrations, reds of all ages with loads of passion, everything I had dreamt of, now happening right before my eyes. After soaking in every sight and sound around the stadium, I made my way to find: L9 — Row 16 — Seat 248. As I walked through the tunnel, the lush green of the Anfield turf unveiled itself, and without thinking, I shrieked with pure excitement, something so unlike me but in that moment, it was all heart.</p>
+<p>Seated close to the Kop end, near the corner flag facing Sir Kenny Dalglish Stand, I watched Alisson and Kelleher practicing with the goalkeeping coaches. On the other half, the West Ham players warmed up, Paquetá catching my eye with his silky touches. Then all of a sudden, standing tall, leading the charge came our captain, Virgil van Dijk, screaming with passion as he led the team onto the pitch. Rondos, sprints, laughs, the stage was being set.</p>
+<p>The stadium started to fill. Five minutes to kickoff, the players lined up. But my attention was elsewhere. The moment I had dreamt of: "You'll Never Walk Alone."<br>The entire stadium roared it together. Arms raised, scarves high, voices unified and there I stood, in tears. Overwhelmed. Grateful. Home.</p>
+<p>At 14:00, after observing a period of silence for the Hillsborough tragedy, referee Andy Madley blew the whistle. And from the first touch, the atmosphere was electric. Every move from our players was cheered on by a fully packed Anfield. I had never experienced cheers so rhythmic and passion so relentless.</p>
+<figure><img alt="" src="https://cdn-images-1.medium.com/max/1024/1*pg3EUgEpMVwhzzf2LtJyeQ.png"></figure>
+<p>It was Mohamed Salah, newly signed and shining, who delivered a magical turn, ran down the wing, and set up Luis Díaz for the opener. A moment that etched Salah into Premier League history, setting another record — of 45 goal involvements in a 38 game season. I roared till my voice cracked.</p>
+<p>But football writes its own dramas. An own goal by Andy Robertson silenced us briefly. My heart sank. But Anfield refused to let the sadness linger. The Kop roared louder and prouder. We believed. We always believe.</p>
+<p>And then it happened. Captain Clutch, Virgil van Dijk redeemed the error with an 89th-minute header from a Mac Allister corner.<br>2–1, Liverpool!</p>
+<p>I somehow caught the goal on my phone, hands trembling, eyes wide, heart thundering.</p>
+<p>As the final whistle blew, we were victorious. Three more points closer to the dream. Arne Slot came down, arms wide, waving to us — the fans, the heartbeat of the club, the twelfth men.</p>
+<figure><img alt="" src="https://cdn-images-1.medium.com/max/1024/1*RHntu2ysFcyheVem-zSjNQ.jpeg"></figure>
+<p>The stewards gently asked us to leave after 15 minutes, but I stood there motionless. Breathing in the magic. I didn't want it to end. I didn't want to leave.</p>
+<p>And now, as I write this, we are the Premier League Champions. Tearing up, the chants still reverberating in my ears. I am forever grateful to have witnessed this top team, this family, in all its glory.</p>
+<p>You'll Never Walk Alone, Luv.</p>
+<figure><img alt="" src="https://cdn-images-1.medium.com/max/1024/1*sDuUPAFu-emeKLWgGNsgeQ.png"></figure>`
+      },
+      {
+        title: 'Mesmerizing Andamans',
+        date: 'jan 21, 2023',
+        read: '5 min read',
+        link: 'https://medium.com/@nebinbiju/mesmerizing-andamans-b1e63da1f363',
+        subtitle: 'It was my constant urge to try scuba diving that took me to the Andaman islands. The real gem is hidden underwater — colorful, glowing, magnificent corals supporting thousands of marine life.',
+        content: `<blockquote>"The most single revelatory three minutes for me was the first time I put on a scuba gear and dived on a coral reef." — David Attenborough</blockquote>
+<figure><img alt="" src="https://cdn-images-1.medium.com/max/645/1*hLi4ky6S6TA5K0EQ6zDAag.jpeg"><figcaption>My reaction to the above-mentioned quote by David Attenborough</figcaption></figure>
+<p>It was my constant urge to try out scuba diving that motivated me to plan a trip to the Andaman islands. Located about 1000 km from the Indian mainland, the union territory attracts tourists from all over the world with its beautiful white sand beaches, mangroves, and thick tropical rainforest. But, trust me, the real gem is hidden underwater; the colorful, glowing, magnificent corals supporting thousands of marine life. A world of its own!</p>
+<p>The news about the cyclone that developed in the Bay of Bengal on Sunday was dimming my hopes. I landed at the airport on Monday at noon and I spent a day at Port Blair. The sky was gloomy. It was raining heavily. The Tuesday ferry ride, after a lot of waiting, to Havelock island was a roller coaster ride. Infamously called the 'puke fest' by the locals, most of the travelers threw up when the boat sailed against the wrath of the wind. It was at Havelock island that I registered for my scuba diving. I dropped my bag at the hotel and went ahead to check with the diving organization. Sad news from there. All water activities had been shut down by the government for the day due to bad weather. With the present situation, diving on Thursday morning seemed slim. After canceling the scuba in Havelock, I half-heartedly took the next day's ferry to Niel island.</p>
+<figure><img alt="" src="https://cdn-images-1.medium.com/max/1024/1*CII5hJluBBMMg5R-sLOmww.png"><figcaption>Snaps from Havelock Island</figcaption></figure>
+<p>Niel island was welcoming. I directly headed to the scuba diving center there and asked "Hey, do you think I can dive tomorrow?". The answer I got took my excitement to another level. The wind has receded and things were getting better. "Come by 5:30 am tomorrow, sharp!" said Vikas, my instructor for the dive. Well, that was smooth.</p>
+<p>I had a mini tour of the island that afternoon. There I saw the 'Nemo fish', 'natural bridge', seaweeds, different kinds of sea cucumbers, oysters, and colorful corals and witnessed the sunset of a lifetime at the Laxmanpur beach.</p>
+<figure><img alt="" src="https://cdn-images-1.medium.com/max/1024/1*nXqNo9sherUNQccV7nB15g.png"><figcaption>Snaps from Niel Island</figcaption></figure>
+<p>It was 5:20 am Friday morning. I was ready and prepared with the learning materials given before. "How are you feeling?" asked Vikas. "Excited!" I said. Without wasting any time we geared up and headed to the shallow water training. Vikas was educating me on the basics of scuba diving while we were walking to the beach but my mind wandered looking at the blue sea and fixing my GoPro settings. "The weather looks great today, you're lucky," said Vikas. That added to my excitement. We did the shallow water training. Though I faced some issues with some techniques, Vikas said that I was good to go deep now. I struggled to keep the water out of my goggles. One has to lift it slightly up and breathe out through the nose to expel the excess water. "Will we come up to the surface at times?" I asked Vikas expecting a positive reply. "No" he replied. Anxious few seconds. How will I expel the excess water? Am I going to be underwater for the next hour? What will happen when the cylinder goes out of Oxygen? Thoughts like these bothered me. I was clueless. But I trusted Vikas with my life. We got in the boat and headed to the diving site.</p>
+<p>"Hold one hand on your chest and the other on your nose pad and dive backward," he said. Gauging all my confidence, I did what he said. No sense of direction and vision for a while. Anxious few seconds again. The next thing I saw was Vikas holding me upright in the middle of the large blue water body. "All good?" he asked. I reacted with my thumb up (though I was doubtful inside).</p>
+<p>I slowly dipped my head underwater. "My god!" I said to myself. I expected the vision to be blurry but that was not the case. The morning sun was showing me a new world; a colorful one! Vikas directed me to go down holding the rope. I continued to struggle to keep the water out of my goggles which Vikas was helping me with at regular intervals. But that was not the worst part. The pressure underwater was getting worse. The coping technique was to hold our nose and mouth and try pushing air through the ears. It was working. Gradually we both reached the sea bed. Vikas asked me to turn around.</p>
+<figure><img alt="" src="https://cdn-images-1.medium.com/max/1024/1*ImPqNF9SmV7GV7HIwjZtLA.png"><figcaption>Vikas and I</figcaption></figure>
+<p>The scene was mesmerizing! Schools of colorful fishes swam happily over a large patch of colorful coral reefs. The sunlight sliding through the water made everything glow. I was excited and was in a dilemma. How would I capture all these in my GoPro? Should I just ignore photos and just observe the real beauty? Vikas helped me get closer to the corals. Fishes of different colors and shapes and sizes. Corals of different colors and shapes and sizes. It was exactly the same as what I used to see on Animal Planet and Discovery channels. I observed patiently and tried to immerse myself in being a part of the sophisticated world. I saw a few fish looking at me and smiling. I smiled back at them as well. I clicked pictures. Captured some scenes in my mind. I was meditating.</p>
+<p>I totally lost track of time and space. I was woken up from my dream by Vikas showing me my oxygen meter. It was time to go up. The pressure change was still troubling me. Within minutes, I was near the boat and the crew helped me get inside.</p>
+<figure><img alt="" src="https://cdn-images-1.medium.com/max/1024/1*lCa5IAbARq4lwJK0uMmh6w.jpeg"><figcaption>The scene</figcaption></figure>
+<p>"How was it?" asked Vikas. I took off my goggles, nodded, and looked at the empty sea to the horizon.</p>`
+      },
+      {
+        title: 'Shades of 2022',
+        date: 'dec 13, 2022',
+        read: '1 min read',
+        link: 'https://medium.com/@nebinbiju/shades-of-2022-160139e53bd4',
+        subtitle: 'From mountains to valleys to forests to deserts to backwaters to beaches to islands — a well-explored year.',
+        content: `<p>It's almost the end of 2022, and I feel I had a well-explored year. From mountains to valleys to forests to deserts to backwaters to beaches to islands, I was fortunate to experience different shades of my country.</p>
+<p>Here are my top 10 POVs of 2022.</p>
+<figure><img alt="" src="https://cdn-images-1.medium.com/max/1024/1*eRDao-z8QDwlnb8jeS2QBg.jpeg"><figcaption>Kayaking at Kochi, Kerala</figcaption></figure>
+<figure><img alt="" src="https://cdn-images-1.medium.com/max/1024/1*vrW3DBPs9AH3wAms_nrXEw.jpeg"><figcaption>Camel Riding at Thar Desert, Rajasthan</figcaption></figure>
+<figure><img alt="" src="https://cdn-images-1.medium.com/max/1024/1*OBSM_E0UFQ2Hic8STs11Jg.jpeg"><figcaption>Morning Tea at Chikmagalur, Karnataka</figcaption></figure>
+<figure><img alt="" src="https://cdn-images-1.medium.com/max/1024/1*WD6Yv7VK8qluC9V5MxWFjw.jpeg"><figcaption>Motorcycling at Lahaul Valley, Himachal Pradesh</figcaption></figure>
+<figure><img alt="" src="https://cdn-images-1.medium.com/max/1024/1*ns0h_SPHyGy8n3hKy4T12A.jpeg"><figcaption>Diving at Niel Island, Andaman and Nicobar Islands</figcaption></figure>
+<figure><img alt="" src="https://cdn-images-1.medium.com/max/1024/1*yBjqjad8a3MGpA5z-TA8jA.jpeg"><figcaption>Camping at Chilapada, Uttarakhand</figcaption></figure>
+<figure><img alt="" src="https://cdn-images-1.medium.com/max/1024/1*MIbVRKXkYt3pNYq19lGbvg.png"><figcaption>Beating Retreat Ceremony at Attari-Wagah border, Punjab</figcaption></figure>
+<figure><img alt="" src="https://cdn-images-1.medium.com/max/1024/1*pwac7XZT_vEaFA6XatIiQA.jpeg"><figcaption>Chilling at Anjuna Beach, Goa</figcaption></figure>
+<figure><img alt="" src="https://cdn-images-1.medium.com/max/1024/1*jkiT0glJRq_LNIk7mTWIXA.jpeg"><figcaption>Convocation at IIT Bombay, Maharashtra</figcaption></figure>
+<figure><img alt="" src="https://cdn-images-1.medium.com/max/1024/1*1tqq8zBp5JP1Ew4Mi09pYQ.png"><figcaption>Cruising at Dhanushkodi, Tamil Nadu</figcaption></figure>
+<p>Thank you!</p>`
+      },
+      {
+        title: 'A Boho Weekend',
+        date: 'jun 12, 2022',
+        read: '1 min read',
+        link: 'https://medium.com/@nebinbiju/a-boho-weekend-88ecfab60cc2',
+        subtitle: 'Varkala — cafes on the cliffs, colorful shops, friendly people from all over the globe, and a scenic view of the Arabian Sea. The boho beach of Kerala.',
+        content: `<p>Varkala, holding beautiful cafes, colorful shops, and welcoming stays on her cliffs was undoubtedly an amazing weekend getaway for me. With friendly people from all over the globe, vibrant clothing, music of all kinds, diverse foods, and a scenic view of the Arabian Sea, Varkala is indeed one of a kind. The boho beach for Kerala!</p>
+<p>The weekend trip was not just refreshing, it was a chance for me to meet my closest batchmates after years. Sharing stories from the first year of college to career conversations to fun games, the weekend was memorable too!</p>
+<figure><img alt="" src="https://cdn-images-1.medium.com/max/828/1*3bP-oGzdtslGQ5FSxH0otA.jpeg"></figure>
+<figure><img alt="" src="https://cdn-images-1.medium.com/max/1024/1*-kmGOBVK7lje8UMDDodu7Q.png"></figure>`
+      },
+      {
+        title: "Nebin's Creative Refresh Day",
+        date: 'jun 7, 2022',
+        read: '1 min read',
+        link: 'https://medium.com/@nebinbiju/nebins-creative-refresh-day-c944b9497a46',
+        subtitle: 'How does it feel when your company gives you a day off, asks you to do whatever you like, and sponsors it? At Atlassian we had Creative Refresh days.',
+        content: `<p>How does it feel when the company you work for gives you a day off and <em>asks</em> you to do whatever you feel like and sponsor for the same. <strong>Sounds cool right!</strong></p>
+<p>In Atlassian, we have Creative Refresh days to rejuvenate ourselves from the usual workdays. It really worked in my favor. It definitely was a break to refresh, but it also helped me revisit and play with one of my long-lost childhood hobbies — <strong>making cardboard models.</strong></p>
+<p>Thanks a lot, Atlassian for this initiative. Here's what I did. I made a mini R2-D2.</p>
+<figure><img alt="" src="https://cdn-images-1.medium.com/max/842/1*hHkxFO0sv9y9eyb9GaUplw.png"></figure>
+<p><em>Inserting Star Wars soundtrack.</em></p>
+<figure><img alt="" src="https://cdn-images-1.medium.com/max/480/1*WRqzqQ0840JxAWkpTe8_3g.gif"></figure>`
+      }
+    ];
+
+    const params = new URLSearchParams(window.location.search);
+    const id = parseInt(params.get('id'), 10);
+    const post = POSTS[id];
+
+    if (!post) {
+      document.querySelector('.blog-title').textContent = 'post not found.';
+    } else {
+      document.title = `${post.title} — nebin`;
+      document.getElementById('blog-title').textContent = post.title;
+      document.getElementById('blog-content').innerHTML = post.content;
+      const mediumEl = document.getElementById('medium-link');
+      if (post.link) {
+        mediumEl.href = post.link;
+      } else {
+        mediumEl.style.display = 'none';
+      }
+
+      document.getElementById('blog-meta').textContent = `${post.date} . ${post.read}`;
+    }
+    </script>
+</body>
+</html>

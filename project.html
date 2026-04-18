@@ -356,6 +356,7 @@
     <nav class="topbar">
         <a href="index.html">home</a>
         <a href="projects.html" class="active">projects</a>
+        <a href="blogs.html">blogs</a>
         <a href="about.html">about</a>
     </nav>
 
@@ -393,38 +394,38 @@
     <script>
         const projects = [
             {
-                title: 'remediation in data migration',
-                desc: 'faster, more reliable, enterprise-ready Atlassian migrations through intelligent error handling.',
+                title: 'Remediation in data migration',
+                desc: 'Faster, more reliable, enterprise-ready Atlassian migrations through intelligent error handling.',
                 tags: ['end-to-end', 'atlassian', '2024–25'],
                 color: 'linear-gradient(145deg, #5b2d9e, #8b3fcf)'
             },
             {
-                title: 'copilot search',
-                desc: 'making discovery smarter with AI search and scaling Copilot Search across Microsoft products.',
+                title: 'Copilot search',
+                desc: 'Making discovery smarter with AI search and scaling Copilot Search across Microsoft products.',
                 tags: ['product design', 'microsoft', '2026'],
                 color: 'linear-gradient(145deg, #1a3a6b, #2563eb)'
             },
             {
-                title: 'adventures of chachaji',
-                desc: 'an exergame for the elderly, built around Chachaji\'s adventures.',
+                title: 'Adventures of Chachaji',
+                desc: 'An exergame for the elderly, built around Chachaji\'s adventures.',
                 tags: ['university project', 'interaction design', '2019'],
                 color: 'linear-gradient(145deg, #7c2d12, #ea580c)'
             },
             {
                 title: 'NTU museum app',
-                desc: 'reimagining the NTU museum experience into a cohesive and immersive mobile application.',
+                desc: 'Reimagining the NTU museum experience into a cohesive and immersive mobile application.',
                 tags: ['mobile', 'ux research', 'uni'],
                 color: 'linear-gradient(145deg, #134e4a, #0d9488)'
             },
             {
-                title: 'code art',
-                desc: 'a collection of small, weird, delightful things built for joy. no brief, no deadline. just vibes.',
+                title: 'Code art',
+                desc: 'A collection of small, weird, delightful things built for joy. No brief, no deadline. Just vibes.',
                 tags: ['experiments', 'creative coding', 'ongoing'],
                 color: 'linear-gradient(145deg, #1a1a18, #2a2a28)'
             },
             {
-                title: 'simplifying data selection for enterprises',
-                desc: 'intuitive data selection for enterprise scale migrations, enabling confident high-volume data transfer.',
+                title: 'Simplifying data selection for enterprises',
+                desc: 'Intuitive data selection for enterprise scale migrations, enabling confident high-volume data transfer.',
                 tags: ['ux enhancement', 'atlassian', '2024'],
                 color: 'linear-gradient(145deg, #1a2a3a, #1e4d6b)'
             }
@@ -541,9 +542,9 @@
         }).join('');
 
         const dataSelectionImages = `
-            <div class="content-block"><h2>here's what I did</h2></div>
+            <div class="content-block"><h2>Here's what I did</h2></div>
             <video src="https://github.com/nebinbiju1/nebinbiju1.github.io/releases/download/data-selection-v1/selection.mp4" controls style="width:100%;display:block;border-radius:12px;margin-bottom:36px;"></video>
-            <div class="content-block"><h2>here's how I did</h2></div>
+            <div class="content-block"><h2>Here's how I did</h2></div>
             ` + Array.from({length: 50}, (_, i) => {
             const n = String(i + 1).padStart(2, '0');
             return `<img src="https://github.com/nebinbiju1/nebinbiju1.github.io/releases/download/data-selection-v1/${n}.png" style="width:100%;display:block;border-radius:12px;margin-bottom:16px;" alt="slide ${i+1}">`;
@@ -559,7 +560,7 @@
                 <div class="video-list" id="video-list">
                     <div class="video-item">
                         <div class="video-item-meta">
-                            <div class="video-item-title">dino finder</div>
+                            <div class="video-item-title">Dino finder</div>
                             <div class="video-item-desc" style="font-size:14px;font-weight:600;color:#888884;line-height:1.75;margin:4px 0 8px;">Explore a Minecraft-inspired voxel world, track hidden dinosaurs with a compass, and discover fun facts about them along the way.</div>
                             <a href="https://github.com/nebinbiju1/dino-finder" class="video-item-link">try the experience</a>
                         </div>
@@ -570,7 +571,7 @@
                     </div>
                     <div class="video-item">
                         <div class="video-item-meta">
-                            <div class="video-item-title">the marauder's chart</div>
+                            <div class="video-item-title">The marauder's chart</div>
                             <div class="video-item-desc" style="font-size:14px;font-weight:600;color:#888884;line-height:1.75;margin:4px 0 8px;">An interactive data visualisation of character mentions across all seven Harry Potter books.</div>
                             <a href="https://github.com/nebinbiju1/the-marauders-chart" class="video-item-link">try the experience</a>
                         </div>
@@ -581,8 +582,8 @@
                     </div>
                     <div class="video-item">
                         <div class="video-item-meta">
-                            <div class="video-item-title">fruit ninja 3d</div>
-                            <div class="video-item-desc" style="font-size:14px;font-weight:600;color:#888884;line-height:1.75;margin:4px 0 8px;">slice fruits with your bare hands. no controller, just your webcam and reflexes.</div>
+                            <div class="video-item-title">Fruit ninja 3d</div>
+                            <div class="video-item-desc" style="font-size:14px;font-weight:600;color:#888884;line-height:1.75;margin:4px 0 8px;">Slice fruits with your bare hands. No controller, just your webcam and reflexes.</div>
                             <a href="https://github.com/nebinbiju1/fruitninja3d" class="video-item-link">try the experience</a>
                         </div>
                         <div class="video-thumb" data-videoid="9RtaUmyEG70">
@@ -592,7 +593,7 @@
                     </div>
                     <div class="video-item">
                         <div class="video-item-meta">
-                            <div class="video-item-title">waveart</div>
+                            <div class="video-item-title">Waveart</div>
                             <div class="video-item-desc" style="font-size:14px;font-weight:600;color:#888884;line-height:1.75;margin:4px 0 8px;">A polar function visualizer that generates beautiful mathematical curves around the unit circle.</div>
                             <a href="https://github.com/nebinbiju1/waveart" class="video-item-link">try the experience</a>
                         </div>
@@ -603,7 +604,7 @@
                     </div>
                     <div class="video-item">
                         <div class="video-item-meta">
-                            <div class="video-item-title">vangogh</div>
+                            <div class="video-item-title">Vangogh</div>
                             <div class="video-item-desc" style="font-size:14px;font-weight:600;color:#888884;line-height:1.75;margin:4px 0 8px;">A browser-based finger painting app that uses your webcam to track hand movements in real time.</div>
                             <a href="https://github.com/nebinbiju1/vangogh" class="video-item-link">try the experience</a>
                         </div>
@@ -614,7 +615,7 @@
                     </div>
                     <div class="video-item">
                         <div class="video-item-meta">
-                            <div class="video-item-title">homepage animation for this website</div>
+                            <div class="video-item-title">Homepage animation for this website</div>
                         </div>
                         <div class="video-thumb" data-videoid="vmQly579PvQ">
                             <img src="https://img.youtube.com/vi/vmQly579PvQ/maxresdefault.jpg" onerror="this.src='https://img.youtube.com/vi/vmQly579PvQ/hqdefault.jpg'" style="width:100%;aspect-ratio:16/9;display:block;object-fit:cover;">

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>blogs — nebin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #141413;
+            color: #ffffff;
+            font-family: 'Fira Code', monospace;
+            min-height: 100vh;
+        }
+        .topbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: 52px;
+            background: #1a1a18;
+            border-bottom: 1px solid #2a2a28;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            z-index: 100;
+        }
+        .topbar a {
+            font-family: 'Fira Code', monospace;
+            font-size: 14px;
+            font-weight: 600;
+            color: #666662;
+            text-decoration: none;
+            padding: 6px 16px;
+            border-radius: 8px;
+            transition: color 0.2s;
+        }
+        .topbar a:hover { color: #ffffff; }
+        .topbar a.active { color: #f1629c; }
+
+        .page {
+            max-width: 620px;
+            margin: 0 auto;
+            padding: 80px 24px 120px;
+            padding-top: 96px;
+        }
+
+        .blog-list { display: flex; flex-direction: column; }
+
+        .blog-entry {
+            display: block;
+            text-decoration: none;
+            padding: 28px 0;
+        }
+        .blog-entry + .blog-entry { border-top: 1px solid #2a2a28; }
+
+        .blog-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.4;
+            margin-bottom: 10px;
+            transition: color 0.2s;
+        }
+        .blog-entry:hover .blog-title { color: #f1629c; }
+
+        .blog-desc {
+            font-size: 16px;
+            font-weight: 600;
+            color: #888884;
+            line-height: 1.5;
+            margin-bottom: 14px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            hyphens: none;
+        }
+
+        .blog-meta {
+            font-size: 14px;
+            font-weight: 600;
+            color: #f1629c;
+        }
+    </style>
+    <script src="favicon.js" defer></script>
+</head>
+<body>
+    <nav class="topbar">
+        <a href="index.html">home</a>
+        <a href="projects.html">projects</a>
+        <a href="blogs.html" class="active">blogs</a>
+        <a href="about.html">about</a>
+    </nav>
+
+    <div class="page">
+<div class="blog-list">
+            <a class="blog-entry" href="blog.html?id=0">
+                <div class="blog-title">The Courage to Not Build</div>
+                <p class="blog-desc">The question is no longer can we build it, but should we. On restraint, intention, and what it means to create in a world where anything can be made instantly.</p>
+                <p class="blog-meta">apr 18, 2026 . 3 min read</p>
+            </a>
+            <a class="blog-entry" href="blog.html?id=1">
+                <div class="blog-title">The Ragpicker of Memories</div>
+                <p class="blog-desc">My scrapbook is my most treasured possession, a quiet companion holding pieces of every place I have been. Boarding passes, beer labels, feathers, café bills. My physical Instagram with weight and scent.</p>
+                <p class="blog-meta">oct 18, 2025 . 2 min read</p>
+            </a>
+            <a class="blog-entry" href="blog.html?id=2">
+                <div class="blog-title">Who owns what we co-create with AI</div>
+                <p class="blog-desc">There is a strange moment when something made with AI feels like yours, but not entirely. It carries your intent, but not your hand. In that gap, the idea of ownership starts to blur.</p>
+                <p class="blog-meta">oct 15, 2025 . 5 min read</p>
+            </a>
+            <a class="blog-entry" href="blog.html?id=3">
+                <div class="blog-title">Beyond the Heights</div>
+                <p class="blog-desc">A trek that challenged both body and spirit. Freezing nights, stunning vistas, relentless climbs, and the Sherpas' quiet endurance toward the roof of the world.</p>
+                <p class="blog-meta">oct 14, 2025 . 1 min read</p>
+            </a>
+            <a class="blog-entry" href="blog.html?id=4">
+                <div class="blog-title">Cheering the Champions</div>
+                <p class="blog-desc">A dream come true for a normal lad: watching his club play for the first time. Liverpool vs West Ham, 13 April 2025, Anfield. The moment I heard You'll Never Walk Alone live, I stood there in tears.</p>
+                <p class="blog-meta">may 24, 2025 . 3 min read</p>
+            </a>
+            <a class="blog-entry" href="blog.html?id=5">
+                <div class="blog-title">Mesmerizing Andamans</div>
+                <p class="blog-desc">Scuba diving in the Andamans. Schools of colorful fish over glowing coral reefs, sunlight sliding through water. A world of its own, hidden beneath the surface.</p>
+                <p class="blog-meta">jan 21, 2023 . 5 min read</p>
+            </a>
+            <a class="blog-entry" href="blog.html?id=6">
+                <div class="blog-title">Shades of 2022</div>
+                <p class="blog-desc">Mountains, valleys, forests, deserts, backwaters, beaches, islands. A well-explored year and the many different shades 2022 had to offer.</p>
+                <p class="blog-meta">dec 13, 2022 . 1 min read</p>
+            </a>
+            <a class="blog-entry" href="blog.html?id=7">
+                <div class="blog-title">A Boho Weekend</div>
+                <p class="blog-desc">Varkala, with its cafes on the cliffs, colorful shops, friendly people from all over the globe, and a scenic view of the Arabian Sea. The boho beach of Kerala.</p>
+                <p class="blog-meta">jun 12, 2022 . 1 min read</p>
+            </a>
+            <a class="blog-entry" href="blog.html?id=8">
+                <div class="blog-title">Nebin's Creative Refresh Day</div>
+                <p class="blog-desc">How does it feel when your company gives you a day off, asks you to do whatever you like, and sponsors it? At Atlassian we had Creative Refresh days. This is how I spent mine.</p>
+                <p class="blog-meta">jun 7, 2022 . 1 min read</p>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
