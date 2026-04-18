@@ -316,6 +316,68 @@
 <p>For here the mountains tested my soul,<br>Yet filled the cracks to make me whole.<br>Memories etched, forever to stay<br>I left a piece of me along the way.</p>`
       },
       {
+        title: 'Designing for remediation',
+        date: 'jun 8, 2025',
+        read: '4 min read',
+        link: '',
+        subtitle: '',
+        content: `<p>In data migration, failure is not an edge case. It is part of the journey. Systems clash, formats mismatch, permissions fail, networks drop. The real experience is not defined by success paths alone, but by how gracefully we handle what goes wrong.</p>
+<p>Over two years of successfully designing remediation experiences for large scale data migration at Atlassian, these nine principles emerged not as theory, but as survival tools. Each one exists because something broke and needed to be fixed better.</p>
+<h2>1. Clarity above all</h2>
+<p>When something fails, confusion makes it worse.</p>
+<p>A good remediation experience answers three things instantly:</p>
+<p>· What went wrong<br>· Why it happened<br>· What can be done next</p>
+<p>Example: Instead of saying "Migration failed due to error code 504," say "Connection to the source server timed out. Check network stability or retry."</p>
+<p>Clarity reduces panic. It gives users control.</p>
+<h2>2. Guided, not dumped</h2>
+<p>Do not throw logs at users and expect them to figure it out.</p>
+<p>Guide them step by step. Break the fix into actions, not information.</p>
+<p>Example: Instead of showing a long error log, provide:</p>
+<p>· Step 1: Reconnect your account<br>· Step 2: Revalidate permissions<br>· Step 3: Retry migration</p>
+<p>Guidance turns complexity into progress.</p>
+<h2>3. Visibility of progress</h2>
+<p>Fixing errors is a process. Users need to see movement.</p>
+<p>If nothing appears to change, they assume nothing is working.</p>
+<p>Example: Show stages like "Scanning issues → Fixing permissions → Retrying failed items"</p>
+<p>Even partial progress builds trust. Silence kills it.</p>
+<h2>4. Error prevention before error recovery</h2>
+<p>The best remediation is the one you never need.</p>
+<p>Anticipate common failures and stop them early.</p>
+<p>Example: Before migration starts:</p>
+<p>· Validate file types<br>· Check storage limits<br>· Flag permission gaps</p>
+<p>Catching issues upfront is cheaper than fixing them later.</p>
+<h2>5. Reassurance and empathy</h2>
+<p>Errors create anxiety. Especially when data is involved.</p>
+<p>The system should acknowledge that.</p>
+<p>Example: Instead of "Migration failed," say "Some items couldn't be migrated, but your existing data is safe. Let's fix the remaining issues."</p>
+<p>This is not about being soft. It is about reducing fear so users can act.</p>
+<h2>6. Flexibility for different skill levels</h2>
+<p>Not every user is technical. Not every user is non technical.</p>
+<p>Design for both.</p>
+<p>· Basic view: "Fix permissions by reconnecting your account"<br>· Advanced view: Detailed logs, IDs, API responses</p>
+<p>Give depth without forcing it.</p>
+<h2>7. Immediate help access</h2>
+<p>When users are stuck, help should not be a scavenger hunt.</p>
+<p>Support should exist within the flow, not outside it.</p>
+<p>· Inline help links<br>· "Contact support with this error attached"<br>· Suggested fixes directly in context</p>
+<p>The faster users find help, the faster they recover.</p>
+<h2>8. Contextual awareness</h2>
+<p>Errors should not exist in isolation. They belong to a specific action, file, or step.</p>
+<p>Surface errors where they happen.</p>
+<p>Example: If a specific file fails due to size limits, show the error next to that file, not as a generic message at the top.</p>
+<p>Context reduces cognitive load. Users should not have to connect dots manually.</p>
+<h2>9. Learning from the experience</h2>
+<p>Every error is a signal. Systems should evolve from it.</p>
+<p>Remediation is not just fixing now, but improving the future.</p>
+<p>Example: If many users fail due to permission issues:</p>
+<p>· System learns from the mistake<br>· Improve onboarding guidance<br>· Suggest smarter contextual defaults</p>
+<p>Good remediation systems get better over time.</p>
+<h2>Closing thought</h2>
+<p>Success flows are predictable. Failure is where trust is earned.</p>
+<p>A well designed remediation experience does not just fix problems. It teaches, reassures, guides, and evolves.</p>
+<p>And in complex systems like data migration, that is the difference between frustration and confidence.</p>`
+      },
+      {
         title: 'Cheering the Champions',
         date: 'may 24, 2025',
         read: '3 min read',
