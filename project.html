@@ -536,10 +536,17 @@
             tagsEl.appendChild(span);
         });
 
-        const atlassianImages = Array.from({length: 90}, (_, i) => {
-            const n = String(i + 1).padStart(2, '0');
-            return `<img src="https://github.com/nebinbiju1/nebinbiju1.github.io/releases/download/slides-v1/${n}.png" style="width:100%;display:block;border-radius:12px;margin-bottom:16px;" alt="slide ${i+1}">`;
-        }).join('');
+        const atlassianImages = [
+            ...Array.from({length: 67}, (_, i) => {
+                const n = String(i + 1).padStart(2, '0');
+                return `<img src="https://github.com/nebinbiju1/nebinbiju1.github.io/releases/download/slides-v1/${n}.png" style="width:100%;display:block;border-radius:12px;margin-bottom:16px;" alt="slide ${i+1}">`;
+            }),
+            `<video src="test_4.mp4" controls style="width:100%;display:block;border-radius:12px;margin-bottom:16px;"></video>`,
+            ...Array.from({length: 90 - 76}, (_, i) => {
+                const n = String(i + 77).padStart(2, '0');
+                return `<img src="https://github.com/nebinbiju1/nebinbiju1.github.io/releases/download/slides-v1/${n}.png" style="width:100%;display:block;border-radius:12px;margin-bottom:16px;" alt="slide ${i+77}">`;
+            }),
+        ].join('');
 
         const dataSelectionImages = `
             <div class="content-block"><h2>Here's what I did</h2></div>

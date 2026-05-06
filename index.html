@@ -15,11 +15,13 @@
         body {
             background-color: #141413;
             font-family: 'Fira Code', monospace;
-            min-height: 100vh;
+            height: 100vh;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 50vh 24px 100px;
+            justify-content: center;
+            padding: 52px 24px 24px;
             text-align: center;
         }
 
@@ -74,6 +76,7 @@
             display: inline-flex;
             flex-direction: column;
             align-items: center;
+            margin-top: -40px;
         }
 
         .hero-text {
@@ -153,12 +156,62 @@
             color: #f1629c;
         }
 
-        #char-canvas {
+        .computer-wrapper {
+            position: relative;
+            width: 456px;
+            max-width: 90vw;
+            margin-bottom: -144px;
+        }
+
+        .computer-img {
+            width: 100%;
+            height: auto;
             display: block;
-            margin: 0 auto 16px;
+        }
+
+        #char-canvas {
+            position: absolute;
+            left: 42%;
+            top: 37%;
+            transform: translate(-50%, -50%) perspective(600px) rotateX(-8deg) rotateY(-4deg);
+            width: 84px;
+            height: 104px;
             image-rendering: pixelated;
             image-rendering: crisp-edges;
         }
+
+        .star-overlay {
+            position: absolute;
+            pointer-events: none;
+            image-rendering: pixelated;
+        }
+
+        .star-overlay-1 {
+            width: 72px;
+            left: 42px;
+            top: 120px;
+            animation: shine 2.4s ease-in-out infinite;
+        }
+
+        .star-overlay-2 {
+            width: 38px;
+            left: 356px;
+            top: 178px;
+            animation: shine 1.9s ease-in-out infinite 0.7s;
+        }
+
+        .star-overlay-3 {
+            width: 61px;
+            left: 74px;
+            top: 454px;
+            animation: shine 2.8s ease-in-out infinite 1.4s;
+        }
+
+        @keyframes shine {
+            0%, 100% { opacity: 0;   transform: rotate(45deg); }
+            45%, 55% { opacity: 0.9; transform: rotate(0deg);  }
+        }
+
 
         .chat {
             margin-top: 160px;
@@ -219,7 +272,13 @@
     </nav>
 
     <div class="hero">
-        <canvas id="char-canvas" width="120" height="150"></canvas>
+        <div class="computer-wrapper">
+            <img src="images/Homepage_assets/computer.png" class="computer-img" alt="">
+            <canvas id="char-canvas" width="120" height="150"></canvas>
+            <img src="images/Homepage_assets/star_1.png" class="star-overlay star-overlay-1" alt="">
+            <img src="images/Homepage_assets/star_2.png" class="star-overlay star-overlay-2" alt="">
+            <img src="images/Homepage_assets/star_3.png" class="star-overlay star-overlay-3" alt="">
+        </div>
 <div class="hero-text">
         <h1>nebin biju</h1>
         <div class="subtitle">
