@@ -140,30 +140,6 @@
             white-space: nowrap;
         }
 
-        @media (max-width: 600px) {
-            .hero-byline {
-                font-size: clamp(10px, 3.5vw, 16px);
-            }
-
-            .hero {
-                margin-top: -90px;
-            }
-
-            .computer-wrapper {
-                width: 260px;
-                margin-bottom: 20px;
-            }
-
-            #char-canvas {
-                width: 48px;
-                height: 59px;
-                transform: translate(-50%, -50%) perspective(350px) rotateX(-5deg) rotateY(-2deg);
-            }
-
-            .star-overlay {
-                display: none;
-            }
-        }
 
         .byline-link {
             color: #888884;
@@ -278,6 +254,31 @@
             border: 1px solid #2e2e2c;
             align-self: flex-start;
             border-bottom-left-radius: 6px;
+        }
+
+        @media (max-width: 600px) {
+            .hero-byline {
+                font-size: clamp(10px, 3.5vw, 16px);
+            }
+
+            .hero {
+                margin-top: -90px;
+            }
+
+            .computer-wrapper {
+                width: clamp(240px, 72vw, 360px);
+                margin-bottom: -60px;
+            }
+
+            #char-canvas {
+                width: 13vw;
+                height: 16vw;
+                transform: translate(-50%, -50%) perspective(350px) rotateX(-5deg) rotateY(-2deg);
+            }
+
+            .star-overlay {
+                display: none;
+            }
         }
     </style>
     <script src="favicon.js"></script>
