@@ -256,6 +256,27 @@
             border-bottom-left-radius: 6px;
         }
 
+        .stripes {
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 44%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .stripe {
+            height: 28px;
+        }
+
+        .hero {
+            position: relative;
+            z-index: 1;
+        }
+
         @media (max-width: 600px) {
             .hero-byline {
                 font-size: clamp(10px, 3.5vw, 16px);
@@ -290,6 +311,13 @@
         <a href="blogs.html">blogs</a>
         <a href="about.html">about</a>
     </nav>
+
+    <div class="stripes">
+        <div class="stripe" style="background:#F1629C"></div>
+        <div class="stripe" style="background:#FABD05"></div>
+        <div class="stripe" style="background:#34A754"></div>
+        <div class="stripe" style="background:#4386F5"></div>
+    </div>
 
     <div class="hero">
         <div class="computer-wrapper">
