@@ -20,6 +20,7 @@
             flex-direction: column;
             align-items: center;
             padding: 100px 24px 100px;
+            overflow-x: hidden;
         }
 
         .topbar {
@@ -58,7 +59,7 @@
 
         .chat {
             width: 100%;
-            max-width: 560px;
+            max-width: 760px;
             display: flex;
             flex-direction: column;
             gap: 10px;
@@ -139,12 +140,51 @@
 
         .about-heading {
             width: 100%;
-            max-width: 560px;
+            max-width: 760px;
             margin-bottom: 40px;
-            font-size: clamp(20px, 4vw, 28px);
+            font-size: 32px;
             font-weight: 700;
             color: #ffffff;
-            line-height: 1.3;
+            line-height: 1.4;
+        }
+
+        .about-hero {
+            position: relative;
+            width: 100vw;
+            margin-bottom: 60px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .about-hero-bg {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .about-pink-bg {
+            background: #F1629C;
+            flex: 1;
+        }
+
+        .about-collage-img {
+            display: block;
+            width: 100%;
+            max-width: 550px;
+            height: auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-stripes {
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+        }
+
+        .about-stripe {
+            height: 28px;
         }
     </style>
     <script src="favicon.js"></script>
@@ -159,16 +199,24 @@
 
     <h1 class="about-heading">A product designer shaping <span class="highlight">clarity</span> and <span class="highlight">judgment</span> in a world where AI makes execution <span class="highlight">effortless</span>.</h1>
 
+    <div class="about-hero">
+        <div class="about-hero-bg">
+            <div class="about-pink-bg"></div>
+            <div class="about-stripes">
+                <div class="about-stripe" style="background:#F1629C"></div>
+                <div class="about-stripe" style="background:#FABD05"></div>
+                <div class="about-stripe" style="background:#34A754"></div>
+                <div class="about-stripe" style="background:#4386F5"></div>
+            </div>
+        </div>
+        <img src="images/Homepage_assets/about_collage.png" alt="" class="about-collage-img">
+    </div>
+
     <div class="chat">
         <div class="bubble left">Hello!</div>
         <div class="bubble left">I am Nebin Biju, and I love bringing smiles to interactions. Currently,  I'm a Product Designer at <a href="https://microsoft.com" target="_blank"><span class="highlight">Microsoft</span></a> designing AI experiences for the Copilot App.</div>
         <div class="bubble left">Previously, I worked with <a href="https://www.atlassian.com/" target="_blank"><span class="highlight">Atlassian</span></a> helping enterprise users migrate data.</div>
         <div class="bubble left">More details in my <a href="https://drive.google.com/file/d/1wNCA_hwy8p7VDoel-va2AQfvZZW7HfSf/view?usp=drive_link" target="_blank"><span class="highlight">resume</span></a>.</div>
-        <div class="bubble image">
-            <img src="images/about/me.png" alt="Nebin Biju">
-            <span class="caption">Oh! btw this is how I look</span>
-        </div>
-
         <div class="bubble right">What’s your educational background?</div>
         <div class="bubble left">I hold a B.Des (interaction design) degree from <a href="https://www.iitb.ac.in/" target="_blank"><span class="highlight">IIT Bombay</span></a>, graduating with the Institute Silver Medal for being the batch topper 🎖️.</div>
         <div class="bubble left">I did a semester at <a href="https://www.ntu.edu.sg/" target="_blank"><span class="highlight">NTU Singapore</span></a> majoring in interactive media.</div>
