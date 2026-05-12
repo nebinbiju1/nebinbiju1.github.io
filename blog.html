@@ -4,165 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>blog — nebin</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            background-color: #141413;
-            font-family: 'Roboto Mono', monospace;
-            min-height: 100vh;
-            color: #666662;
-        }
-        .topbar {
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            height: 52px;
-            background-color: #1a1a18;
-            border-bottom: 1px solid #2a2a28;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            z-index: 100;
-        }
-        .topbar a {
-            font-family: 'Roboto Mono', monospace;
-            font-size: 14px;
-            font-weight: 600;
-            text-decoration: none;
-            color: #666662;
-            padding: 6px 16px;
-            border-radius: 8px;
-            transition: color 0.2s;
-        }
-        .topbar a:hover { color: #ffffff; }
-        .topbar a.active { color: #f1629c; }
-
-        .page {
-            max-width: 760px;
-            margin: 0 auto;
-            padding: 80px 24px 120px;
-        }
-
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 13px;
-            font-weight: 700;
-            color: #666662;
-            text-decoration: none;
-            margin-bottom: 48px;
-            transition: color 0.2s;
-        }
-        .back-btn:hover { color: #ffffff; }
-        .back-btn svg { width: 14px; height: 14px; }
-
-        .blog-header { margin-bottom: 28px; }
-
-        .blog-title {
-            font-size: 42px;
-            font-weight: 700;
-            color: #ffffff;
-            line-height: 1.2;
-            margin-bottom: 16px;
-        }
-
-        .blog-desc {
-            font-size: 16px;
-            font-weight: 600;
-            color: #888884;
-            line-height: 1.5;
-            margin-bottom: 20px;
-        }
-
-        .blog-meta {
-            font-size: 16px;
-            font-weight: 600;
-            color: #888884;
-            margin-bottom: 20px;
-        }
-
-        .medium-link {
-            display: inline-block;
-            font-size: 16px;
-            font-weight: 600;
-            color: #f1629c;
-            text-decoration: none;
-            transition: opacity 0.2s;
-        }
-        .medium-link:hover { opacity: 0.75; }
-
-        .divider {
-            height: 1px;
-            background: #2a2a28;
-            margin: 36px 0;
-        }
-
-        .blog-content p {
-            font-size: 16px;
-            line-height: 1.5;
-            color: #888884;
-            margin-bottom: 16px;
-        }
-        .blog-content strong { color: #888884; font-weight: 400; }
-        .blog-content em { font-style: italic; }
-        .blog-content blockquote {
-            border-left: 2px solid rgba(241, 98, 156, 0.35);
-            padding-left: 14px;
-            margin: 16px 0;
-            font-style: italic;
-            font-size: 16px;
-            font-weight: 400;
-            color: #888884;
-            line-height: 1.5;
-        }
-        .blog-content figure { margin: 24px 0; }
-        .blog-content figure img {
-            width: 100%;
-            border-radius: 10px;
-            border: 1px solid #2a2a28;
-            display: block;
-        }
-        .blog-content figcaption {
-            font-size: 11px;
-            font-weight: 600;
-            color: #444441;
-            margin-top: 8px;
-            text-align: center;
-        }
-        .blog-content a { color: #f1629c; text-decoration: none; }
-        .blog-content a:hover { text-decoration: underline; }
-        .blog-content h2 { font-size: 16px; font-weight: 700; color: #ffffff; margin-top: 40px; margin-bottom: 12px; }
-        .blog-content h3 { font-size: 13px; font-weight: 700; color: #888884; margin-top: 20px; margin-bottom: 8px; }
-
-        .blog-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-top: 56px;
-            padding-top: 32px;
-            border-top: 1px solid #2a2a28;
-        }
-
-        .nav-btn {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-family: 'Roboto Mono', monospace;
-            font-size: 13px;
-            font-weight: 700;
-            color: #666662;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-        .nav-btn:hover { color: #ffffff; }
-        .nav-btn svg { width: 14px; height: 14px; }
-    </style>
+    <link rel="stylesheet" href="styles.css">
     <script src="favicon.js" defer></script>
 </head>
-<body>
+<body class="pg-blog">
     <nav class="topbar">
         <a href="index.html">home</a>
         <a href="projects.html">projects</a>
@@ -255,6 +100,7 @@
       },
       {
         title: 'Who owns what we co-create with AI',
+        titleHTML: 'Who owns what we co-create with <span class="keep-case">AI</span>',
         date: 'oct 15, 2025',
         read: '5 min read',
         link: '',
@@ -400,6 +246,7 @@
       },
       {
         title: 'Mesmerizing Andamans',
+        titleHTML: 'Mesmerizing <span class="keep-case">Andamans</span>',
         date: 'jan 21, 2023',
         read: '5 min read',
         link: 'https://medium.com/@nebinbiju/mesmerizing-andamans-b1e63da1f363',
@@ -475,7 +322,12 @@
       document.querySelector('.blog-title').textContent = 'post not found.';
     } else {
       document.title = `${post.title} — nebin`;
-      document.getElementById('blog-title').textContent = post.title;
+      const titleEl = document.getElementById('blog-title');
+      if (post.titleHTML) {
+        titleEl.innerHTML = post.titleHTML;
+      } else {
+        titleEl.textContent = post.title;
+      }
       document.getElementById('blog-content').innerHTML = post.content;
       const mediumEl = document.getElementById('medium-link');
       if (post.link) {

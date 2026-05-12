@@ -4,355 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project — Nebin Biju</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background-color: #141413;
-            font-family: 'Roboto Mono', monospace;
-            min-height: 100vh;
-            color: #666662;
-        }
-
-        .topbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 52px;
-            background-color: #1a1a18;
-            border-bottom: 1px solid #2a2a28;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            z-index: 100;
-        }
-
-        .topbar a {
-            font-family: 'Roboto Mono', monospace;
-            font-size: 14px;
-            font-weight: 600;
-            text-decoration: none;
-            color: #666662;
-            padding: 6px 16px;
-            border-radius: 8px;
-            transition: color 0.2s;
-        }
-
-        .topbar a:hover { color: #ffffff; }
-        .topbar a.active { color: #f1629c; }
-
-        .page {
-            max-width: 760px;
-            margin: 0 auto;
-            padding: 80px 24px 120px;
-        }
-
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 13px;
-            font-weight: 700;
-            color: #666662;
-            text-decoration: none;
-            margin-bottom: 48px;
-            transition: color 0.2s;
-        }
-
-        .back-btn:hover { color: #ffffff; }
-
-        .back-btn svg {
-            width: 14px;
-            height: 14px;
-        }
-
-        .project-header {
-            margin-bottom: 28px;
-        }
-
-        .project-title {
-            font-size: 42px;
-            font-weight: 700;
-            color: #ffffff;
-            line-height: 1.2;
-            margin-bottom: 16px;
-        }
-
-        .project-desc {
-            font-size: 14px;
-            font-weight: 600;
-            color: #888884;
-            line-height: 1.75;
-            margin-bottom: 20px;
-        }
-
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .tag {
-            font-size: 12px;
-            font-weight: 700;
-            color: #f1629c;
-            background: rgba(241, 98, 156, 0.12);
-            border: 1px solid rgba(241, 98, 156, 0.3);
-            border-radius: 6px;
-            padding: 4px 10px;
-        }
-
-        .divider {
-            height: 1px;
-            background: #2a2a28;
-            margin: 36px 0;
-        }
-
-        .content-block {
-            margin-bottom: 36px;
-        }
-
-        .content-block h2 {
-            font-size: 16px;
-            font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 12px;
-        }
-
-        .content-block h3 {
-            font-size: 13px;
-            font-weight: 700;
-            color: #888884;
-            margin-top: 20px;
-            margin-bottom: 8px;
-        }
-
-        .content-block p {
-            font-size: 13px;
-            font-weight: 600;
-            line-height: 1.85;
-            color: #555552;
-        }
-
-        .content-block p + p { margin-top: 10px; }
-
-        .content-block ul,
-        .content-block ol {
-            margin: 10px 0 10px 18px;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .content-block li {
-            font-size: 13px;
-            font-weight: 600;
-            color: #555552;
-            line-height: 1.75;
-        }
-
-        .content-block strong {
-            color: #888884;
-            font-weight: 700;
-        }
-
-        .content-block blockquote {
-            border-left: 2px solid rgba(241,98,156,0.35);
-            padding-left: 14px;
-            margin: 16px 0;
-            font-style: italic;
-            font-size: 13px;
-            font-weight: 600;
-            color: #555552;
-            line-height: 1.75;
-        }
-
-        .proj-meta {
-            font-size: 12px;
-            font-weight: 600;
-            color: #444440;
-            line-height: 1.75;
-        }
-
-        .proj-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 14px 0;
-        }
-
-        .proj-table th {
-            text-align: left;
-            color: #f1629c;
-            border-bottom: 1px solid #2a2a28;
-            padding: 8px 10px;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.05em;
-        }
-
-        .proj-table td {
-            color: #555552;
-            border-bottom: 1px solid #1e1e1c;
-            padding: 10px;
-            vertical-align: top;
-            line-height: 1.6;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .proj-table tr:last-child td { border-bottom: none; }
-
-        .proj-link {
-            color: #f1629c;
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 700;
-        }
-
-        .proj-link:hover { text-decoration: underline; }
-
-        .dummy-image {
-            width: 100%;
-            height: 240px;
-            border-radius: 14px;
-            border: 1px solid #2a2a28;
-            margin-bottom: 36px;
-        }
-
-        .video-list {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .video-item {
-            padding: 40px 0;
-        }
-
-        .video-item:first-child { padding-top: 0; }
-        .video-item:last-child { padding-bottom: 0; }
-
-        .video-item + .video-item {
-            border-top: 1px solid #2a2a28;
-        }
-
-        .video-item-meta {
-            margin-bottom: 12px;
-        }
-
-        .video-item-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 6px;
-        }
-
-        .video-item-link {
-            font-size: 14px;
-            font-weight: 700;
-            color: #f1629c;
-            text-decoration: none;
-        }
-
-        .video-item-link:hover { text-decoration: underline; }
-
-        .video-thumb {
-            position: relative;
-            width: 100%;
-            border-radius: 14px;
-            overflow: hidden;
-            background: #0e0e0d;
-            border: 1px solid #2a2a28;
-            cursor: pointer;
-        }
-
-        .video-thumb video {
-            width: 100%;
-            display: block;
-        }
-
-        .video-play-btn {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: transparent;
-            opacity: 0;
-            transition: opacity 0.2s;
-        }
-
-        .video-thumb:hover .video-play-btn { opacity: 1; background: rgba(0,0,0,0.15); }
-
-        .video-play-btn.hidden { display: none; }
-
-        .video-play-icon {
-            width: 52px;
-            height: 52px;
-            border-radius: 50%;
-            background: rgba(241,98,156,0.9);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.15s;
-        }
-
-        .video-thumb:hover .video-play-icon { transform: scale(1.08); }
-
-        .video-play-icon svg {
-            width: 20px;
-            height: 20px;
-            fill: #ffffff;
-            margin-left: 3px;
-        }
-
-        .project-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-top: 56px;
-            padding-top: 32px;
-            border-top: 1px solid #2a2a28;
-        }
-
-        .nav-btn {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-family: 'Roboto Mono', monospace;
-            font-size: 13px;
-            font-weight: 700;
-            color: #666662;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .nav-btn:hover { color: #ffffff; }
-
-        .nav-btn svg {
-            width: 14px;
-            height: 14px;
-            flex-shrink: 0;
-        }
-
-        .nav-btn.disabled {
-            opacity: 0.2;
-            pointer-events: none;
-        }
-
-        .nav-btn.next {
-            margin-left: auto;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
     <script src="favicon.js"></script>
 </head>
-<body>
+<body class="pg-project">
     <nav class="topbar">
         <a href="index.html">home</a>
         <a href="projects.html" class="active">projects</a>
@@ -407,14 +62,14 @@
             },
             {
                 title: 'Exergame for elderly',
-                desc: 'An interactive game inspired by Indian stories and mythology, designed to make physiotherapy more engaging, accessible, and affordable.',
-                tags: ['university project', 'interaction design', '2019'],
+                desc: 'An interactive game inspired by Indian stories and mythology, designed to make physiotherapy more engaging and accessible.',
+                tags: ['interaction design', 'exergame', 'university project', '2019'],
                 color: 'linear-gradient(145deg, #7c2d12, #ea580c)'
             },
             {
                 title: 'NTU museum app',
                 desc: 'Reimagining the NTU museum experience into a cohesive and immersive mobile application.',
-                tags: ['mobile', 'ux research', 'uni'],
+                tags: ['immersive experience', 'university project', '2018'],
                 color: 'linear-gradient(145deg, #134e4a, #0d9488)'
             },
             {
@@ -424,9 +79,9 @@
                 color: 'linear-gradient(145deg, #1a1a18, #2a2a28)'
             },
             {
-                title: 'Simplifying data selection for enterprises',
+                title: 'Simplifying data selection',
                 desc: 'Intuitive data selection for enterprise scale migrations, enabling confident high-volume data transfer.',
-                tags: ['ux enhancement', 'atlassian', '2024'],
+                tags: ['ux enhancement', 'atlassian', '2023'],
                 color: 'linear-gradient(145deg, #1a2a3a, #1e4d6b)'
             }
         ];
@@ -568,7 +223,7 @@
                     <div class="video-item">
                         <div class="video-item-meta">
                             <div class="video-item-title">Dino finder</div>
-                            <div class="video-item-desc" style="font-size:14px;font-weight:600;color:#888884;line-height:1.75;margin:4px 0 8px;">Explore a Minecraft-inspired voxel world, track hidden dinosaurs with a compass, and discover fun facts about them along the way.</div>
+                            <div class="video-item-desc">Explore a Minecraft-inspired voxel world, track hidden dinosaurs with a compass, and discover fun facts about them along the way.</div>
                             <a href="https://github.com/nebinbiju1/dino-finder" class="video-item-link">try the experience</a>
                         </div>
                         <div class="video-thumb" data-videoid="momVSo-qWCY">
@@ -579,7 +234,7 @@
                     <div class="video-item">
                         <div class="video-item-meta">
                             <div class="video-item-title">The marauder's chart</div>
-                            <div class="video-item-desc" style="font-size:14px;font-weight:600;color:#888884;line-height:1.75;margin:4px 0 8px;">An interactive data visualisation of character mentions across all seven Harry Potter books.</div>
+                            <div class="video-item-desc">An interactive data visualisation of character mentions across all seven Harry Potter books.</div>
                             <a href="https://github.com/nebinbiju1/the-marauders-chart" class="video-item-link">try the experience</a>
                         </div>
                         <div class="video-thumb" data-videoid="O5EcYNBfFp4">
@@ -590,7 +245,7 @@
                     <div class="video-item">
                         <div class="video-item-meta">
                             <div class="video-item-title">Fruit ninja 3d</div>
-                            <div class="video-item-desc" style="font-size:14px;font-weight:600;color:#888884;line-height:1.75;margin:4px 0 8px;">Slice fruits with your bare hands. No controller, just your webcam and reflexes.</div>
+                            <div class="video-item-desc">Slice fruits with your bare hands. No controller, just your webcam and reflexes.</div>
                             <a href="https://github.com/nebinbiju1/fruitninja3d" class="video-item-link">try the experience</a>
                         </div>
                         <div class="video-thumb" data-videoid="9RtaUmyEG70">
@@ -601,7 +256,7 @@
                     <div class="video-item">
                         <div class="video-item-meta">
                             <div class="video-item-title">Waveart</div>
-                            <div class="video-item-desc" style="font-size:14px;font-weight:600;color:#888884;line-height:1.75;margin:4px 0 8px;">A polar function visualizer that generates beautiful mathematical curves around the unit circle.</div>
+                            <div class="video-item-desc">A polar function visualizer that generates beautiful mathematical curves around the unit circle.</div>
                             <a href="https://github.com/nebinbiju1/waveart" class="video-item-link">try the experience</a>
                         </div>
                         <div class="video-thumb" data-videoid="eDSZ0qcvW_s">
@@ -612,7 +267,7 @@
                     <div class="video-item">
                         <div class="video-item-meta">
                             <div class="video-item-title">Vangogh</div>
-                            <div class="video-item-desc" style="font-size:14px;font-weight:600;color:#888884;line-height:1.75;margin:4px 0 8px;">A browser-based finger painting app that uses your webcam to track hand movements in real time.</div>
+                            <div class="video-item-desc">A browser-based finger painting app that uses your webcam to track hand movements in real time.</div>
                             <a href="https://github.com/nebinbiju1/vangogh" class="video-item-link">try the experience</a>
                         </div>
                         <div class="video-thumb" data-videoid="EvUgRl6xLEU">
