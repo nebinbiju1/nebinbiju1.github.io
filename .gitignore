@@ -1,4 +1,6 @@
 .DS_Store
 **/.DS_Store
 images/PNG/
-Videos/
+Videos/*
+!Videos/test_4.mp4
+!Videos/selection.mp4
