@@ -31,7 +31,7 @@
 
         <div class="divider"></div>
 
-        <div id="proj-dummy" style="background:#1a1a18; border-radius:14px; border:1px solid #2a2a28; height:220px; margin-bottom:36px;"></div>
+        <div id="proj-dummy" style="background:#1a1a18;  border:1px solid #2a2a28; height:220px; margin-bottom:36px;"></div>
 
         <div id="proj-content"></div>
 
@@ -194,22 +194,22 @@
         const atlassianImages = [
             ...Array.from({length: 67}, (_, i) => {
                 const n = String(i + 1).padStart(2, '0');
-                return `<img src="https://github.com/nebinbiju1/nebinbiju1.github.io/releases/download/slides-v1/${n}.png" style="width:100%;display:block;border-radius:12px;margin-bottom:16px;" alt="slide ${i+1}">`;
+                return `<img src="https://github.com/nebinbiju1/nebinbiju1.github.io/releases/download/slides-v1/${n}.png" style="width:100%;display:block;margin-bottom:16px;" alt="slide ${i+1}">`;
             }),
-            `<video src="Videos/test_4.mp4" controls style="width:100%;display:block;border-radius:12px;margin-bottom:16px;"></video>`,
+            `<video src="Videos/test_4.mp4" controls style="width:100%;display:block;margin-bottom:16px;"></video>`,
             ...Array.from({length: 90 - 76}, (_, i) => {
                 const n = String(i + 77).padStart(2, '0');
-                return `<img src="https://github.com/nebinbiju1/nebinbiju1.github.io/releases/download/slides-v1/${n}.png" style="width:100%;display:block;border-radius:12px;margin-bottom:16px;" alt="slide ${i+77}">`;
+                return `<img src="https://github.com/nebinbiju1/nebinbiju1.github.io/releases/download/slides-v1/${n}.png" style="width:100%;display:block;margin-bottom:16px;" alt="slide ${i+77}">`;
             }),
         ].join('');
 
         const dataSelectionImages = `
             <div class="content-block"><h2>Here's what I did</h2></div>
-            <video src="Videos/selection.mp4" controls style="width:100%;display:block;border-radius:12px;margin-bottom:36px;"></video>
+            <video src="Videos/selection.mp4" controls style="width:100%;display:block;margin-bottom:36px;"></video>
             <div class="content-block"><h2>Here's how I did</h2></div>
             ` + Array.from({length: 50}, (_, i) => {
             const n = String(i + 1).padStart(2, '0');
-            return `<img src="https://github.com/nebinbiju1/nebinbiju1.github.io/releases/download/data-selection-v1/${n}.png" style="width:100%;display:block;border-radius:12px;margin-bottom:16px;" alt="slide ${i+1}">`;
+            return `<img src="https://github.com/nebinbiju1/nebinbiju1.github.io/releases/download/data-selection-v1/${n}.png" style="width:100%;display:block;margin-bottom:16px;" alt="slide ${i+1}">`;
         }).join('');
 
         const defaultContent = ``;
@@ -217,7 +217,7 @@
         const projectContent = {
             0: atlassianImages,
             5: dataSelectionImages,
-            3: `<img src="https://framerusercontent.com/images/EVq4ZctUdzbCsdfcdAUWFC4QsY.jpg?width=2480&height=40020" style="width:100%;display:block;border-radius:12px;" alt="NTU museum app">`,
+            3: `<img src="https://framerusercontent.com/images/EVq4ZctUdzbCsdfcdAUWFC4QsY.jpg?width=2480&height=40020" style="width:100%;display:block;" alt="NTU museum app">`,
             4: `
                 <div class="video-list" id="video-list">
                     <div class="video-item">
