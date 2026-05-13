@@ -715,8 +715,8 @@ body.pg-about {
 }
 
 @media (max-width: 600px) {
-    .social-icons { gap: 28px; }
-    .social-icons svg { width: 34px; height: 34px; }
+    .social-icons { gap: 22px; justify-content: flex-start; }
+    .social-icons svg { width: 27px; height: 27px; }
 }
 
 .about-heading {
