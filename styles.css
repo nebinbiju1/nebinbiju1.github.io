@@ -546,7 +546,6 @@ body.pg-about {
     .about-logos { gap: 32px; padding: 20px 0; }
     .about-logos img { height: 22px; }
     .about-logos .logo-microsoft { height: 50px; }
-    .about-section-title { font-size: 26px; }
 }
 
 .tv-section {
