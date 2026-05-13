@@ -678,8 +678,6 @@ body.pg-about {
 
 @media (max-width: 600px) {
     .tv-star { display: none; }
-    .social-icons { gap: 28px; }
-    .social-icons svg { width: 34px; height: 34px; }
 }
 
 .about-contact {
@@ -714,6 +712,11 @@ body.pg-about {
     height: 42px;
     fill: currentColor;
     display: block;
+}
+
+@media (max-width: 600px) {
+    .social-icons { gap: 28px; }
+    .social-icons svg { width: 34px; height: 34px; }
 }
 
 .about-heading {
