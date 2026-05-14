@@ -1479,8 +1479,9 @@ body.pg-blog .blog-meta {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 21%;
+    padding: 26%;
     color: #e8dcb5;
+    overflow: hidden;
 }
 
 .research-icon svg,
