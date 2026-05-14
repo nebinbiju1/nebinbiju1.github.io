@@ -1499,16 +1499,26 @@ body.pg-blog .blog-meta {
 
 @media (max-width: 600px) {
     .research-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 18px;
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    .research-item {
+        flex-direction: row;
+        align-items: center;
+        gap: 14px;
     }
     .research-icon {
-        max-width: 120px;
-        margin: 0 auto;
+        width: 64px;
+        height: 64px;
+        max-width: 64px;
+        flex: 0 0 64px;
+        padding: 8px;
+        margin: 0;
+        aspect-ratio: auto;
     }
     .research-label {
-        font-size: 13px;
-        text-align: center;
+        font-size: 14px;
+        text-align: left;
     }
 }
 
