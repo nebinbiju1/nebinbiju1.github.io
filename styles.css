@@ -806,7 +806,7 @@ body.pg-projects { padding: 90px 24px 80px; }
 .card:nth-child(3) .card-img { background-image: url('images/Exergame.png'); }
 .card:nth-child(4) .card-img { background-image: url('images/code_art.png'); }
 .card:nth-child(5) .card-img { background-image: url('images/Thumb3.png'); }
-.card:nth-child(6) .card-img { background-image: url('images/NTU.jpg'); background-position: top; }
+.card:nth-child(6) .card-img { background-image: url('images/NTU_cover.png'); background-position: top; }
 
 .card-content { padding: 20px 0 0; }
 
