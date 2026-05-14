@@ -803,9 +803,9 @@ body.pg-projects { padding: 90px 24px 80px; }
 
 .card:nth-child(1) .card-img { background-image: url('images/remediation_final.png'); }
 .card:nth-child(2) .card-img { background-image: url('images/copilot_search.png'); }
-.card:nth-child(3) .card-img { background-image: url('images/code_art.png'); }
-.card:nth-child(4) .card-img { background-image: url('images/Thumb3.png'); }
-.card:nth-child(5) .card-img { background-image: url('images/Exergame.png'); }
+.card:nth-child(3) .card-img { background-image: url('images/Exergame.png'); }
+.card:nth-child(4) .card-img { background-image: url('images/code_art.png'); }
+.card:nth-child(5) .card-img { background-image: url('images/Thumb3.png'); }
 .card:nth-child(6) .card-img { background-image: url('images/NTU.jpg'); background-position: top; }
 
 .card-content { padding: 20px 0 0; }
@@ -1240,12 +1240,268 @@ body.pg-blog .blog-meta {
     margin-bottom: 12px;
 }
 
+.blog-content.numbered { counter-reset: section; }
+.blog-content.numbered h2 { counter-increment: section; }
+.blog-content.numbered h2::before { content: counter(section) ". "; }
+
 .blog-content h3 {
-    font-size: 13px;
+    font-family: 'Noto Serif', serif;
+    font-size: 24px;
     font-weight: 700;
+    color: #d4d0cb;
+    line-height: 1.3;
+    margin-top: 28px;
+    margin-bottom: 12px;
+}
+
+.blog-content details {
+    margin: 12px 0 16px;
+}
+
+.blog-content details summary {
+    font-family: 'Noto Serif', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #d4d0cb;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 4px 0;
+    user-select: none;
+}
+
+.blog-content details summary::-webkit-details-marker { display: none; }
+.blog-content details summary::marker { content: ''; }
+
+.blog-content details summary::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: rotate(-45deg);
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+    margin-bottom: 2px;
+}
+
+.blog-content details[open] summary::before {
+    transform: rotate(45deg);
+    margin-bottom: 0;
+    margin-top: -2px;
+}
+
+.blog-content details > ul,
+.blog-content details > ol { margin-top: 6px; }
+
+.blog-content ul,
+.blog-content ol {
+    font-family: 'Noto Serif', serif;
+    font-size: 18px;
+    line-height: 1.5;
     color: #888884;
-    margin-top: 20px;
-    margin-bottom: 8px;
+    margin: 0 0 16px 22px;
+}
+
+.blog-content ul li,
+.blog-content ol li { margin-bottom: 4px; }
+
+.blog-content .callout {
+    color: #f1629c;
+    margin-top: 24px;
+}
+
+.blog-content .key-line {
+    color: #d4d0cb;
+    margin-top: 24px;
+}
+
+.blog-content .exercise-name {
+    color: #d4d0cb;
+    font-weight: 700;
+}
+
+.report-link {
+    display: inline-block;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    color: #f1629c;
+    text-decoration: none;
+    margin: 20px 0;
+}
+
+.report-link:hover { text-decoration: underline; }
+
+.blog-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-family: 'Noto Serif', serif;
+    font-size: 16px;
+    color: #888884;
+}
+
+.blog-content table th,
+.blog-content table td {
+    border: 1px solid #2a2a28;
+    padding: 12px 14px;
+    text-align: left;
+    vertical-align: top;
+    line-height: 1.4;
+}
+
+.blog-content table thead th {
+    background: #1a1a18;
+    color: #d4d0cb;
+    font-weight: 700;
+}
+
+.blog-content table tbody th {
+    background: transparent;
+    font-weight: 400;
+}
+
+.blog-content table tbody td {
+    text-align: center;
+    color: #d4d0cb;
+}
+
+.blog-content table tr.total th,
+.blog-content table tr.total td {
+    background: #1a1a18;
+    color: #d4d0cb;
+    font-weight: 700;
+}
+
+.user-journey {
+    margin: 24px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    counter-reset: step;
+}
+
+.journey-step {
+    background: #1a1a18;
+    border: 2px solid #888884;
+    border-radius: 8px;
+    padding: 14px 18px;
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+    counter-increment: step;
+    position: relative;
+}
+
+.journey-step::before {
+    content: counter(step) ".";
+    position: absolute;
+    right: calc(100% + 28px);
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Noto Serif', serif;
+    font-size: 72px;
+    font-weight: 700;
+    color: #d4d0cb;
+    line-height: 1;
+}
+
+@media (max-width: 600px) {
+    .journey-step::before { display: none; }
+}
+
+.journey-step img {
+    width: 100%;
+    display: block;
+    margin: 0 auto 10px;
+    border-radius: 6px;
+}
+
+.journey-title {
+    font-family: 'Noto Serif', serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: #FBF6DF;
+    line-height: 1.5;
+}
+
+.journey-arrow {
+    position: relative;
+    width: 28px;
+    height: 48px;
+}
+
+.journey-arrow::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 10px;
+    width: 2px;
+    background: #888884;
+    transform: translateX(-50%);
+}
+
+.journey-arrow::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 10px;
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid #888884;
+    border-bottom: 2px solid #888884;
+    transform: translateX(-50%) rotate(45deg);
+}
+
+.research-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin: 28px 0 32px;
+}
+
+.research-item {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.research-icon {
+    background: #1a1a18;
+    border: 1px solid #2a2a28;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 21%;
+    color: #e8dcb5;
+}
+
+.research-icon svg,
+.research-icon img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+}
+
+.research-label {
+    font-family: 'Noto Serif', serif;
+    font-size: 15px;
+    line-height: 1.4;
+    color: #888884;
+}
+
+@media (max-width: 600px) {
+    .research-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+    }
 }
 
 .blog-nav {

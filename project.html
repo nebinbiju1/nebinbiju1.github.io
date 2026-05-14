@@ -95,87 +95,8 @@
         document.getElementById('proj-title').textContent = proj.title;
         document.getElementById('proj-desc').textContent = proj.desc;
         const dummyEl = document.getElementById('proj-dummy');
-        if (id === 0 || id === 3 || id === 4 || id === 5) {
+        if (id === 0 || id === 2 || id === 3 || id === 4 || id === 5) {
             dummyEl.style.display = 'none';
-        } else if (id === 2) {
-            dummyEl.style.background = '#1a1a18';
-            dummyEl.style.display = 'flex';
-            dummyEl.style.flexDirection = 'column';
-            dummyEl.style.alignItems = 'center';
-            dummyEl.style.justifyContent = 'center';
-            dummyEl.style.height = 'auto';
-            dummyEl.style.padding = '48px 24px';
-            dummyEl.style.gap = '16px';
-            dummyEl.innerHTML = '<canvas id="wip-char" width="80" height="100" style="image-rendering:pixelated;display:block;"></canvas>'
-                + '<p style="font-size:13px;font-weight:600;color:#555552;line-height:1.85;text-align:center;">A condensed version of this project is a work in progress.<br>For now, do take a look at the detailed version in the link below.</p>'
-                + '<a href="https://drive.google.com/file/d/1jfEXqQp83PV8q7BLoIqO-SLCmQTgzgOx/view?usp=drive_link" target="_blank" style="font-family:\'Roboto Mono\',monospace;font-size:13px;font-weight:700;color:#f1629c;text-decoration:none;">Link to detailed report</a>';
-
-            (function() {
-                const cc = document.getElementById('wip-char');
-                const cx = cc.getContext('2d');
-                const P = 4, OX = 3, OY0 = 3;
-                const K = {
-                    H: '#3d2b1f', S: '#c8956c', Sd: '#b07050', E: '#141413',
-                    J: '#f1629c', JL: '#ff8ab8', JD: '#b03060', L: '#555558', Z: '#f1629c',
-                };
-                let T = 0;
-                function draw() {
-                    cx.clearRect(0, 0, 80, 100);
-                    T++;
-                    const ph = T * 0.045;
-                    const lay = Math.round(Math.sin(ph * 4) * 1.5);
-                    const ray = Math.round(Math.cos(ph * 4) * 1.5);
-                    function p(x, y, w, h, c) {
-                        cx.fillStyle = c;
-                        cx.fillRect((OX + x) * P, (OY0 + y) * P, w * P, h * P);
-                    }
-                    // shoes
-                    p(0, 17, 4, 2, K.Z); p(5, 17, 4, 2, K.Z);
-                    // legs
-                    p(1, 12, 3, 5, K.L); p(6, 12, 3, 5, K.L);
-                    // body
-                    p(1, 7, 8, 5, K.J); p(0, 8, 1, 3, K.J); p(9, 8, 1, 3, K.J);
-                    p(1, 7, 2, 2, K.JD); p(7, 7, 2, 2, K.JD);
-                    p(4, 8, 2, 4, K.JL); p(1, 11, 8, 1, K.JD);
-                    // ruler (drawn before arm so hand overlaps handle)
-                    const RC = '#e8d070', RCD = '#aa9030';
-                    p(-2, 3+lay, 1, 5, RC);
-                    p(-2, 4+lay, 1, 1, RCD);
-                    p(-2, 6+lay, 1, 1, RCD);
-                    // left arm
-                    p(-2, 8 + lay, 2, 4, K.J); p(-2, 12 + lay, 2, 1, K.S);
-                    // laptop
-                    const lpy = OY0 + 11;
-                    cx.fillStyle = '#4a4a48'; cx.fillRect((OX+0)*P, (lpy-3)*P, P*10, P*3);
-                    cx.fillStyle = '#2a2a28'; cx.fillRect((OX+1)*P, (lpy-3)*P, P*8,  P*2);
-                    cx.fillStyle = '#f1629c'; cx.fillRect((OX+2)*P, (lpy-3)*P, P*6,  P);
-                    cx.fillStyle = 'rgba(241,98,156,0.3)'; cx.fillRect((OX+2)*P, (lpy-2)*P, P*6, P);
-                    cx.fillStyle = '#555552'; cx.fillRect((OX+0)*P, (lpy-1)*P, P*10, P);
-                    cx.fillStyle = '#4a4a48'; cx.fillRect((OX-1)*P, lpy*P,     P*12, P*2);
-                    cx.fillStyle = '#666662';
-                    for (let k = 0; k < 5; k++) cx.fillRect((OX + k*2)*P, (lpy+1)*P, P, P);
-                    // right arm
-                    p(10, 8 + ray, 2, 4, K.J); p(10, 12 + ray, 2, 1, K.S);
-                    // neck + face
-                    p(3, 7, 4, 1, K.S);
-                    p(2, 1, 6, 5, K.S); p(1, 2, 8, 3, K.S);
-                    p(3, 3, 1, 1, K.E); p(6, 3, 1, 1, K.E);
-                    p(4, 4, 2, 1, K.Sd);
-                    p(3, 5, 1, 1, K.E); p(6, 5, 1, 1, K.E); p(4, 6, 2, 1, K.E);
-                    // hair
-                    p(1, 0, 8, 1, K.H); p(0, 1, 10, 1, K.H);
-                    p(0, 2, 2, 1, K.H); p(8, 2, 2, 1, K.H);
-                    p(0, 3, 1, 1, K.H); p(9, 3, 1, 1, K.H);
-                    // builder hat (on top of hair)
-                    const HC = '#f5c518', HCS = '#c9a010';
-                    p(2, -1, 6, 1, HC);
-                    p(1,  0, 8, 1, HC);
-                    p(-1, 1, 3, 1, HC); p(8, 1, 3, 1, HC);
-                    p(3, -1, 1, 1, HCS);
-                    requestAnimationFrame(draw);
-                }
-                draw();
-            })();
         } else if (id === 5) {
             dummyEl.style.background = "url('images/Data_selection.png') center/cover no-repeat";
             dummyEl.style.height = '320px';
@@ -190,6 +111,16 @@
             span.textContent = t;
             tagsEl.appendChild(span);
         });
+
+        if (id === 2) {
+            const reportLink = document.createElement('a');
+            reportLink.className = 'report-link';
+            reportLink.href = 'https://drive.google.com/file/d/1jfEXqQp83PV8q7BLoIqO-SLCmQTgzgOx/view';
+            reportLink.target = '_blank';
+            reportLink.rel = 'noopener';
+            reportLink.textContent = 'Link to detailed report';
+            document.querySelector('.project-header').appendChild(reportLink);
+        }
 
         const atlassianImages = [
             ...Array.from({length: 67}, (_, i) => {
@@ -286,7 +217,316 @@
                     </div>
                 </div>
             `,
-            2: ``
+            2: `
+                <div class="blog-content numbered">
+                    <h2>The problem</h2>
+                    <p>India's growing elderly population faces limited access to affordable rehabilitation, especially in rural areas. Ageing, neurological disorders, and poor ergonomics often reduce hand mobility, affecting daily activities. Although physiotherapy can improve these conditions, repetitive routines and lack of motivation lead many patients to discontinue therapy. This creates the need for an engaging and affordable rehabilitation platform that encourages consistent hand exercises and long-term recovery.</p>
+
+                    <h2>Understanding the problem</h2>
+                    <p>Secondary research revealed that physiotherapy and rehabilitation programs often suffer from:</p>
+
+                    <div class="research-grid">
+                        <div class="research-item">
+                            <div class="research-icon"><img src="images/Exergame/research_icons/repetitive.png" alt=""></div>
+                            <div class="research-label">Repetitive and monotonous exercise programs</div>
+                        </div>
+                        <div class="research-item">
+                            <div class="research-icon"><img src="images/Exergame/research_icons/motivation.png" alt=""></div>
+                            <div class="research-label">Lack of motivation and therapist follow-up</div>
+                        </div>
+                        <div class="research-item">
+                            <div class="research-icon"><img src="images/Exergame/research_icons/affordability.png" alt=""></div>
+                            <div class="research-label">Limited affordability and accessibility</div>
+                        </div>
+                        <div class="research-item">
+                            <div class="research-icon"><img src="images/Exergame/research_icons/misconceptions.png" alt=""></div>
+                            <div class="research-label">Misconceptions, depression, and social barriers</div>
+                        </div>
+                        <div class="research-item">
+                            <div class="research-icon"><img src="images/Exergame/research_icons/engaging.png" alt=""></div>
+                            <div class="research-label">Need for engaging and immersive rehabilitation</div>
+                        </div>
+                        <div class="research-item">
+                            <div class="research-icon"><img src="images/Exergame/research_icons/effectiveness.png" alt=""></div>
+                            <div class="research-label">Effectiveness of game-based therapy in improving adherence</div>
+                        </div>
+                    </div>
+
+                    <p>Researchers have proposed several methods to improve rehabilitation adherence, including making exercises more engaging, providing timely feedback, and creating a sense of support. Existing rehabilitation tools can be broadly classified into three categories:</p>
+                    <ul>
+                        <li>reminder tools giving personal reminders in the form of texts or calls</li>
+                        <li>exchange platforms for patient-therapist interaction</li>
+                        <li>performance-improvement tools focused on enhancing motor recovery.</li>
+                    </ul>
+                    <p>Introducing a game-play in these tools under the name of Game therapy is becoming very prominent now.</p>
+                    <p class="callout">Game-based therapy combines rehabilitation exercises with interactive gameplay, making physiotherapy more engaging and enjoyable while improving patient motivation, participation, and adherence to long-term rehabilitation programs.</p>
+
+                    <h2>Existing games</h2>
+                    <p>Traditional rehabilitation exercises used to assess hand dexterity are often repetitive, require therapist supervision, and lack engaging feedback. To improve motivation and adherence, digital and game-based rehabilitation systems using VR, motion tracking, and interactive gameplay have been introduced. However, many existing solutions still require complex setups and are not tailored specifically for rehabilitation needs.</p>
+
+                    <h2>User study</h2>
+                    <p>Primary research was conducted with therapists and elderlies to understand the process of rehabilitation and the nature of physiotherapy programs, adherence of elderly towards technology, and the challenges faced by them.</p>
+
+                    <h3>Therapist</h3>
+                    <details>
+                        <summary>Key questions asked</summary>
+                        <ul>
+                            <li>What are the stages of rehabilitation?</li>
+                            <li>Which hand exercises are commonly recommended?</li>
+                            <li>How is rehabilitation progress evaluated?</li>
+                            <li>Why do patients discontinue rehabilitation programs?</li>
+                            <li>Is home-based rehabilitation recommended?</li>
+                            <li>What rehabilitation tools and products are commonly used?</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Key insights</summary>
+                        <ul>
+                            <li>Rehabilitation commonly uses activity-based exercises such as threading beads, mixing dough, separating grains, and towel manipulation.</li>
+                            <li>Exercises follow the FITT principle — Frequency, Intensity, Time, and Type.</li>
+                            <li>Sessions should engage maximum joints while maintaining correct posture.</li>
+                            <li>Typical rehabilitation sessions last around 10 minutes, repeated three times daily.</li>
+                            <li>Sudden jerks and incorrect movements should be avoided.</li>
+                            <li>Elderly patients often try to take shortcuts during exercises, making supervision important.</li>
+                            <li>Simple-looking exercises can feel childish or unimportant to elders; slight complexity in tools improves motivation.</li>
+                            <li>Continuous feedback, tracking, and visible progress are essential for adherence.</li>
+                            <li>Technical or complex data presentation is difficult for elders to understand.</li>
+                            <li>Many elderly users have limited awareness about their illness and recovery process.</li>
+                            <li>Elders are willing to invest in rehabilitation products if they observe improvement.</li>
+                            <li>Home-based rehabilitation is considered valuable but requires monitoring and engagement.</li>
+                        </ul>
+                    </details>
+
+                    <h3>Elderlies</h3>
+                    <details>
+                        <summary>Key questions asked</summary>
+                        <ul>
+                            <li>What does your daily routine look like?</li>
+                            <li>How frequently do you exercise?</li>
+                            <li>What are your hobbies and interests?</li>
+                            <li>How do you stay connected with your doctor?</li>
+                            <li>Do you use or wish to learn smartphones and technology?</li>
+                            <li>How confident are you about your health?</li>
+                            <li>How much would you invest in an exercise or rehabilitation product?</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Key insights</summary>
+                        <ul>
+                            <li>Most elderly participants start their day early, though only a few follow a strict routine.</li>
+                            <li>Majority are open to learning and using new technologies like smartphones.</li>
+                            <li>Elders prefer living with family and value emotional support from children and caregivers.</li>
+                            <li>Maintaining independence in daily activities is highly important for their confidence.</li>
+                            <li>They are willing to spend on medical devices if they demonstrate clear progress.</li>
+                            <li>Most rely on personal/local doctors, often from Ayurveda or Homeopathy backgrounds.</li>
+                            <li>Although motivated about health, monotonous exercises and lack of resources reduce adherence.</li>
+                            <li>Religious activities such as prayer and chanting are an important part of daily life.</li>
+                            <li>Common hobbies include watching TV, listening to radio, reading newspapers, spending time with grandchildren, and light household work.</li>
+                            <li>Listening to old songs and engaging in arts/crafts activities bring joy and engagement.</li>
+                            <li>Very few, mostly men, participate in social activities outside home such as club visits.</li>
+                            <li>Many elders face difficulties understanding English.</li>
+                            <li>Primary information sources are TV, newspapers, and phone calls.</li>
+                        </ul>
+                    </details>
+
+                    <h2>Exercises</h2>
+                    <p>After consultations with physiotherapists, the following hand range-of-motion exercises were selected:</p>
+                    <ol>
+                        <li>Ulnar–Radial Deviation</li>
+                        <li>Flexion–Extension</li>
+                        <li>Finger Lifts</li>
+                    </ol>
+
+                    <figure><img src="images/Exergame/Exercises.png" alt=""></figure>
+
+                    <p>These exercises help improve posture, flexibility, strength, and range of motion. Proper monitoring and feedback are essential to ensure exercises are performed correctly with the right posture, intensity, timing, and repetitions.</p>
+                    <p>The exercise program follows the FITT principle:</p>
+                    <ul>
+                        <li>Frequency – how often exercises are performed</li>
+                        <li>Intensity – how hard the exercise is performed</li>
+                        <li>Time – duration of the exercise</li>
+                        <li>Type – kind of exercise performed</li>
+                    </ul>
+                    <p>Tracking exercise performance is important and can be divided into four levels:</p>
+                    <ul>
+                        <li>Posture Tracking</li>
+                        <li>Repetition Tracking</li>
+                        <li>Exercise Tracking</li>
+                        <li>Session Tracking</li>
+                    </ul>
+                    <p>Typically, each exercise is repeated 10 times per session, with three sessions per day lasting 10–15 minutes each.</p>
+
+                    <h2>Project brief</h2>
+                    <p>Insights from primary and secondary research indicate that the proposed design should be accessible, affordable, and motivating for patients. The system should include progress tracking for physiotherapists and meaningful feedback to help users self-monitor and stay motivated.</p>
+
+                    <h3>Objectives</h3>
+                    <p class="callout">To design a rehabilitation platform for elderly individuals in India that enhances hand flexibility and range of motion through interactive and motivating activities/games.</p>
+
+                    <h3>Goals</h3>
+                    <ol>
+                        <li>Increase motivation and adherence to the rehabilitation process</li>
+                        <li>Provide an effective feedback mechanism to monitor progress</li>
+                        <li>Reduce complexity in both the apparatus and user interaction</li>
+                        <li>Ensure the experience is contextualized for the Indian population</li>
+                        <li>Maintain records of rehabilitation data for future reference and analysis</li>
+                    </ol>
+
+                    <h2>Ideation</h2>
+                    <p>Six ideas were explored and evaluated based on factors such as motivation, feedback mechanism, complexity, affordability, contextual relevance, and data tracking. After discussions with guides and experts, three concepts were shortlisted for pilot testing.</p>
+                    <ol>
+                        <li><strong>Keep Counting:</strong> A counting-machine-inspired exercise tool for elderly users.</li>
+                        <li><strong>Frugal Much!:</strong> A low-cost DIY exercise tool made from household materials, but lacking feedback and tracking.</li>
+                        <li><strong>Something Musical:</strong> A musical instrument adapted into an exercise tool.</li>
+                        <li><strong>Shoot Em:</strong> A gesture-based tablet game using exercise movements.</li>
+                        <li><strong>Create, Play, Note:</strong> A rubber-band pattern-making exercise tool with progress tracking.</li>
+                        <li><strong>Magic Board:</strong> A game-based rehabilitation system connected to a PC/tablet/smartphone for exercise and tracking.</li>
+                    </ol>
+
+                    <figure><img src="images/Exergame/ideation.png" alt=""></figure>
+
+                    <p class="key-line">Selected concepts to test: Keep Counting, Shoot Em, Magic Board</p>
+
+                    <h2>Testing concepts</h2>
+                    <figure><img src="images/Exergame/testing.png" alt=""></figure>
+                    <p>Initial evaluation of the selected concepts was conducted after Pilot Test 1 using mockups and feedback from users and experts. Each concept was scored out of five based on the six selected factors through detailed discussions, and Magic Board was chosen as the final concept.</p>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Keep Counting</th>
+                                <th>Shoot Em</th>
+                                <th>Magic Board</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><th>Increase Motivation</th><td>2</td><td>2</td><td>4</td></tr>
+                            <tr><th>Trackable Data</th><td>3</td><td>1</td><td>4</td></tr>
+                            <tr><th>Feedback Mechanism</th><td>4</td><td>3</td><td>4</td></tr>
+                            <tr><th>Right Complexity</th><td>3</td><td>2</td><td>4</td></tr>
+                            <tr><th>Contextual to India</th><td>5</td><td>5</td><td>5</td></tr>
+                            <tr><th>Easily Affordable</th><td>4</td><td>5</td><td>3</td></tr>
+                            <tr class="total"><th>Total</th><td>21</td><td>18</td><td>24</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h2>Final concept</h2>
+                    <p>The Magic Board consists of a controller that wirelessly connects to a PC, tablet, or smartphone. Through the game application, participants perform simple gestures linked to rehabilitation exercises to complete tasks. Based on primary research, relatable gestures with low cognitive load were prioritized for easier learning. Range of motion is evaluated using movement angles and time taken during tasks. The collected data can be shared with therapists to improve the rehabilitation process.</p>
+
+                    <h3>Pilot test 2</h3>
+                    <figure><img src="images/Exergame/testing2.png" alt=""></figure>
+                    <p>The second pilot test was conducted using developed mockups and a Ramayana-inspired game theme. Exercises for extension, flexion, and ulnar-radial deviation were mapped to gameplay actions. Participants were introduced to the rules beforehand, and responses were simulated according to their actions. The concept was later reviewed by experts and refined based on feedback.</p>
+
+                    <details>
+                        <summary>Key insights</summary>
+                        <ul>
+                            <li>Users often forgot the required gestures during gameplay, indicating the need for real-time gesture references to reduce cognitive load.</li>
+                            <li>The game lacked post-session guidance or feedback for users.</li>
+                            <li>The ergonomics of the control board required improvement, particularly for thumb placement.</li>
+                            <li>Abstract themes inspired by Indian traditional games or comics were found to be more inclusive than direct epic narratives.</li>
+                            <li>Users expressed the need for a clear and understandable progress report after each session.</li>
+                            <li>The playful nature of the tasks was appreciated.</li>
+                            <li>Aggressive actions such as shooting or killing should be avoided in games designed for elderly users.</li>
+                        </ul>
+                    </details>
+
+                    <h3>Control pad design</h3>
+                    <p>A new controller pad was designed with ergonomic considerations. The earlier display board within the device was removed, with feedback and tracking integrated into the application. The pad includes touch-pads for the fingers and thumbs, supports both left and right hands, and features a rotating plate to enable radial-ulnar deviation. Circular markings help ensure accurate hand placement for sensor-based measurements.</p>
+
+                    <figure><img src="images/Exergame/device.png" alt=""></figure>
+
+                    <h3>Working</h3>
+                    <p>The system works by measuring the distance between the reference point and the fingertips or hand using ultrasonic sensors, with all measurements taken in millimetres. Using these distances and basic trigonometric calculations, the range of motion angles are determined. The radial–ulnar deviation angle is calculated directly from the rotation of the disc, which is calibrated using a sensor.</p>
+                    <figure><img src="images/Exergame/working.png" alt=""></figure>
+
+                    <h3>Data collection and feedback</h3>
+                    <p>Data collection and feedback were important for motivating users and monitoring rehabilitation progress. The system recorded session frequency, duration, and joint range of motion through controller sensors, allowing therapists to analyse progress and modify therapy plans when needed.</p>
+                    <p>The therapist portal displayed day-wise progress graphs for different hand movements along with patient details and session data, while the patient feedback screen provided simple progress updates, performance comparisons, and health tips to encourage motivation and healthy habits.</p>
+
+                    <h3>Story development</h3>
+                    <p>The application content was designed to be engaging and relatable for elderly users. Themes inspired by Indian stories, comics, and traditional games were explored to maintain cultural familiarity and inclusiveness.</p>
+                    <p>Inspired by Chacha Chaudhary, a new character named Chachaji was created. Chachaji is a smart and active old man whose adventures form the basis of the game series, Adventures with Chachaji. Humour, simple storytelling, and native language content were incorporated to make therapy sessions more enjoyable and accessible.</p>
+                    <p>Each session followed a linear narrative where users completed tasks to achieve an objective, followed by a performance report.</p>
+
+                    <figure><img src="images/Exergame/chachaji.png" alt=""></figure>
+
+                    <h3>Game play and exercises</h3>
+                    <p>A gameplay was developed to effectively incorporate the selected exercises into an engaging and interactive experience.</p>
+
+                    <p><strong class="exercise-name">1. Jump</strong><br>Category: Extension</p>
+                    <p>While moving ahead, Chachaji encounters obstacles that must be jumped over or slid under. Lifting all fingers together while keeping the palm rested on the board makes Chachaji jump. Higher lifts result in higher jumps. The minimum jump height can be adjusted by the therapist based on the patient's progress. This action helps achieve finger extension.</p>
+                    <figure><img src="images/Exergame/gameplay/Jump.png" alt=""></figure>
+
+                    <p><strong class="exercise-name">2. Slide</strong><br>Category: Flexion</p>
+                    <p>Chachaji slides down obstacles by lifting the lower end of the palm while keeping the fingers on the controller board. A higher palm lift results in a lower slide. The angle formed between the palm, fingers, and board is measured for evaluation. This action helps achieve flexion.</p>
+                    <figure><img src="images/Exergame/gameplay/Slide.png" alt=""></figure>
+
+                    <p><strong class="exercise-name">3. Wave</strong><br>Category: Radial–Ulnar Deviation</p>
+                    <p>Chachaji waves his magic umbrella to shoo away fly swarms using the rotating disc on the controller. Rotating the disc changes the angle, which increases with each level. The sensor records the angle in the application. This action helps achieve radial and ulnar deviation of the hand.</p>
+                    <figure><img src="images/Exergame/gameplay/Wave.png" alt=""></figure>
+
+                    <p><strong class="exercise-name">4. Power-Up</strong><br>Category: Range of Motion – Thumb</p>
+                    <p>Chachaji's energy can be restored through a power-up activity shown on the screen. Lifting and tapping the thumb on the thumb plate increases the energy level. The sensor measures the thumb angle based on its distance from the board. Higher angles result in greater energy gain. This action helps improve thumb range of motion.</p>
+                    <figure><img src="images/Exergame/gameplay/powerup.png" alt=""></figure>
+
+                    <p><strong class="exercise-name">5. Open</strong><br>Category: Range of Motion – Fingers</p>
+                    <p>Chottu the pet cat may be hiding inside numbered boxes that can be opened by lifting the corresponding fingers on the controller pad. The movement creates an angle with the board, which is measured using ultrasonic sensors. Larger boxes require greater finger extension, and the difficulty can be adjusted by the therapist based on the patient's needs.</p>
+                    <figure><img src="images/Exergame/gameplay/Open.png" alt=""></figure>
+
+                    <h3>User journey</h3>
+                    <div class="user-journey">
+                        <div class="journey-step"><img src="images/Exergame/userflow/1.png" alt=""><div class="journey-title">Welcome screen</div></div>
+                        <div class="journey-arrow"></div>
+                        <div class="journey-step"><img src="images/Exergame/userflow/2.png" alt=""><div class="journey-title">Scenario introduction</div></div>
+                        <div class="journey-arrow"></div>
+                        <div class="journey-step"><img src="images/Exergame/userflow/3.png" alt=""><div class="journey-title">Hand configuration screen</div></div>
+                        <div class="journey-arrow"></div>
+                        <div class="journey-step"><img src="images/Exergame/userflow/4.png" alt=""><div class="journey-title">Configuration confirmation</div></div>
+                        <div class="journey-arrow"></div>
+                        <div class="journey-step"><img src="images/Exergame/userflow/5.png" alt=""><div class="journey-title">Gameplay &amp; gesture interaction</div></div>
+                        <div class="journey-arrow"></div>
+                        <div class="journey-step"><img src="images/Exergame/userflow/6.png" alt=""><div class="journey-title">Completion screen</div></div>
+                        <div class="journey-arrow"></div>
+                        <div class="journey-step"><img src="images/Exergame/userflow/7.png" alt=""><div class="journey-title">Feedback &amp; performance report</div></div>
+                    </div>
+
+                    <h2>Evaluation</h2>
+                    <p>A four-day test run was conducted with a participant, and readings for extension and radial–ulnar deviation were recorded. Qualitative evaluations were also carried out to assess the effectiveness of the system. Sample questions included enjoyment of the game, clarity of tasks, ease of completing activities, connection with the character, perceived improvement in hand flexibility, and suggestions for improvement.</p>
+
+                    <figure><img src="images/Exergame/evaluation.png" alt=""></figure>
+
+                    <details>
+                        <summary>Insights from user evaluation</summary>
+                        <ul>
+                            <li>The game was well appreciated and enjoyed by the participant.</li>
+                            <li>The hardware was easy to use, and the participant adapted quickly to the system. By the third and fourth day, gestures could be remembered without reference.</li>
+                            <li>The participant rarely needed to look at the controller while performing exercises.</li>
+                            <li>Each session resulted in an overall feeling of satisfaction.</li>
+                            <li>The screen was sometimes perceived as overcrowded, making tasks difficult to identify quickly.</li>
+                            <li>Concerns were raised regarding the accuracy of the measurements.</li>
+                        </ul>
+                    </details>
+
+                    <p>Expert evaluation was also conducted with a physiotherapist after sharing the system content and controller details.</p>
+
+                    <details>
+                        <summary>Insights from expert evaluation</summary>
+                        <ul>
+                            <li>The contextualisation of the content to India was appreciated.</li>
+                            <li>The ability to adjust game difficulty according to patient needs was considered highly useful.</li>
+                            <li>Synergistic movement patterns during calibration were important and had been overlooked in the setup.</li>
+                            <li>Early stages of the game could further reduce cognitive load for elderly patients.</li>
+                            <li>Since fatigue is common among elderly users, incorporating short breaks or automatic story progression could help patients perform exercises more accurately.</li>
+                        </ul>
+                    </details>
+
+                    <h2>Conclusion and future scope</h2>
+                    <p>The positive feedback from therapists and participants highlights the potential of exercise gaming in telerehabilitation. The relatable Indian context, simple hardware, intuitive gestures, and motivational feedback system made the experience engaging and effective. The project shows strong potential for further technological improvements and affordability.</p>
+                    <p>The system can be expanded with new games, stories, and multilingual content for different age groups and rehabilitation needs. Features like multiplayer modes, leaderboards, and integrated video communication with therapists can further improve engagement and remote rehabilitation experiences.</p>
+
+                    <a class="report-link" href="https://drive.google.com/file/d/1jfEXqQp83PV8q7BLoIqO-SLCmQTgzgOx/view" target="_blank" rel="noopener">Link to detailed report</a>
+                </div>
+            `
         };
 
         document.getElementById('proj-content').innerHTML = projectContent[id] || defaultContent;
