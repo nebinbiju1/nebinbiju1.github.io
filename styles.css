@@ -1502,6 +1502,14 @@ body.pg-blog .blog-meta {
         grid-template-columns: repeat(2, 1fr);
         gap: 18px;
     }
+    .research-icon {
+        max-width: 120px;
+        margin: 0 auto;
+    }
+    .research-label {
+        font-size: 13px;
+        text-align: center;
+    }
 }
 
 .blog-nav {
