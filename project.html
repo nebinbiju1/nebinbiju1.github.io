@@ -148,7 +148,113 @@
         const projectContent = {
             0: atlassianImages,
             5: dataSelectionImages,
-            3: `<img src="https://framerusercontent.com/images/EVq4ZctUdzbCsdfcdAUWFC4QsY.jpg?width=2480&height=40020" style="width:100%;display:block;" alt="NTU museum app">`,
+            3: `
+                <img src="images/NTU_cover.png" style="width:100%;display:block;" alt="NTU museum app">
+                <div class="blog-content numbered">
+                    <h2>What is NTU Museum?</h2>
+                    <p>NTU Museum promotes a keen awareness and strong interest in art and heritage on the Nanyang Technological University Singapore campus.</p>
+                    <p>As part of the University, the Museum has the advantage of collaborating with schools across various disciplines. It focuses on education, works closely with the artist community to initiate interdisciplinary research and collaborations through exhibitions and programmes, and brings art to the NTU community through an active public art programme.</p>
+                    <p>Opened in 2008, the Museum houses a modest collection of contemporary and Southeast Asian art and exhibits mainly in public spaces across the campus to maximise outreach. These artworks, installations, and sculptures together form the NTU Campus Art Trail.</p>
+                    <figure>
+                        <img src="images/NTU%20Museum/Exhibits.png" alt="NTU Museum exhibits">
+                        <figcaption>Some artworks of NTU museum</figcaption>
+                    </figure>
+
+                    <h2>Understanding the current scenario</h2>
+                    <p>By conducting user interviews and speaking with experts and people at the NTU Museum, the following key insights were identified:</p>
+                    <ul>
+                        <li>At present, the Museum has more than 200 physical artworks and 500 digital artworks that are constantly competing for attention. Many people living on campus are unaware of the NTU Museum.</li>
+                        <li>Due to the limited availability of volunteers, organising guided tours has become challenging.</li>
+                        <li>NTU attracts a large number of people for various events across the campus, and the NTU Museum offers a great way to spend leisure time. However, it often goes unnoticed.</li>
+                        <li>There is little incentive for the general campus audience to explore the artworks.</li>
+                        <li>It is very difficult to navigate using the existing Art Trail Map, which primarily focuses on aesthetics.</li>
+                        <li>Poor visibility of the installations also causes them to go unnoticed.</li>
+                    </ul>
+
+                    <figure>
+                        <img src="images/NTU%20Museum/DayatNTU.png" alt="A day at NTU">
+                        <figcaption>A day at NTU</figcaption>
+                    </figure>
+
+                    <h2>Design brief</h2>
+                    <p>To design a mobile application that enhances the campus art trail experience and motivates users through the use of leading technology.</p>
+
+                    <h3>Objectives</h3>
+                    <figure><img src="images/NTU%20Museum/Objectives.png" alt="Objectives" style="border:0;"></figure>
+
+                    <h2>Pathways taken</h2>
+                    <ul>
+                        <li>Identifying activities that could be incorporated into the NTU Museum experience to make it more than just a usual tour.</li>
+                        <li>Conducting a spatial ethnography study of people on the NTU campus.</li>
+                        <li>Redesigning the existing physical map to understand its major shortcomings and challenges.</li>
+                        <li>Translating insights from the redesigned physical map into a digital experience.</li>
+                    </ul>
+
+                    <h2>User persona</h2>
+                    <p>After conducting user studies and secondary research, a user persona was created to provide a reliable and realistic representation of the situation.</p>
+                    <figure><img src="images/NTU%20Museum/persona.png" alt="NTU Museum user persona" style="border:0;"></figure>
+                    <p>Shu is an exchange student at NTU from Japan. He loves to travel and explore everything possible in a new place. As a humanities student, he enjoys learning about the history, society, and culture of different places. Shu is a little weak with his sense of direction and often misses shortcuts or even the correct route. Being a shy person, he is reluctant to ask others for directions or help. Language can also sometimes be a barrier for Shu.</p>
+
+                    <h2>Ideation</h2>
+                    <p>After extensive brainstorming and ideation sessions, the following concepts emerged as some of the most effective ideas.</p>
+
+                    <h3>Dividing artworks into suggested trails</h3>
+                    <p>Encourage self-exploration through themed and suggested trails that make the experience more meaningful while aligning with the original motivations of the NTU Museum.</p>
+                    <ul>
+                        <li>Group artworks based on proximity and zones within the campus map.</li>
+                        <li>Suggest new experiences along the trail, such as food stops, soundscape explorations, and outdoor activities.</li>
+                        <li>Create flexible grouping and chunking methods that can easily accommodate future additions.</li>
+                    </ul>
+                    <figure><img src="images/NTU%20Museum/trails.png" alt="Trails" style="border:0;"></figure>
+                    <p>The idea was tested with users, and the results were largely positive. The themed and suggested trails attracted the interest of many users.</p>
+                    <figure>
+                        <img src="images/NTU%20Museum/testing_the_map.png" alt="Testing the new trail map">
+                        <figcaption>Testing the new trail map</figcaption>
+                    </figure>
+
+                    <h3>Telling stories while travelling</h3>
+                    <p>The travel time between artworks can be effectively used to share stories about NTU and its rich history. The spirit of &ldquo;Nantah&rdquo; still lives on.</p>
+                    <p>The significance of each location or building can be narrated through stories and events associated with those places, enriching the experience and educating visitors about the campus and its heritage.</p>
+                    <figure>
+                        <img src="images/NTU%20Museum/nantah.png" alt="Images of Nantah Campus">
+                        <figcaption>Images of Nantah Campus from A Pictorial History of Nantah, selected and captioned by Kee Pookong and Choi Kwai Keong, Chinese Heritage Centre.</figcaption>
+                    </figure>
+
+                    <h3>&lsquo;AR navigation&rsquo; as a delighter feature</h3>
+                    <p>Some artworks are located inside buildings, and studies found that users often struggle to navigate indoor spaces and get confused between floors.</p>
+                    <p>By incorporating the Google Street View API or self-generated scenes, the indoor navigation experience can be made more engaging and enjoyable through AR integration.</p>
+
+                    <h3>Personal collection, tasks, and prizes</h3>
+                    <p>Each user profile will be assigned a collection board (in the form of tiles), with all artworks initially locked. Upon scanning a QR code at an artwork, the corresponding tile unlocks and the user receives a small random task, such as inviting friends, answering a question about the visited artwork, or using the NTU Museum hashtag on social media.</p>
+                    <p>Rewards, such as food discount coupons within the campus, can be offered for completing these tasks. A larger reward or NTU Museum merchandise can be provided upon completing the trails.</p>
+                    <p>This system motivates users while also increasing publicity and engagement for the museum.</p>
+
+                    <h2>User journey</h2>
+                    <p>The following chart illustrates how a user might navigate through the Campus Art Trail using the app. The user needs and UI affordances are also mapped alongside the journey.</p>
+                    <figure><img src="images/NTU%20Museum/Journey.png" alt="User journey" style="border:0;"></figure>
+                    <figure>
+                        <img src="images/NTU%20Museum/fern.png" alt="Fern by NTU Community, North Spine">
+                        <figcaption>Fern by NTU Community, North Spine</figcaption>
+                    </figure>
+
+                    <h2>Information architecture</h2>
+                    <figure><img src="images/NTU%20Museum/InformationA.png" alt="Information architecture" style="border:0;"></figure>
+
+                    <h2>Key features</h2>
+                    <figure><img src="images/NTU%20Museum/key_features.png" alt="Key features" style="border:0;"></figure>
+
+                    <h2>Logo design</h2>
+                    <p>The iconic octagonal pavilion in the Yunnan Gardens at NTU served as the primary inspiration for the logo, as it represented a strong sense of identity. DIN Universal was chosen as the typeface to align the design with the NTU visual family.</p>
+                    <figure><img src="images/NTU%20Museum/NTU_logo.png" alt="NTU Museum logo" style="border:0;"></figure>
+
+                    <h2>Screens explained</h2>
+                    <div class="ntu-flow-stack">
+                        <img src="images/NTU%20Museum/Flow/NTU_flow_1.png" alt="">
+                        <img src="images/NTU%20Museum/Flow/NTU_flow_2.png" alt="">
+                        <img src="images/NTU%20Museum/Flow/NTU_flow_3.png" alt="">
+                    </div>
+                </div>
+            `,
             4: `
                 <div class="video-list" id="video-list">
                     <div class="video-item">

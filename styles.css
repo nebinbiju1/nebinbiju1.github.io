@@ -1220,11 +1220,22 @@ body.pg-blog .blog-meta {
 }
 
 .blog-content figcaption {
-    font-size: 11px;
-    font-weight: 600;
-    color: #444441;
+    font-family: 'Noto Serif', serif;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: 400;
+    color: #888884;
+    line-height: 1.5;
     margin-top: 8px;
     text-align: center;
+}
+
+.ntu-flow-stack { margin: 24px 0; }
+.ntu-flow-stack img {
+    width: 100%;
+    display: block;
+    border: 0;
+    margin: 0;
 }
 
 .blog-content a { color: #f1629c; text-decoration: none; }
