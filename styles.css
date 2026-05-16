@@ -802,7 +802,7 @@ body.pg-projects { padding: 90px 24px 80px; }
 }
 
 .card:nth-child(1) .card-img { background-image: url('images/remediation_final.png'); }
-.card:nth-child(2) .card-img { background-image: url('images/copilot_search.png'); }
+.card:nth-child(2) .card-img { background-image: url('images/Copilot.png'); }
 .card:nth-child(3) .card-img { background-image: url('images/Exergame.png'); }
 .card:nth-child(4) .card-img { background-image: url('images/code_art.png'); }
 .card:nth-child(5) .card-img { background-image: url('images/Selection.png'); }
