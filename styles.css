@@ -801,7 +801,7 @@ body.pg-projects { padding: 90px 24px 80px; }
     background-repeat: no-repeat;
 }
 
-.card:nth-child(1) .card-img { background-image: url('images/remediation_final.png'); }
+.card:nth-child(1) .card-img { background-image: url('images/remediation_cover.png'); }
 .card:nth-child(2) .card-img { background-image: url('images/Copilot.png'); }
 .card:nth-child(3) .card-img { background-image: url('images/Exergame.png'); }
 .card:nth-child(4) .card-img { background-image: url('images/vibehub.png'); }
