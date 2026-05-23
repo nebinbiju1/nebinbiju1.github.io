@@ -116,7 +116,7 @@ body {
 }
 
 .page {
-    max-width: 760px;
+    max-width: 912px;
     margin: 0 auto;
     padding: 80px 24px 120px;
 }
@@ -488,13 +488,14 @@ body.pg-about {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 100px 24px 100px;
+    padding: 100px 0;
     overflow-x: hidden;
 }
 
 .about-content {
     width: 100%;
-    max-width: 700px;
+    max-width: 760px;
+    padding: 0 24px;
     display: flex;
     flex-direction: column;
     gap: 22px;
@@ -681,7 +682,8 @@ body.pg-about {
 
 .about-contact {
     width: 100%;
-    max-width: 700px;
+    max-width: 760px;
+    padding: 0 24px;
     display: flex;
     flex-direction: column;
     gap: 22px;
@@ -721,6 +723,7 @@ body.pg-about {
 .about-heading {
     width: 100%;
     max-width: 760px;
+    padding: 0 24px;
     margin-bottom: 40px;
     font-family: 'Noto Serif', serif;
     font-size: 32px;
@@ -867,9 +870,24 @@ body.pg-blogs .page { padding-top: 96px; }
 .blog-list { display: flex; flex-direction: column; }
 
 .blog-entry {
-    display: block;
+    display: flex;
+    align-items: flex-start;
+    gap: 32px;
     text-decoration: none;
     padding: 28px 0;
+}
+
+.blog-entry-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.blog-thumb {
+    flex-shrink: 0;
+    width: 220px;
+    height: 150px;
+    object-fit: cover;
+    display: block;
 }
 
 .blog-entry + .blog-entry { border-top: 1px solid #2a2a28; }
@@ -911,11 +929,22 @@ body.pg-blogs .blog-meta {
     color: #888884;
 }
 
+@media (max-width: 900px) {
+    .blog-entry { gap: 24px; }
+    .blog-thumb { width: 180px; height: 124px; }
+}
+
+@media (max-width: 600px) {
+    .blog-thumb { display: none; }
+}
+
 /* -------------------------------------------------- */
 /* page: project                                      */
 /* -------------------------------------------------- */
 
 body.pg-project { color: #666662; }
+
+body.pg-project .page { max-width: 760px; }
 
 .project-header { margin-bottom: 28px; }
 
@@ -1147,6 +1176,8 @@ body.pg-project { color: #666662; }
 /* -------------------------------------------------- */
 
 body.pg-blog { color: #666662; }
+
+body.pg-blog .page { max-width: 760px; }
 
 .blog-header { margin-bottom: 28px; }
 
