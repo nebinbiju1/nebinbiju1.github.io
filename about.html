@@ -65,6 +65,80 @@
         </div>
     </div>
 
+    <div class="about-hub">
+        <div class="hub-grid">
+            <div class="hub-card" data-key="scrapbook">
+                <img class="hub-img" src="images/HUB/scrapbook.png" alt="">
+                <div class="hub-card-text">
+                    <div class="hub-title">I like to journal through scrapbooking</div>
+                    <p class="hub-desc">My scrapbook is a living archive of the places and moments I have collected along the way. My &ldquo;physical Instagram.&rdquo;</p>
+                </div>
+            </div>
+
+            <div class="hub-card" data-key="speak">
+                <img class="hub-img" src="images/HUB/public_speak.png" alt="">
+                <div class="hub-card-text">
+                    <div class="hub-title">Public speaking: A recent <span class="keep-case">phenomenon</span></div>
+                    <p class="hub-desc">What started as a personal challenge has quietly become a craft I genuinely look forward to.</p>
+                </div>
+            </div>
+
+            <div class="hub-card" data-key="volunteer">
+                <img class="hub-img" src="images/HUB/volunteer.png" alt="">
+                <div class="hub-card-text">
+                    <div class="hub-title">Volunteering keeps me grounded</div>
+                    <p class="hub-desc">Giving back through design and community work keeps me socially aware, empathetic, and grounded.</p>
+                </div>
+            </div>
+
+            <div class="hub-card" data-key="paint">
+                <img class="hub-img" src="images/HUB/painting.png" alt="">
+                <div class="hub-card-text">
+                    <div class="hub-title">Drawing and painting to slow down</div>
+                    <p class="hub-desc">Brushstrokes and pencil lines are how I stay present, patient, and fully absorbed in a single moment.</p>
+                </div>
+            </div>
+
+            <div class="hub-card" data-key="trek">
+                <img class="hub-img" src="images/HUB/trekking.png" alt="">
+                <div class="hub-card-text">
+                    <div class="hub-title">Trekking: my annual reset</div>
+                    <p class="hub-desc">An annual escape into the mountains to disconnect, reset, and return with a renewed sense of perspective.</p>
+                </div>
+            </div>
+
+            <div class="hub-card" data-key="photo">
+                <img class="hub-img" src="images/HUB/phtotgraphy.png" alt="">
+                <div class="hub-card-text">
+                    <div class="hub-title">Chasing moments between frames</div>
+                    <p class="hub-desc">Photography, for me, is about preserving the fleeting details and everyday scenes that might otherwise be forgotten.</p>
+                </div>
+            </div>
+
+            <div class="hub-card" data-key="active">
+                <img class="hub-img" src="images/HUB/Active_dive.png" alt="">
+                <div class="hub-card-text">
+                    <div class="hub-title">Activities to keep me alive</div>
+                    <p class="hub-desc">From football to scuba dives, sport and adventure keep me present, curious, and fully alive.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="hub-modal-overlay" id="hub-modal-overlay" aria-hidden="true">
+        <div class="hub-modal" role="dialog" aria-modal="true" aria-labelledby="hub-modal-title">
+            <button class="hub-modal-close" id="hub-modal-close" aria-label="close">
+                <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 2L12 12M12 2L2 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+            <div class="hub-modal-body">
+                <h3 class="hub-modal-title" id="hub-modal-title"></h3>
+                <div class="hub-modal-content" id="hub-modal-content"></div>
+            </div>
+        </div>
+    </div>
+
     <div class="about-contact">
         <h2 class="about-section-title">Always excited to connect, collaborate, and exchange ideas.</h2>
         <p class="about-text">Drop by at <a href="mailto:nebinbiju@gmail.com">nebinbiju@gmail.com</a></p>
@@ -86,6 +160,162 @@
         </a>
         </div>
     </div>
+
+    <script>
+    (function() {
+        const LEFT_TIMES = [
+            '7.35.48','7.38.57','7.41.20',
+            '7.32.12','7.32.32','7.32.50','7.33.02','7.33.20','7.33.35',
+            '7.34.04','7.34.46','7.35.07','7.36.13','7.36.31','7.36.57',
+            '7.37.53','7.39.39'
+        ];
+        const RIGHT_TIMES = [
+            '7.38.26','7.38.40','7.40.14','7.40.24','7.41.57','7.42.08',
+            '7.42.42','7.42.56','7.43.10','7.43.41','7.43.55','7.44.06','7.44.29','7.45.29'
+        ];
+
+        function buildPhotoBento() {
+            const toImg = t => {
+                const file = `Screenshot 2026-06-18 at ${t} PM.png`;
+                return `<img src="images/HUB/Photography/${encodeURIComponent(file)}" alt="" loading="lazy">`;
+            };
+            const flamingo = `<img src="images/HUB/phtotgraphy.png" alt="" loading="lazy">`;
+            const left = LEFT_TIMES.map(toImg).join('');
+            const right = flamingo + RIGHT_TIMES.map(toImg).join('');
+            return `<div class="photo-bento"><div class="photo-col">${left}</div><div class="photo-col">${right}</div></div>`;
+        }
+
+        const ACTIVITY_FILES = [
+            'Screenshot 2026-06-18 at 9.53.16 PM.png',
+            'Screenshot 2026-06-18 at 9.52.15 PM.png',
+            'Screenshot 2026-06-18 at 9.52.31 PM.png',
+            'Screenshot 2026-06-18 at 9.52.43 PM.png',
+            'Screenshot 2026-06-18 at 9.52.57 PM.png',
+            'Screenshot 2026-06-18 at 9.53.52 PM.png'
+        ];
+
+        function buildActivityBento() {
+            const imgs = ACTIVITY_FILES.map(f =>
+                `<img src="images/HUB/Activity/${encodeURIComponent(f)}" alt="" loading="lazy">`
+            );
+            const left = imgs.filter((_, i) => i % 2 === 0).join('');
+            const right = imgs.filter((_, i) => i % 2 === 1).join('');
+            return `<div class="photo-bento"><div class="photo-col">${left}</div><div class="photo-col">${right}</div></div>`;
+        }
+
+        const TREK_FILES = [
+            'Trek_01.png','Trek_02.png','Trek_3.png','Trek_4.png','Trek_5.png','Trek_6.png',
+            'Trek_7.png','Trek_8.png','Trek_9.png','Trek_a.png','Trek_b.png','Trek_c.png',
+            'Trek_d.png','Trek_e.png','Trek_f.png','Trek_g.png',
+            'Screenshot 2026-06-18 at 9.03.06 PM.png'
+        ];
+
+        function buildTrekBento() {
+            const imgs = TREK_FILES.map(f =>
+                `<img src="images/HUB/Trek/${encodeURIComponent(f)}" alt="" loading="lazy">`
+            );
+            const left = imgs.filter((_, i) => i % 2 === 0).join('');
+            const right = imgs.filter((_, i) => i % 2 === 1).join('');
+            return `<div class="photo-bento"><div class="photo-col">${left}</div><div class="photo-col">${right}</div></div>`;
+        }
+
+        const HUB = {
+            scrapbook: {
+                title: 'I like to journal through scrapbooking',
+                img: 'images/HUB/scrapbook.png',
+                content: `<p>My scrapbook is my most treasured possession, a quiet companion that holds pieces of every place I have been. Boarding passes, beer labels, feathers, café bills, train tickets, and anything else that can be pasted on a page.</p>
+<p><a class="medium-link" href="https://medium.com/@nebinbiju/the-ragpicker-of-memories-da432c426e8f" target="_blank" rel="noopener">read more</a></p>
+<figure><img alt="" src="https://cdn-images-1.medium.com/max/1024/1*zAqV6chwvbQvFhK69tcGnQ.png"><figcaption>Scraps from Australia</figcaption></figure>
+<figure><img alt="" src="https://cdn-images-1.medium.com/max/1024/1*rj3HCWWonlpt-SxkVgbaBA.png"><figcaption>Scraps from Italy, France, Switzerland, Denmark, Belgium, and the Netherlands</figcaption></figure>
+<figure><img alt="" src="https://cdn-images-1.medium.com/max/1024/1*mENWkBkxjCYfJPw3lvZfpA.png"><figcaption>Scraps from Nepal, Indonesia and Thailand</figcaption></figure>`
+            },
+            speak: {
+                title: 'Public speaking: A recent phenomenon',
+                img: 'images/HUB/public_speak.png',
+                content: `<p>What started as a challenge to myself has quietly become something I genuinely look forward to. From sharing ideas in small team discussions at work to speaking at one of India's largest design conferences, public speaking has pushed me outside my comfort zone in the best way possible. It has helped me think more critically, communicate with greater clarity, and develop confidence in my own perspective. More than speaking, I've come to appreciate its power to influence people, not through volume, but through thoughtful ideas, compelling stories, and meaningful conversations.</p>
+<figure><img src="images/HUB/public_speak.png" alt=""></figure>
+<figure><img src="images/HUB/Public%20speaking/Screenshot%202026-06-18%20at%208.27.57%20PM.png" alt=""></figure>`
+            },
+            volunteer: {
+                title: 'Volunteering keeps me grounded',
+                img: 'images/HUB/volunteer.png',
+                content: `<p>I believe we have a responsibility to give back to the communities that shape us. Volunteering has introduced me to perspectives, challenges, and stories that I would have otherwise never encountered. It has made me more socially aware, more empathetic, and more appreciative of the privileges I often take for granted.</p>
+<p>One experience that remains particularly close to my heart was designing and building <a href="https://www.behance.net/gallery/68690325/Cheap-and-Easily-replicable-Assistive-Devices-for-ADL" target="_blank" rel="noopener">affordable aids for daily living</a> for children with cerebral palsy. Seeing design improve someone's everyday life reinforced why I chose this profession in the first place. Over the years, I've also contributed to organizations such as the Welfare Association Trust, the UDAAT Foundation, and the Atlassian Foundation, supporting social impact initiatives through design, education, and community engagement. These experiences continue to remind me that good design can create meaningful change beyond products and businesses.</p>
+<figure><img src="images/HUB/Volunteering/Volunteering_1.png" alt=""></figure>
+<figure><img src="images/HUB/Volunteering/Volunteering_2.png" alt=""></figure>
+<figure><img src="images/HUB/Volunteering/Volunteering_3.png" alt=""></figure>
+<figure><img src="images/HUB/Volunteering/Volunteering_4.png" alt=""></figure>
+<figure><img src="images/HUB/Volunteering/Volunteering_5.png" alt=""></figure>`
+            },
+            paint: {
+                title: 'Drawing and painting to slow down',
+                img: 'images/HUB/painting.png',
+                content: `<p>Drawing and painting are my way of being fully present. In a world that often feels rushed, they offer a rare opportunity to focus on a single line, a single brushstroke, and the details that might otherwise go unnoticed. The process is deeply meditative, teaching me patience, concentration, and the value of taking my time.</p>
+<p>It's also where I feel most expressive. Whether working with watercolor, acrylic, or a simple pencil sketch, art gives me the freedom to create without expectations or constraints. It's less about the final artwork and more about the peace, perspective, and joy I find along the way.</p>
+<div class="paint-grid">
+    <figure><img src="images/HUB/Drawing%20and%20painting/DP_1.png" alt=""></figure>
+    <figure><img src="images/HUB/Drawing%20and%20painting/DP_2.png" alt=""></figure>
+    <figure><img src="images/HUB/Drawing%20and%20painting/DP_3.png" alt=""></figure>
+    <figure><img src="images/HUB/Drawing%20and%20painting/DP_4.png" alt=""></figure>
+    <figure><img src="images/HUB/Drawing%20and%20painting/DP_5.png" alt=""></figure>
+    <figure><img src="images/HUB/Drawing%20and%20painting/DP_6.png" alt=""></figure>
+</div>
+<figure><img src="images/HUB/Drawing%20and%20painting/DP_7.png" alt=""><figcaption>My very first exhibition, when I was 5 years old.</figcaption></figure>`
+            },
+            trek: {
+                title: 'Trekking: my annual reset',
+                img: 'images/HUB/trekking.png',
+                content: `<p>The mountains have a way of putting everything into perspective. Every trek leaves me a little more reflective, a little more grateful, and a lot more present. Long days of walking, unpredictable weather, and simple living remind me how little we actually need to be happy and how much we take for granted in everyday life.</p>
+<p>Over the years, I've completed the <span class="highlight">Everest Base Camp</span> and <span class="highlight">Annapurna Base Camp</span> treks, along with several others across the Himalayas. No matter where the trail leads, the experience is always the same: a chance to disconnect from the noise, reconnect with myself, and return with a renewed appreciation for life's small joys. I try to make at least one major trek every year.</p>` + buildTrekBento()
+            },
+            photo: {
+                title: 'Chasing moments between frames',
+                img: 'images/HUB/phtotgraphy.png',
+                content: `<p>Photography, for me, has never been about perfect compositions or technical mastery. It's about preserving moments, the fleeting expressions, quiet details, and everyday scenes that might otherwise be forgotten. Recently, I've been exploring film photography, drawn to its deliberate pace and the anticipation that comes with every frame.</p>` + buildPhotoBento()
+            },
+            active: {
+                title: 'Activities to keep me alive',
+                img: 'images/HUB/Active.png',
+                content: `<p>Football on weekends, sunrise runs, and the occasional game of badminton. Staying active is the quickest way for my body and mind to clear whatever the work week leaves behind.</p>
+<p>Beyond the usual routine, I'm drawn to activities that bring a sense of adventure and curiosity. Whether it's diving beneath the surface while scuba diving, exploring coastlines by kayak, cycling through unfamiliar roads, or awkwardly attempting to stay upright on a surfboard, I enjoy experiences that make me feel present and connected to the world around me. More than fitness, these activities are a reminder to step outside, embrace discomfort, and collect stories along the way.</p>` + buildActivityBento()
+            }
+        };
+
+        const overlay = document.getElementById('hub-modal-overlay');
+        const modalTitle = document.getElementById('hub-modal-title');
+        const modalContent = document.getElementById('hub-modal-content');
+        const closeBtn = document.getElementById('hub-modal-close');
+
+        function openHub(key) {
+            const data = HUB[key];
+            if (!data) return;
+            modalTitle.textContent = data.title;
+            modalContent.innerHTML = data.content;
+            overlay.classList.add('visible');
+            overlay.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+            modalContent.parentElement.scrollTop = 0;
+        }
+
+        function closeHub() {
+            overlay.classList.remove('visible');
+            overlay.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        }
+
+        document.querySelectorAll('.hub-card').forEach(card => {
+            card.addEventListener('click', () => openHub(card.dataset.key));
+        });
+
+        closeBtn.addEventListener('click', closeHub);
+        overlay.addEventListener('click', e => {
+            if (e.target === overlay) closeHub();
+        });
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && overlay.classList.contains('visible')) closeHub();
+        });
+    })();
+    </script>
 
     <script>
     (function() {
