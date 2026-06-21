@@ -1459,9 +1459,13 @@ body.pg-blog .blog-meta {
 .blog-content p {
     font-family: 'Noto Serif', serif;
     font-size: 18px;
-    line-height: 1.5;
+    line-height: 1.65;
     color: #888884;
     margin-bottom: 16px;
+}
+
+@media (max-width: 600px) {
+    .blog-content p { line-height: 1.5; }
 }
 
 .blog-content strong { color: #888884; font-weight: 400; }
