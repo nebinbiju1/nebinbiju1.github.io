@@ -84,6 +84,12 @@
                 desc: 'Intuitive data selection for enterprise scale migrations, enabling confident high-volume data transfer.',
                 tags: ['ux enhancement', 'atlassian', '2023'],
                 color: 'linear-gradient(145deg, #1a2a3a, #1e4d6b)'
+            },
+            {
+                title: 'Dhantrack',
+                desc: 'A web-based financial platform that helps small business owners in India to manage their finances effectively.',
+                tags: ['experiments', 'hack week', '2023'],
+                color: 'linear-gradient(145deg, #1a3a2a, #0d9488)'
             }
         ];
 
@@ -96,7 +102,7 @@
         document.getElementById('proj-title').textContent = proj.title;
         document.getElementById('proj-desc').textContent = proj.desc;
         const dummyEl = document.getElementById('proj-dummy');
-        if (id === 0 || id === 2 || id === 3 || id === 4 || id === 5) {
+        if (id === 0 || id === 2 || id === 3 || id === 4 || id === 5 || id === 6) {
             dummyEl.style.display = 'none';
         } else if (id === 5) {
             dummyEl.style.background = "url('images/Data_selection.png') center/cover no-repeat";
@@ -147,11 +153,19 @@
             return `<img src="https://github.com/nebinbiju1/nebinbiju1.github.io/releases/download/data-selection-v1/${n}.png" style="width:100%;display:block;margin-bottom:16px;" alt="slide ${i+1}">`;
         }).join('');
 
+        const dhantrackImages = [
+            '1.00',
+            ...Array.from({length: 12}, (_, i) => `1.${String(i + 2).padStart(2, '0')}`),
+            ...Array.from({length: 25}, (_, i) => `2.${String(i).padStart(2, '0')}`),
+            ...Array.from({length: 6}, (_, i) => `3.${String(i).padStart(2, '0')}`)
+        ].map((n, i) => `<img src="https://github.com/nebinbiju1/nebinbiju1.github.io/releases/download/dhantrack-v1/${n}.png" style="width:100%;display:block;margin-bottom:16px;" alt="slide ${i+1}">`).join('');
+
         const defaultContent = ``;
 
         const projectContent = {
             0: atlassianImages,
             5: dataSelectionImages,
+            6: dhantrackImages,
             3: `
                 <img src="images/NTU_cover.png" style="width:100%;display:block;" alt="NTU museum app">
                 <div class="blog-content numbered">

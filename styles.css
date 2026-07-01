@@ -1042,10 +1042,11 @@ body.pg-projects { padding: 90px 24px 80px; }
 
 .card:nth-child(1) .card-img { background-image: url('images/remediation_cover.png'); }
 .card:nth-child(2) .card-img { background-image: url('images/Copilot_updated.png'); }
-.card:nth-child(3) .card-img { background-image: url('images/Exergame.png'); }
-.card:nth-child(4) .card-img { background-image: url('images/vibehub.png'); }
+.card:nth-child(3) .card-img { background-image: url('images/vibehub.png'); }
+.card:nth-child(4) .card-img { background-image: url('images/Exergame.png'); }
 .card:nth-child(5) .card-img { background-image: url('images/Selection.png'); }
 .card:nth-child(6) .card-img { background-image: url('images/NTU_cover.png'); background-position: top; }
+.card:nth-child(7) .card-img { background-image: url('images/Dhantrack.png'); }
 
 .card-content { padding: 20px 0 0; }
 
