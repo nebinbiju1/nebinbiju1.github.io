@@ -17,13 +17,21 @@
 
     <div class="page">
 <div class="blog-list">
-            <a class="blog-entry" href="blog.html?id=10">
+            <a class="blog-entry" href="blog.html?id=10" data-pinned>
                 <div class="blog-entry-text">
                     <div class="blog-title">Biomimicry in Generative <span class="keep-case">AI</span></div>
                     <p class="blog-desc">Generative AI is arguably one of the most sophisticated acts of biomimicry humanity has ever attempted.</p>
-                    <p class="blog-meta">may 16, 2026 . 3 min read</p>
+                    <p class="blog-meta">may 16, 2026 . 3 min read . <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width:1em;height:1em;vertical-align:-0.15em;transform:rotate(45deg);transform-origin:center;" aria-label="pinned"><path d="M16 12V4h1V2H7v2h1v8l-2 2v2h5v6h2v-6h5v-2l-2-2Z" /></svg></p>
                 </div>
                 <img class="blog-thumb" src="images/Blogs/AI_and_bimomicry.png" alt="" loading="lazy">
+            </a>
+            <a class="blog-entry" href="blog.html?id=11">
+                <div class="blog-entry-text">
+                    <div class="blog-title">Before chasing dreams</div>
+                    <p class="blog-desc">A return to drawing, sketching, and the physical joy of creating with hands in a world increasingly shaped by pixels and <span class="keep-case">AI</span>.</p>
+                    <p class="blog-meta">aug 5, 2026 . 5 min read</p>
+                </div>
+                <img class="blog-thumb" src="https://cdn-images-1.medium.com/max/1024/0*xacg7QsMC6NaGC7O.png" alt="" loading="lazy">
             </a>
             <a class="blog-entry" href="blog.html?id=0">
                 <div class="blog-entry-text">
@@ -126,6 +134,10 @@
     <script>
         const PROTECTED_BLOG_URL = 'https://drive.google.com/file/d/1-Eai4VYLci3li7cp3m6KxI6ocj4sG5-w/view?usp=sharing';
         const BLOG_PASSWORD = 'nebin';
+
+        const blogList = document.querySelector('.blog-list');
+        const pinnedEntries = blogList.querySelectorAll('.blog-entry[data-pinned]');
+        blogList.prepend(...pinnedEntries);
 
         const overlay = document.getElementById('modal-overlay');
         const input = document.getElementById('modal-input');
