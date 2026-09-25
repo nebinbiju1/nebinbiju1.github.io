@@ -202,6 +202,20 @@ body {
     color: #d4d0cb;
 }
 
+.modal-nda {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.6;
+    color: #d4d0cb;
+}
+
+.modal-nda a {
+    color: #f1629c;
+    text-decoration: none;
+}
+
+.modal-nda a:hover { color: #ff8ab8; }
+
 .modal-sub {
     font-size: 12px;
     font-weight: 600;
