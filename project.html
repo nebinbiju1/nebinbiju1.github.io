@@ -108,7 +108,7 @@
         document.getElementById('proj-title').textContent = proj.title;
         document.getElementById('proj-desc').textContent = proj.desc;
         const dummyEl = document.getElementById('proj-dummy');
-        if (id === 0 || id === 2 || id === 3 || id === 4 || id === 5 || id === 6) {
+        if (id === 0 || id === 2 || id === 3 || id === 4 || id === 5 || id === 6 || id === 7) {
             dummyEl.style.display = 'none';
         } else if (id === 5) {
             dummyEl.style.background = "url('images/Data_selection.png') center/cover no-repeat";
@@ -168,10 +168,390 @@
 
         const defaultContent = ``;
 
+        const proactiveSourceIcons = {
+            time: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 6v6h5"/></svg>',
+            autopilot: '<img src="images/cowork-regular.svg" alt="">',
+            people: '<svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20v-3a6 6 0 0 1 12 0v3M16 5a3 3 0 0 1 0 6M18 14a5 5 0 0 1 3 5v1"/></svg>',
+            alert: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16v.1"/></svg>'
+        };
+        const proactiveCards = [
+            {
+                title: 'Bloom pitch',
+                body: 'Build context on Bloom by understanding Project Spark.',
+                timestamp: '7min ago',
+                sources: ['time', 'autopilot', 'people', 'alert'],
+                taskHeadline: '2 tasks due today',
+                taskDetail: 'revise budget and draft response'
+            },
+            {
+                title: 'Spark retro',
+                body: 'Three themes came out of the retro that need an owner before Friday.',
+                timestamp: '24min ago',
+                sources: ['time', 'autopilot', 'alert'],
+                taskHeadline: '3 themes need owners',
+                taskDetail: 'assign them before Friday'
+            },
+            {
+                title: 'Budget thread',
+                body: 'Finance replied on the FY27 numbers and is waiting on your read.',
+                timestamp: '1hr ago',
+                sources: ['autopilot', 'alert'],
+                taskHeadline: '1 reply waiting',
+                taskDetail: 'finance needs your read on FY27'
+            },
+            {
+                title: 'Launch review',
+                body: "Notes from this morning's review are ready to turn into a plan.",
+                timestamp: '2hr ago',
+                sources: ['time', 'autopilot', 'people', 'alert'],
+                taskHeadline: '4 notes to triage',
+                taskDetail: "turn this morning's review into a plan"
+            },
+            {
+                title: 'Partner sync',
+                body: "Two partners asked for the revised timeline after yesterday's sync.",
+                timestamp: '3hr ago',
+                sources: ['time', 'autopilot', 'alert'],
+                taskHeadline: '2 partners waiting',
+                taskDetail: 'send the revised timeline'
+            },
+            {
+                title: 'Research digest',
+                body: "This week's customer interviews point at the same onboarding gap.",
+                timestamp: '5hr ago',
+                sources: ['autopilot', 'alert'],
+                taskHeadline: '5 interviews summarised',
+                taskDetail: 'one onboarding gap to close'
+            }
+        ];
+
+        const workiqPulseLayers = Array.from({ length: 12 }, (_, index) => ({
+            length: 24 - index * 2,
+            opacity: 0.025 + 0.325 * (index / 11) ** 2
+        }));
+
+        const renderProactiveCardTrack = prefix => `
+            <ul class="proactive-card-track" id="${prefix}-track" aria-label="Suggested tasks">
+                ${proactiveCards.map((card, index) => `
+                    <li class="proactive-task" style="--prompt-delay: -${((6 - index) % 6) * 2.6}s">
+                        <div class="proactive-prompt-card" role="group" aria-labelledby="${prefix}-title-${index}" aria-describedby="${prefix}-summary-${index}">
+                            <h2 id="${prefix}-title-${index}">${card.title}</h2>
+                            <div class="proactive-source-icons" aria-hidden="true">${card.sources.map(source => proactiveSourceIcons[source]).join('')}</div>
+                            <p>${card.body}</p>
+                            <p class="proactive-card-time">${card.timestamp}</p>
+                        </div>
+                        <div class="proactive-task-summary" id="${prefix}-summary-${index}">
+                            <p class="proactive-task-headline">${card.taskHeadline}</p>
+                            <p>${card.taskDetail}</p>
+                        </div>
+                    </li>
+                `).join('')}
+            </ul>
+        `;
+
         const projectContent = {
             0: atlassianImages,
             5: dataSelectionImages,
             6: dhantrackImages,
+            7: `
+                <section class="proactive-overview blog-content" aria-label="Project overview">
+                    <dl class="proactive-project-facts">
+                        <div>
+                            <dt>Duration</dt>
+                            <dd>1 month</dd>
+                        </div>
+                        <div>
+                            <dt>Role</dt>
+                            <dd>Owner</dd>
+                        </div>
+                        <div>
+                            <dt>Status</dt>
+                            <dd>Shipped</dd>
+                        </div>
+                    </dl>
+                </section>
+                <section class="proactive-preview" aria-labelledby="proactive-preview-title">
+                    <header class="blog-content">
+                        <h2 id="proactive-preview-title">1. Here&rsquo;s a sneak peek</h2>
+                    </header>
+                    ${renderProactiveCardTrack('proactive-card')}
+                </section>
+                <div class="blog-content">
+                    <h2>2. Now let&rsquo;s understand the context</h2>
+                </div>
+                <section class="proactive-story" aria-label="Mona's morning">
+                    <div class="proactive-story-copy blog-content">
+                        <h3>It&rsquo;s 9:41 AM, Wednesday</h3>
+                        <p>Mona unlocks her phone.</p>
+                        <div>
+                            <p>Her day has already started without her.</p>
+                            <ul>
+                                <li>41 unread emails</li>
+                                <li>3 meetings before noon</li>
+                                <li>A client waiting on a revised deck</li>
+                                <li>Two Cowork tasks, half-done</li>
+                            </ul>
+                        </div>
+                        <p class="proactive-story-question"><em>Where does she even begin?</em></p>
+                        <details>
+                            <summary>Who is Mona?</summary>
+                            <p>Mona (34, she/her) is a <strong>high-performing enterprise seller</strong> responsible for managing key customer relationships and a complex sales pipeline.</p>
+                            <p>She relies on <strong>timely and actionable insights</strong> to prioritize her day, mitigate risks, and accelerate deal velocity.</p>
+                            <p>Her company uses Microsoft 365 Copilot for work</p>
+                        </details>
+                        <h3>Today, Copilot waits</h3>
+                        <figure class="proactive-current-composition">
+                            <img class="proactive-current-screen" src="images/proactive-home-current.png" width="768" height="1670" alt="Copilot's dark-themed mobile home asks What's on your mind today? and offers Your day at a glance, Fetch latest info, and Help me prepare, waiting for the user to start." loading="lazy">
+                        </figure>
+                        <p>Copilot opens to a blank canvas without context, leaving users to figure out what matters and where to begin.</p>
+                        <details>
+                            <summary>What are the users saying?</summary>
+                            <blockquote><p>&ldquo;Every morning I spend the first 20 minutes figuring out what needs my attention before I can actually start working.&rdquo;</p></blockquote>
+                            <blockquote><p>&ldquo;I spend too much time preparing to work and not enough time actually working.&rdquo;</p></blockquote>
+                            <blockquote><p>&ldquo;I don&rsquo;t need more notifications. I need clarity.&rdquo;</p></blockquote>
+                            <blockquote><p>&ldquo;It&rsquo;s the same question everyday! What&rsquo;s important? What&rsquo;s changed? What should I focus on?&rdquo;</p></blockquote>
+                        </details>
+                        <h3>But Mona&rsquo;s work already has a shape</h3>
+                        <p>Courtesy: <span class="highlight">WorkIQ</span></p>
+                        <div class="workiq-flow">
+                            <svg class="workiq-diagram" id="workiq-diagram" viewBox="0 0 800 320" role="img" aria-labelledby="workiq-flow-title workiq-flow-desc">
+                                <title id="workiq-flow-title">WorkIQ connects Mona's work to Copilot</title>
+                                <desc id="workiq-flow-desc">Calendar, chat, and email signals flow along three converging paths into Copilot. Copilot's ring lights up as each signal arrives.</desc>
+                                <defs>
+                                    <path id="workiq-calendar-route" pathLength="100" d="M132 55H310C400 55 400 160 490 160H673"/>
+                                    <path id="workiq-chat-route" pathLength="100" d="M132 160H673"/>
+                                    <path id="workiq-email-route" pathLength="100" d="M132 265H310C400 265 400 160 490 160H673"/>
+                                </defs>
+                                <g class="workiq-connections">
+                                    <use href="#workiq-calendar-route"/>
+                                    <use href="#workiq-chat-route"/>
+                                    <use href="#workiq-email-route"/>
+                                </g>
+                                <g class="workiq-nodes">
+                                    <circle cx="100" cy="55" r="32"/>
+                                    <circle cx="100" cy="160" r="32"/>
+                                    <circle cx="100" cy="265" r="32"/>
+                                    <circle cx="720" cy="160" r="47"/>
+                                </g>
+                                <g class="workiq-pulses">
+                                    ${['calendar', 'chat', 'email'].map(source => `
+                                        <g class="workiq-signal">
+                                            ${workiqPulseLayers.map(layer => `
+                                                <use class="workiq-pulse" href="#workiq-${source}-route" style="--pulse-length: ${layer.length}; --pulse-opacity: ${layer.opacity}"/>
+                                            `).join('')}
+                                            <circle class="workiq-receiver-glow" cx="720" cy="160" r="47"/>
+                                        </g>
+                                    `).join('')}
+                                </g>
+                                <g class="workiq-source-glyphs">
+                                    <rect x="88" y="43" width="24" height="24" rx="3"/>
+                                    <path d="M88 49H112M95 55H96M103 55H104M95 61H96M103 61H104"/>
+                                    <path d="M113 159a13 13 0 0 1-18 12l-8 2 2-8a13 13 0 1 1 24-6ZM95 156H105M95 162H102"/>
+                                    <rect x="87" y="255" width="26" height="20" rx="3"/>
+                                    <path d="M88 258L100 266 112 258"/>
+                                </g>
+                                <g class="workiq-copilot-glyph" transform="translate(696 136) scale(1.5)">
+                                    <path d="M11.109 23.5639L11.5 22H14.0841C16.0916 22 17.8415 20.6337 18.3284 18.6861L20.5 10H25.3966C28.2428 10 30.3312 12.6748 29.6409 15.4361L27.3546 24.5815C26.7054 27.1783 24.3722 29 21.6954 29H15.3534C12.5071 29 10.4187 26.3252 11.109 23.5639Z"/>
+                                    <path d="M20.891 8.43609L20.5 10H17.9159C15.9084 10 14.1585 11.3663 13.6716 13.3139L11.5 22H6.60344C3.75719 22 1.66875 19.3252 2.35907 16.5639L4.64541 7.41854C5.29461 4.82173 7.62785 3 10.3046 3H16.6466C19.4929 3 21.5813 5.67483 20.891 8.43609Z"/>
+                                </g>
+                                <g class="workiq-connection-dots">
+                                    <circle cx="132" cy="55" r="4"/>
+                                    <circle cx="132" cy="160" r="4"/>
+                                    <circle cx="132" cy="265" r="4"/>
+                                    <circle cx="673" cy="160" r="4"/>
+                                </g>
+                            </svg>
+                        </div>
+                        <details>
+                            <summary>What is WorkIQ?</summary>
+                            <p>WorkIQ is the intelligence layer behind Microsoft 365 Copilot that connects signals from your emails, meetings, chats, and documents to understand your work context, helping Copilot deliver more relevant insights and assistance while respecting existing permissions.</p>
+                            <p><a href="https://www.microsoft.com/en-us/copilot/features/work-iq">Learn more about WorkIQ</a></p>
+                        </details>
+                        <h3>Why Microsoft can win</h3>
+                        <ul>
+                            <li>Personal Work IQ</li>
+                            <li>Enterprise awareness</li>
+                            <li>Agentic</li>
+                            <li>Generative not static</li>
+                            <li>Best in class security</li>
+                        </ul>
+                        <p class="proactive-announcement-date"><span class="highlight">Also, on <time datetime="2026-09-26">26 Sept 2026</time></span></p>
+                        <figure>
+                            <img src="images/proactive-home-copilot-keynote.png" width="1000" height="667" style="height:auto;border:0;" alt="A speaker onstage in front of a colorful Copilot logo." loading="lazy">
+                        </figure>
+                        <blockquote>
+                            <p>&ldquo;Microsoft unveils Copilot super app, targeting business users with AI agents&rdquo;</p>
+                        </blockquote>
+                        <h3 class="proactive-brief-heading">So, the brief became...</h3>
+                        <p class="proactive-brief-statement">We don't just answer your day.<br><span class="highlight">We hand it to you.</span></p>
+                        <h3>... and the users would want to</h3>
+                        <div class="proactive-jobs">
+                            <section>
+                                <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+                                    <path d="M38 38H10V9a4 4 0 0 1 4-4H34a4 4 0 0 1 4 4ZM10 38V39a4 4 0 0 0 4 4H38M29 16c0-6-10-6-10 0 0 3 5 3 5 6v2"/>
+                                    <circle cx="24" cy="30" r="1.8" fill="currentColor" stroke="none"/>
+                                </svg>
+                                <h4>Understand</h4>
+                                <p>When I start my day, help me quickly understand my work landscape so I can orient myself without manually checking multiple tools.</p>
+                            </section>
+                            <section>
+                                <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+                                    <path d="M24 3V15M18 9L24 15 30 9M24 45V33M18 39L24 33 30 39M3 24H15M9 18L15 24 9 30M45 24H33M39 18L33 24 39 30"/>
+                                </svg>
+                                <h4>Prioritise</h4>
+                                <p>When my attention is fragmented across meetings, messages and documents, help me identify the few things that deserve focus.</p>
+                            </section>
+                            <section>
+                                <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+                                    <path d="M8 20H40V37a6 6 0 0 1-6 6H14a6 6 0 0 1-6-6Z"/>
+                                    <g transform="rotate(-16 8 20)">
+                                        <rect x="8" y="12" width="32" height="8" rx="3"/>
+                                        <path d="M18 12L13 20M28 12L23 20M37 12L32 20"/>
+                                    </g>
+                                </svg>
+                                <h4>Act</h4>
+                                <p>When I know what matters, help me take action immediately without switching context.</p>
+                            </section>
+                        </div>
+                        <details>
+                            <summary>Engagement loop</summary>
+                        <div class="engagement-loop" role="group" aria-label="Engagement loop: Trigger, Understand, Action, Reward" style="--signal-duration: 5s;">
+                            <section class="engagement-trigger">
+                                <h4>Trigger</h4>
+                                <p>How do I know?<br>Notifications</p>
+                                <ul>
+                                    <li>Implicit (Push notifications)</li>
+                                    <li>Explicit (A module, memorise)</li>
+                                </ul>
+                            </section>
+                            <section class="engagement-understand">
+                                <h4>Understand</h4>
+                                <p>What is the information?</p>
+                                <ul>
+                                    <li>Consumable content</li>
+                                    <li>Context aware</li>
+                                    <li>Connection</li>
+                                </ul>
+                            </section>
+                            <svg class="engagement-diagram" viewBox="0 0 800 480" role="img" aria-labelledby="engagement-diagram-title engagement-diagram-desc">
+                                <title id="engagement-diagram-title">A clockwise engagement loop</title>
+                                <desc id="engagement-diagram-desc">A signal enters from the left, travels right toward Understand, curves clockwise down through Action and Reward, and returns upward to Trigger.</desc>
+                                <defs>
+                                    <path id="engagement-route" pathLength="100" d="M24 35H400C510 35 600 125 600 235S510 435 400 435 200 345 200 235V105"/>
+                                </defs>
+                                <use class="engagement-route" href="#engagement-route"/>
+                                <g class="workiq-pulses" aria-hidden="true">
+                                    ${workiqPulseLayers.map(layer => `
+                                        <use class="workiq-pulse" href="#engagement-route" style="--pulse-length: ${layer.length}; --pulse-opacity: ${layer.opacity}"/>
+                                    `).join('')}
+                                </g>
+                                <g class="engagement-arrows">
+                                    <path d="M182 123L200 105 218 123"/>
+                                </g>
+                                <g class="engagement-sunrise" transform="translate(400 235)">
+                                    <path d="M-26 10a28 28 0 1 1 52 0M-52 10H52M-32 28H32M-10 45H10M0-52V-42M-38-38L-31-31M38-38L31-31"/>
+                                </g>
+                            </svg>
+                            <section class="engagement-action">
+                                <h4>Action</h4>
+                                <p>What to do with the information?</p>
+                                <ul>
+                                    <li>Actionable (Chat, Choice)</li>
+                                    <li>Agentic (Agent, Generative, Cowork)</li>
+                                </ul>
+                            </section>
+                            <section class="engagement-reward">
+                                <h4>Reward</h4>
+                                <p>How can I benefit</p>
+                                <ul>
+                                    <li>Richer and faster</li>
+                                    <li>Completeness</li>
+                                    <li>Contextual</li>
+                                    <li>Future proofing</li>
+                                </ul>
+                            </section>
+                        </div>
+                        </details>
+                        <h2>3. Whiteboard and vibecode</h2>
+                        <figure>
+                            <img src="images/proactive-home-ideas.png" width="1188" height="768" style="height:auto;border:0;" alt="Exploration board of proactive home ideas, including contextual task cards, daily summaries, widgets, and quick actions, with playful yet familiar productivity references." loading="lazy">
+                            <figcaption>Ideas explored: contextual cards, daily summaries, and quick actions to make Copilot feel proactive, familiar, and playfully serious across life and work.</figcaption>
+                        </figure>
+                        <h3>AI-assisted workflow</h3>
+                        <p>I started by ideating in Figma, exploring layouts, contextual cards, and interaction directions. With Figma MCP, I brought that design context into VS Code so the AI coding assistant could reference the designs while helping me build working SwiftUI prototypes. I then built and ran the app through Xcode and the iOS Simulator to check how those ideas felt in a native experience.</p>
+                        <figure>
+                            <img src="images/proactive-home-ai-workflow.png" width="1266" height="768" style="height:auto;border:0;" alt="VS Code with an AI coding assistant alongside an iPhone Simulator running the proactive Copilot home prototype." loading="lazy">
+                            <figcaption>From ideation in Figma, through Figma MCP and AI-assisted coding in VS Code, to a native prototype built with Xcode and explored in the iOS Simulator.</figcaption>
+                        </figure>
+                        <p>This shortened the loop between exploring an idea and trying it out, with less manual translation between design and code. Rather than judging static screens alone, I could evaluate motion, gestures, and content in context, compare alternatives, and take those learnings back into Figma before refining the prototype. AI helped with implementation; I drove the design decisions and reviewed the result in the running app.</p>
+                        <h3>Exploring motion and transition for the selected ideas</h3>
+                        <div class="proactive-motion-studies" role="group" aria-label="Three animated motion studies: vertical carousel, card swipes, and focused carousel.">
+                            ${[
+                                { mode: 'vertical', title: '1. Vertical carousel', description: 'Cards glide upward through a vertical carousel, with the centered card emphasized and neighboring cards visible above and below.' },
+                                { mode: 'swipe', title: '2. Card swipes', description: 'Cards flick left and right with a Tinder-like rotation, revealing the next card in the stack.' },
+                                { mode: 'carousel', title: '3. Focused carousel', description: 'The opening carousel transition: the centered card grows while neighboring cards tilt and recede.' }
+                            ].map(study => `
+                                <figure class="proactive-motion-study">
+                                    <div class="motion-phone" role="img" aria-label="${study.description}">
+                                        <img class="motion-phone-reference" src="images/proactive-home-motion-base.png" width="768" height="1508" alt="" loading="lazy">
+                                        <div class="motion-phone-ui" aria-hidden="true">
+                                            <div class="motion-phone-body">
+                                                <p class="motion-phone-greeting">Hello Mona,<br>ready to start?</p>
+                                                <div class="motion-card-stage motion-card-stage-${study.mode}">
+                                                    ${Array.from({ length: study.mode === 'swipe' ? 3 : 6 }, (_, index) => `
+                                                        <div class="motion-blank-card" style="--prompt-delay: -${((6 - index) % 6) * 2.6}s; --swipe-delay: -${((3 - index) % 3) * 3}s; --swipe-direction: ${index % 2 === 0 ? 1 : -1};"></div>
+                                                    `).join('')}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <figcaption>${study.title}</figcaption>
+                                </figure>
+                            `).join('')}
+                        </div>
+                        <p>We selected option 3, the focused carousel, because it aligned with the broader &ldquo;One Copilot&rdquo; brand direction: a cohesive experience with a shared interaction language.</p>
+                        <p>It balanced usability and scalability, keeping one suggestion in focus while making the next easy to discover, with a card system that could accommodate different types of proactive content. The motion felt playful yet elegant, bringing personality to the experience without distracting from the work at hand.</p>
+                        <h3>Card framework and detailing</h3>
+                        <h4 class="proactive-card-subheading">Home cards</h4>
+                        <p>I explored different approaches to home cards, varying the balance of text, imagery, contextual cues, and actions. These explorations helped shape a flexible card framework: enough information to understand why a suggestion matters at a glance, with a clear next step and room to adapt to different types of content.</p>
+                        <figure>
+                            <img src="images/proactive-home-card-explorations.svg" width="1328" height="386" style="height:auto;border:0;" alt="Six dark-themed home card explorations comparing text-only and illustrated layouts, contextual icons, people and app cues, timestamps, an attention label, and View actions." loading="lazy">
+                        </figure>
+                        <p>With the framework in place, I sweated the details: how cards behave as a group, how the experience supports accessibility, and how the layouts adapt to localisation. The focus shifted from individual cards to a cohesive system that works across different content, languages, and user needs.</p>
+                        <figure>
+                            <img src="images/proactive-home-card-details.svg" width="736" height="982" style="height:auto;border:0;" alt="Dark-themed card framework showing shadows, 3- and 5-degree tilted cards at 50% opacity, focused and neighboring card states, and Arabic, German, and Chinese localisation examples." loading="lazy">
+                        </figure>
+                        <p>The moving cards were complemented by &ldquo;things to know&rdquo; beneath them, with supporting context transitioning in step with each suggestion. This seamless pairing made efficient use of space, maintained visual balance, and surfaced relevant information without crowding the cards.</p>
+                    </div>
+                    <section class="proactive-preview" aria-label="Home cards with supporting things to know">
+                        ${renderProactiveCardTrack('proactive-detail-card')}
+                    </section>
+                    <div class="proactive-story-copy blog-content">
+                        <h4 class="proactive-card-subheading">Action cards</h4>
+                        <p>Designed around clear next steps, action cards scale across a wide range of work and life scenarios, helping people act quickly across products.</p>
+                        <figure>
+                            <img src="images/proactive-home-action-cards.svg" width="946" height="459" style="height:auto;border:0;" alt="Action card design explorations for proactive Copilot home." loading="lazy">
+                        </figure>
+                        <figure>
+                            <img src="images/proactive-home-action-card-variants.svg" width="946" height="557" style="height:auto;border:0;" alt="Action card design variants for proactive Copilot home." loading="lazy">
+                        </figure>
+                        <h3>Information architecture and navigation</h3>
+                        <p>The initial recommendation was to introduce the experience as a standalone module called &ldquo;Today&rdquo; in the side navigation, with the potential to evolve into the homepage based on user feedback.</p>
+                        <figure>
+                            <img class="proactive-ia-screen" src="images/proactive-home-information-architecture.svg" width="1137" height="1057" style="height:auto;border:0;" alt="Dark-themed Copilot screens showing Today in the side navigation and the navigation menu on the Today screen." loading="lazy">
+                        </figure>
+                        <h2>4. Final show</h2>
+                        <div class="proactive-final-video">
+                        <video src="https://github.com/nebinbiju1/nebinbiju1.github.io/releases/download/slides-v1/proactive-home-final.mov" controls playsinline preload="metadata" aria-label="Final proactive Copilot home prototype walkthrough">
+                            Your browser does not support embedded video. <a href="https://github.com/nebinbiju1/nebinbiju1.github.io/releases/download/slides-v1/proactive-home-final.mov">Download the prototype walkthrough</a>.
+                        </video>
+                        </div>
+                        <h2>5. Closing thoughts</h2>
+                        <p>Mobile is often about catching up rather than creating. Proactive suggestions can make brief moments useful, helping people stay informed during a commute or prepare for the next day.</p>
+                        <p>Designing through code made interactions tangible, accelerated iteration, and helped stakeholders validate the experience beyond static screens.</p>
+                    </div>
+                </section>
+            `,
             3: `
                 <img src="images/NTU_cover.png" style="width:100%;display:block;" alt="NTU museum app">
                 <div class="blog-content numbered">
@@ -693,6 +1073,35 @@
         };
 
         document.getElementById('proj-content').innerHTML = projectContent[id] || defaultContent;
+
+        if (id === 7) {
+            document.querySelectorAll('.workiq-signal').forEach(signal => {
+                const duration = 1.8 + Math.random() * 0.8;
+                signal.style.setProperty('--signal-duration', `${duration}s`);
+                signal.style.setProperty('--signal-delay', `${-Math.random() * duration * 0.3}s`);
+            });
+            const animatedSections = [
+                ...document.querySelectorAll('.proactive-preview'),
+                document.querySelector('.workiq-flow'),
+                document.querySelector('.engagement-loop'),
+                document.querySelector('.proactive-motion-studies')
+            ];
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    entry.target.classList.toggle('is-offscreen', !entry.isIntersecting);
+                });
+            });
+            animatedSections.forEach(element => {
+                observer.observe(element);
+            });
+            const updateVisibility = () => {
+                animatedSections.forEach(element => {
+                    element.classList.toggle('is-hidden', document.hidden);
+                });
+            };
+            document.addEventListener('visibilitychange', updateVisibility);
+            updateVisibility();
+        }
 
         // Click-to-load YouTube facade for project 4
         if (id === 4) {
