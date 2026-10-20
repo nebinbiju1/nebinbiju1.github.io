@@ -42,7 +42,7 @@ There is no CMS, JSON, or markdown content store. To add or edit a project/blog,
 - **Projects** — the `projects` array at [project.html:50](project.html#L50) holds title/desc/tags/color, and the `projectContent` object further down (around [project.html:148](project.html#L148)) holds the per-id HTML body keyed by numeric id. The [projects.html](projects.html) listing has its own hardcoded `<a class="card">` block per project, which must be added in parallel.
 - **Blogs** — the `POSTS` array at [blog.html:47](blog.html#L47) holds full post content as HTML strings. Listing cards in [blogs.html](blogs.html) are likewise hardcoded.
 
-Adding a new project/blog requires updating **both** the listing page and the detail page's data array. Ids in the URL (`?id=N`) are array indices, so reordering changes URLs.
+Adding a new project/blog requires updating **both** the listing page and the detail page's data array. Project URLs are resolved by the explicit `projectRoutes` map in [project.html](project.html): public projects retain numeric identifiers, while protected projects use random 32-character hexadecimal identifiers. Old numeric identifiers for protected projects, missing identifiers, and invalid identifiers show "Project not found" rather than defaulting to a project. Keep listing `data-href` values and password-map keys in sync with these routes. Blog identifiers remain array indices. Preserve existing route mappings when editing or reordering content.
 
 ### Heavy slide assets are hosted on GitHub Releases, not in the repo
 
@@ -51,6 +51,8 @@ For image-heavy projects (Atlassian id=0, Data selection id=5), [project.html](p
 ### Password-gated projects
 
 In [projects.html](projects.html), cards intended to be gated use `data-href` instead of `href`. The `passwords` object (around [projects.html:133](projects.html#L133)) maps `data-href` → plaintext password. A click intercept shows the modal in `#modal-overlay` and only navigates after the password matches. This is **client-side only** — it deters casual visitors, not anyone reading the source. Don't treat it as security.
+
+Random project identifiers deter URL guessing only: the identifiers, passwords, case-study content, and release assets remain publicly discoverable. NDA cards retain their contact-only modal. Actual confidentiality requires authenticated hosting or server-side access control, not longer URLs.
 
 ### Project detail page behavior
 

@@ -48,6 +48,7 @@
 
 
     <script>
+        function renderProject() {
         const projects = [
             {
                 title: 'Remediation in data migration',
@@ -100,7 +101,25 @@
         ];
 
         const params = new URLSearchParams(window.location.search);
-        const id = parseInt(params.get('id')) || 0;
+        const projectRoutes = new Map([
+            ['9815cb3c63d93b18452bd4d5999337e3', 0],
+            ['beb859c944e5d6daa244cf5f066b28dc', 1],
+            ['2', 2],
+            ['3', 3],
+            ['4', 4],
+            ['686db53b0b58ae3e570064a17da447d0', 5],
+            ['6', 6],
+            ['453aea3100e61c3ac4b76054db83d880', 7]
+        ]);
+        const requestedIds = params.getAll('id');
+        const id = requestedIds.length === 1 ? projectRoutes.get(requestedIds[0]) : undefined;
+        if (id === undefined) {
+            document.title = 'Project not found - Nebin Biju';
+            document.getElementById('proj-title').textContent = 'Project not found';
+            document.getElementById('proj-desc').textContent = 'This project link is unavailable. Return to projects to explore the portfolio.';
+            document.getElementById('proj-dummy').hidden = true;
+            return;
+        }
         const proj = projects[id];
 
         // Fill content
@@ -1126,6 +1145,8 @@
             });
         }
 
+        }
+        renderProject();
     </script>
 </body>
 </html>
