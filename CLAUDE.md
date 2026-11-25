@@ -8,6 +8,11 @@ Nebin Biju's personal portfolio — a static HTML/CSS/JS site deployed to GitHub
 
 ## Local development
 
+See [README.md](README.md) for setup on another machine, the editing workflow,
+deployment verification, and the distinction between published assets and
+original source recordings. Shared assistant entry points are [AGENTS.md](AGENTS.md)
+and [.github/copilot-instructions.md](.github/copilot-instructions.md).
+
 Open files directly in the browser, or serve from the repo root if you need relative paths and query params to behave normally:
 
 ```sh
