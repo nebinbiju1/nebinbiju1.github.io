@@ -97,6 +97,12 @@
                 desc: 'Reimagining the Copilot mobile home as a proactive assistant that helps you stay ahead.',
                 tags: ['vision', 'microsoft', '2026'],
                 color: 'linear-gradient(145deg, #1a3a6b, #2563eb)'
+            },
+            {
+                title: 'Copilot in iPhone Duo',
+                desc: 'Optimizing Copilot’s information architecture and navigation for iPhone Duo from day one',
+                tags: ['launch version', 'building in code', 'microsoft', '2026'],
+                color: 'linear-gradient(145deg, #1a3a6b, #2563eb)'
             }
         ];
 
@@ -109,7 +115,8 @@
             ['4', 4],
             ['686db53b0b58ae3e570064a17da447d0', 5],
             ['6', 6],
-            ['453aea3100e61c3ac4b76054db83d880', 7]
+            ['453aea3100e61c3ac4b76054db83d880', 7],
+            ['80609bb1473e85ec5ffe37c65ab7ba93', 8]
         ]);
         const requestedIds = params.getAll('id');
         const id = requestedIds.length === 1 ? projectRoutes.get(requestedIds[0]) : undefined;
@@ -127,7 +134,7 @@
         document.getElementById('proj-title').textContent = proj.title;
         document.getElementById('proj-desc').textContent = proj.desc;
         const dummyEl = document.getElementById('proj-dummy');
-        if (id === 0 || id === 2 || id === 3 || id === 4 || id === 5 || id === 6 || id === 7) {
+        if (id === 0 || id === 2 || id === 3 || id === 4 || id === 5 || id === 6 || id === 7 || id === 8) {
             dummyEl.style.display = 'none';
         } else if (id === 5) {
             dummyEl.style.background = "url('images/Data_selection.png') center/cover no-repeat";
@@ -272,6 +279,77 @@
             0: atlassianImages,
             5: dataSelectionImages,
             6: dhantrackImages,
+            8: `
+                <img src="images/iPhone_Duo.png" style="width:100%;display:block;margin-bottom:36px;" alt="Copilot navigation and home on iPhone Duo held in landscape orientation">
+                <div class="blog-content">
+                    <h2>Context</h2>
+                    <p>A new form factor opens up new ways to interact. With the announcement of iPhone Duo on September 9, 2026, Copilot needed more than a stretched phone layout. It needed an experience designed for fold, half fold, portrait, landscape, ready for launch on October 23.</p>
+                    <p>I designed the information architecture and navigation for Copilot’s first release on iPhone Duo, establishing the foundation for this new form factor. The challenge was to create seamless ways for people to move between chat, content, and context as the device folded and unfolded.</p>
+                    <p>With no physical device available for testing. Using <strong>Xcode 27.1</strong> beta, I led a simulator led design workflow where we ideated and tested natively and implemented the transitions and motion directly in code, ensuring what shipped was true to what we designed.</p>
+                    <p>Copilot was one of the very few apps, that worked seamlessly for duo from day 1.</p>
+                    <h2>A week after announcement</h2>
+                    <p>Through our close collaboration with Apple, we got an early look at Copilot running on iPhone Duo. When the team tested the existing build on the device, this is what we saw</p>
+                    <img src="images/iphone-duo-existing-build.png" style="width:100%;display:block;" alt="The existing Copilot build on an unfolded iPhone Duo, with a narrow layout and unused space on both sides">
+                    <p>But with limited access to the device, designing and iterating directly on the hardware wasn’t always possible.</p>
+                    <h2>Challenges</h2>
+                    <p>Designing for an entirely new form factor meant navigating several unknowns:</p>
+                    <ul>
+                        <li>New form factor within iOS</li>
+                        <li>New interaction patterns and transitions</li>
+                        <li>Limited access to the physical device</li>
+                        <li>No direct references or established patterns to design from</li>
+                    </ul>
+                    <p>Apple provided guidelines for the new form factor, but the real design challenge was understanding how Copilot’s custom components should evolve with it. For an AI experience built to operate at scale, we needed to define thoughtful treatments for a transition-heavy experience, ensuring every interaction felt natural on Duo</p>
+                    <figure>
+                        <img src="images/iphone-duo-orientations.svg" style="width:100%;display:block;" alt="iPhone Duo form factors and device orientations">
+                        <figcaption>Six unique orientations in iPhone Duo</figcaption>
+                    </figure>
+                    <h3>More on Apple’s Guidelines for Designing for Duo</h3>
+                    <p>More on Apple guidelines while <a href="https://developer.apple.com/design/human-interface-guidelines/designing-for-iphone-duo" target="_blank" rel="noopener">Designing for Duo</a>.</p>
+                    <figure>
+                        <img src="images/iphone-duo-native-controls-1.svg" style="width:100%;display:block;border:0;" alt="Native control rearrangement on iPhone Duo, example 1">
+                        <img src="images/iphone-duo-native-controls-2.svg" style="width:100%;display:block;border:0;" alt="Native control rearrangement on iPhone Duo, example 2">
+                        <img src="images/iphone-duo-native-controls-3.svg" style="width:100%;display:block;border:0;" alt="Native control rearrangement on iPhone Duo, example 3">
+                    </figure>
+                    <h2>How I approached this as a designer</h2>
+                    <figure>
+                        <img src="images/iphone-duo-early-exploration.png" style="width:100%;display:block;border:0;" alt="A chat with a coworker exploring early iPhone Duo interaction patterns">
+                        <figcaption>A cute little snippet of me and a coworker figuring out Duo patterns early on from the launch video.</figcaption>
+                    </figure>
+                    <p>With a tight timeline and limited access to the device, I developed a simulator-led design process that let me rapidly design, test, and iterate natively, helping us deliver a seamless Copilot experience on Duo from day one. Here’s what that process looked like.</p>
+                    <figure>
+                        <img src="images/iphone-duo-process.svg" style="width:100%;display:block;border:0;" alt="Simulator-led design process for Copilot on iPhone Duo">
+                    </figure>
+                    <h3>1. Design draft</h3>
+                    <p>The process began in Figma, where I explored the experience across Duo orientations, defining how layouts, components, and interactions should adapt between device states.</p>
+                    <figure>
+                        <img src="images/iphone-duo-figma-design.gif" style="width:100%;display:block;border:0;" alt="Figma exploration of Copilot layouts, components, and interactions across iPhone Duo orientations">
+                    </figure>
+                    <h3>2. Edit code</h3>
+                    <p>With MCP bringing Figma context into VS Code, I vibe-coded the Swift implementation, tuned Flex tokens (Microsoft’s design-system values for visual styling and layout) and component behaviors, and added skills to systematically account for every Duo orientation, surfacing edge cases and special treatments that could otherwise be missed.</p>
+                    <figure>
+                        <img src="images/iphone-duo-edit-code.gif" style="width:100%;display:block;border:0;" alt="Editing the Swift implementation for Copilot on iPhone Duo in VS Code">
+                    </figure>
+                    <h3>3. Build and launch</h3>
+                    <p>With the experience taking shape, Xcode turned each iteration into a working Duo build, letting me move beyond static screens and validate the design as a real product.</p>
+                    <figure>
+                        <img src="images/iphone-duo-build-launch.gif" style="width:100%;display:block;border:0;" alt="Building and launching Copilot for iPhone Duo in Xcode">
+                    </figure>
+                    <h3>4. Test results</h3>
+                    <p>The iOS Simulator exposed what static screens couldn’t: how the experience behaved through folds, rotations, transitions, and the moments where native iOS interactions met Copilot’s custom components. Most importantly, it gave us the confidence to design, test, and iterate rapidly without relying on constant access to the physical device.</p>
+                    <figure>
+                        <img src="images/iphone-duo-test-results.gif" style="width:100%;display:block;border:0;" alt="Testing Copilot folds, rotations, and transitions in the iOS Simulator for iPhone Duo">
+                    </figure>
+                    <h2>One Experience. A New Form Factor.</h2>
+                    <figure>
+                        <img src="images/iphone-duo-designs.svg" style="width:100%;display:block;border:0;" alt="Copilot designs for the iPhone Duo form factor">
+                    </figure>
+                    <p>The result was a Copilot experience that felt intentionally designed for Duo from day one, not simply adapted from iPhone. By rethinking key controls, layouts, and interactions for the new form factor, we preserved the familiarity of Copilot while making the experience feel native to Duo.</p>
+                    <figure>
+                        <img src="images/iphone-duo-launch-feedback.png" style="width:100%;display:block;border:0;" alt="Max Weinbach’s post praising Microsoft Copilot’s Duo-optimized experience, with screenshots in folded and unfolded layouts">
+                    </figure>
+                </div>
+            `,
             7: `
                 <section class="proactive-overview blog-content" aria-label="Project overview">
                     <dl class="proactive-project-facts">

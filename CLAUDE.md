@@ -56,6 +56,8 @@ Random project identifiers deter URL guessing only: the identifiers, passwords, 
 
 ### Project detail page behavior
 
+Copilot in iPhone Duo is the fourth listing card and uses internal project index `8`, with protected route `80609bb1473e85ec5ffe37c65ab7ba93`. Its cover and detail image share `images/iPhone_Duo.png`. Card cover rules in `styles.css` use `nth-child`, so keep all following cover positions aligned when inserting a card.
+
 [project.html](project.html) renders different layouts per id via `if (id === ...)` branches in the script: dummy header block, hero gradient vs. image, the report-link button on id=2, the YouTube facade on id=4 (click thumbnail → swap to embedded iframe), etc. Per-id branches are the norm here; expect to add one when introducing a new project that needs custom treatment.
 
 ## Style guide
